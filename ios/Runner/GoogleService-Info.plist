@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>596570629532-q5ifc4b1v2snqevjl1d2j3jqjredc0mc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.596570629532-q5ifc4b1v2snqevjl1d2j3jqjredc0mc</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>596570629532-1ktla9sfbv5tt2a7tg5jsp49mqqihvgs.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCGo-8Wf1cZrvLxofw_6sjyB1MFw2p9oic</string>
+	<key>GCM_SENDER_ID</key>
+	<string>596570629532</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>net.pedalpulse.pedalpulse</string>
+	<key>PROJECT_ID</key>
+	<string>pedalpulse-1995d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pedalpulse-1995d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:596570629532:ios:5cc29a82500e41ba41d459</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-3643121138456032~1021619500</string>
+</dict>
+</plist>

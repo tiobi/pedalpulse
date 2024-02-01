@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "596570629532",
+    "project_id": "pedalpulse-1995d",
+    "storage_bucket": "pedalpulse-1995d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596570629532:android:6e4567bd30675e5141d459",
+        "android_client_info": {
+          "package_name": "com.example.pedalpulse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596570629532-1ktla9sfbv5tt2a7tg5jsp49mqqihvgs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pedalpulse",
+            "certificate_hash": "1f32113bbe7aa12a2b64c977b97a0d3029bbe876"
+          }
+        },
+        {
+          "client_id": "596570629532-p7rql3osf2ughmkfk4uemd9t1dovtgdk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pedalpulse",
+            "certificate_hash": "bc3fd9fd7793f5ec7d06ecd549358520a4eb7366"
+          }
+        },
+        {
+          "client_id": "596570629532-jic55rdjtnhq335vm6l1302rolkcl0e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq4NE5N8DG0_wY57K2aTXD2IZeP7STrWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596570629532-a9uesnkj3tnto10nec1me18kcf4h7bgs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "596570629532-931obtr2acisgf86bkioaaaeehgmv5oi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pedalpulse"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596570629532:android:d453746466f70f0d41d459",
+        "android_client_info": {
+          "package_name": "net.pedalpulse.pedalpulse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596570629532-44f908s076trffvs4bi94m21ve8m1m0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.pedalpulse.pedalpulse",
+            "certificate_hash": "b838c0ffbeefc21f3c1fb477b786bd89972264d6"
+          }
+        },
+        {
+          "client_id": "596570629532-f6cvhf5lb9nq4bsqukom5v932fn7dn99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.pedalpulse.pedalpulse",
+            "certificate_hash": "1f32113bbe7aa12a2b64c977b97a0d3029bbe876"
+          }
+        },
+        {
+          "client_id": "596570629532-fcb7ua1holros1qgt4jpba7h5urplqgb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.pedalpulse.pedalpulse",
+            "certificate_hash": "bc3fd9fd7793f5ec7d06ecd549358520a4eb7366"
+          }
+        },
+        {
+          "client_id": "596570629532-jic55rdjtnhq335vm6l1302rolkcl0e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq4NE5N8DG0_wY57K2aTXD2IZeP7STrWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596570629532-a9uesnkj3tnto10nec1me18kcf4h7bgs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "596570629532-931obtr2acisgf86bkioaaaeehgmv5oi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pedalpulse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
