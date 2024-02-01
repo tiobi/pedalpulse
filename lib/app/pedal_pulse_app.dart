@@ -1,36 +1,46 @@
-// Flutter and Dart packages
+/// Flutter and Dart packages
+///
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// 3rd party packages
+/// 3rd party packages
+///
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
 
-// Models and Providers
+/// Models and Providers
+///
 import '../providers/user_provider.dart';
 import '../providers/pedal_provider.dart';
 import '../providers/user_likes_provider.dart';
 
-// Screens and Layouts
+/// Screens and Layouts
+///
 import '../responsive/responsive_layout.dart';
 import '../responsive/mobile_layout.dart';
 import '../responsive/desktop_layout.dart';
 import '../screens/mobile_web_screen.dart';
 import '../screens/sign_in_screen.dart';
 
-// Utils
+/// Utils
+///
 import '../utils/managers/theme_manager.dart';
 import '../utils/managers/route_manager.dart';
 
 class PedalPulseApp extends StatelessWidget {
   const PedalPulseApp({Key? key}) : super(key: key);
+
+  /// TODO: make dependency injection
+  ///
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+      /// TODO: make common provider list
+      ///
       providers: [
         ChangeNotifierProvider<UserProvider>(
           create: (_) => UserProvider(),
