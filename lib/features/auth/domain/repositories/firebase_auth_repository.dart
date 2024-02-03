@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/entities/user_entity.dart';
 import '../../../../core/errors/failure.dart';
 
-abstract class FirebaseAuthRemoteDataSource {
+abstract class FirebaseAuthRepository {
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
     required String email,
     required String password,
