@@ -19,7 +19,4 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {}
     }
   }
-
-  @override
-  
 }
