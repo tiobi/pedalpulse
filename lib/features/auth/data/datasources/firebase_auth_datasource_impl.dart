@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../domain/entities/auth_entity.dart';
 import 'firebase_auth_datasource.dart';
 
 class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
@@ -11,4 +12,13 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required this.firestore,
     required this.auth,
   });
+
+  @override
+  Future<void> signUpWithEmailAndPassword({
+    required AuthEntity authEntity,
+  }) async {
+    try{
+      await auth.createUserWithEmailAndPassword(email: authEntity.email , password: authEntity.password,)
+    }
+  }
 }

@@ -1,12 +1,14 @@
+import 'package:pedalpulse/core/entities/user_entity.dart';
+
+import '../../domain/entities/auth_entity.dart';
+
 abstract class FirebaseAuthDataSource {
-  Future<String> signInWithEmailAndPassword({
-    required String email,
-    required String password,
+  Future<void> signUpWithEmailAndPassword({
+    required AuthEntity authEntity,
   });
 
-  Future<void> signUpWithEmailAndPassword({
-    required String email,
-    required String password,
+  Future<UserEntity> signInWithEmailAndPassword({
+    required AuthEntity authEntity,
   });
 
   Future<void> sendPasswordResetEmail({
