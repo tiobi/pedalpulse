@@ -1,17 +1,9 @@
-import '../../data/datasources/firebase_auth_datasource.dart';
-import '../entities/auth_entity.dart';
+import '../repositories/firebase_auth_repository.dart';
 
 class FirebaseAuthUseCase {
-  final FirebaseAuthDataSource dataSource;
+  final FirebaseAuthRepository repository;
 
   FirebaseAuthUseCase({
-    required this.dataSource,
+    required this.repository,
   });
-
-  Future<String> signInWithEmailAndPassword(AuthEntity authEntity) async {
-    return await dataSource.signInWithEmailAndPassword(
-      email: authEntity.email,
-      password: authEntity.password,
-    );
-  }
 }

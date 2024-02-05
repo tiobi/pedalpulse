@@ -13,8 +13,5 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> signInWithEmailAndPassword({
     required AuthEntity authEntity,
-  }) async {
-    await firebaseAuthUseCase.signInWithEmailAndPassword(authEntity);
-    notifyListeners();
-  }
+  }) async {}
 }

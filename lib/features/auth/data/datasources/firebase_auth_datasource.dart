@@ -11,6 +11,15 @@ abstract class FirebaseAuthDataSource {
     required AuthEntity authEntity,
   });
 
+  Future<void> sendEmailVerification({
+    required String email,
+  });
+
+  Future<void> initializeUserData({
+    required String uid,
+    required String email,
+  });
+
   Future<void> sendPasswordResetEmail({
     required String email,
   });
