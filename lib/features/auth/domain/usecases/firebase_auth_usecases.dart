@@ -1,14 +1,5 @@
 import '../../data/datasources/firebase_auth_datasource.dart';
-
-class FirebaseAuthUseCaseParams {
-  final String email;
-  final String password;
-
-  FirebaseAuthUseCaseParams({
-    required this.email,
-    required this.password,
-  });
-}
+import '../entities/auth_entity.dart';
 
 class FirebaseAuthUseCase {
   final FirebaseAuthDataSource dataSource;
@@ -17,11 +8,10 @@ class FirebaseAuthUseCase {
     required this.dataSource,
   });
 
-  Future<String> signInWithEmailAndPassword(
-      FirebaseAuthUseCaseParams params) async {
+  Future<String> signInWithEmailAndPassword(AuthEntity authEntity) async {
     return await dataSource.signInWithEmailAndPassword(
-      email: params.email,
-      password: params.password,
+      email: authEntity.email,
+      password: authEntity.password,
     );
   }
 }
