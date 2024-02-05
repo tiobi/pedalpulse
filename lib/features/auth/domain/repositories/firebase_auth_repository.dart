@@ -20,4 +20,8 @@ abstract class FirebaseAuthRepository {
   });
 
   Future<Either<Failure, void>> signOut();
+
+  Future<Either<Failure, bool>> isEmailVerified({
+    required String email,
+  });
 }
