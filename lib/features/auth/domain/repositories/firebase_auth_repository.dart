@@ -9,17 +9,17 @@ abstract class FirebaseAuthRepository {
     required String password,
   });
 
-  Future<Either<Failure, void>> signUpWithEmailAndPassword({
+  Future<Either<Failure, Unit>> signUpWithEmailAndPassword({
     required String email,
     required String password,
     required String confirmPassword,
   });
 
-  Future<Either<Failure, void>> sendPasswordResetEmail({
+  Future<Either<Failure, Unit>> sendPasswordResetEmail({
     required String email,
   });
 
-  Future<Either<Failure, void>> signOut();
+  Future<Either<Failure, Unit>> signOut();
 
   Future<Either<Failure, bool>> isEmailVerified({
     required String email,

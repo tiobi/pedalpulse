@@ -14,12 +14,12 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   });
 
   @override
-  Future<Either<Failure, void>> sendPasswordResetEmail({
+  Future<Either<Failure, Unit>> sendPasswordResetEmail({
     required String email,
   }) async {
     try {
       await dataSource.sendPasswordResetEmail(email: email);
-      return const Right(null);
+      return const Right(unit);
     } catch (e) {
       return Left(AuthFailure(e.toString()));
     }
@@ -39,13 +39,13 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> signOut() {
+  Future<Either<Failure, Unit>> signOut() {
     // TODO: implement signOut
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<Failure, void>> signUpWithEmailAndPassword(
+  Future<Either<Failure, Unit>> signUpWithEmailAndPassword(
       {required String email,
       required String password,
       required String confirmPassword}) {

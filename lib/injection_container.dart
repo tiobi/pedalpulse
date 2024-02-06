@@ -8,6 +8,8 @@ import 'features/auth/data/datasources/firebase_auth_datasource.dart';
 import 'features/auth/data/datasources/firebase_auth_datasource_impl.dart';
 import 'features/auth/data/repositories/firebase_auth_repository.dart';
 import 'features/auth/domain/repositories/firebase_auth_repository.dart';
+import 'features/auth/domain/usecases/sign_in_with_email_and_password_usecase.dart';
+import 'features/auth/domain/usecases/sign_out_usecase.dart';
 
 final getIt = GetIt.instance;
 
@@ -37,6 +39,16 @@ Future<void> initializeDependencies() async {
   );
   getIt.registerLazySingleton(
     () => FirebaseAuthUseCase(
+      repository: getIt<FirebaseAuthRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => SignInWithEmailAndPasswordUseCase(
+      repository: getIt<FirebaseAuthRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => SignOutUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );

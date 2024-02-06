@@ -1,9 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:pedalpulse/core/entities/user_entity.dart';
 
 import '../../domain/entities/auth_entity.dart';
 
 abstract class FirebaseAuthDataSource {
-  Future<void> signUpWithEmailAndPassword({
+  Future<Unit> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   });
 
@@ -11,20 +12,20 @@ abstract class FirebaseAuthDataSource {
     required AuthEntity authEntity,
   });
 
-  Future<void> sendEmailVerification({
+  Future<Unit> sendEmailVerification({
     required String email,
   });
 
-  Future<void> initializeUserData({
+  Future<Unit> initializeUserData({
     required String uid,
     required String email,
   });
 
-  Future<void> sendPasswordResetEmail({
+  Future<Unit> sendPasswordResetEmail({
     required String email,
   });
 
-  Future<void> signOut();
+  Future<Unit> signOut();
 
   Future<bool> isEmailVerified({
     required String email,
