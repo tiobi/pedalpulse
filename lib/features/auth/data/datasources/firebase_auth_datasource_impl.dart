@@ -49,6 +49,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
       );
 
       await firestore.collection('users').doc(uid).set(newUser.toMap());
+      return;
     } on FirebaseException {
       rethrow;
     }
