@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/entities/user_entity.dart';
@@ -16,7 +17,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   });
 
   @override
-  Future<void> signUpWithEmailAndPassword({
+  Future<Unit> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   }) async {
     try {
@@ -27,13 +28,15 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
       await auth.currentUser!.sendEmailVerification();
 
       // TODO: initializeUserData is removed from this method. Implement it in the sign in.
+
+      return unit;
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<void> initializeUserData({
+  Future<Unit> initializeUserData({
     required String uid,
     required String email,
   }) async {
@@ -49,7 +52,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
       );
 
       await firestore.collection('users').doc(uid).set(newUser.toMap());
-      return;
+      return unit;
     } on FirebaseException {
       rethrow;
     }
@@ -85,5 +88,29 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     } on FirebaseAuthException {
       rethrow;
     }
+  }
+
+  @override
+  Future<bool> isEmailVerified({required String email}) {
+    // TODO: implement isEmailVerified
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Unit> sendEmailVerification({required String email}) {
+    // TODO: implement sendEmailVerification
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Unit> sendPasswordResetEmail({required String email}) {
+    // TODO: implement sendPasswordResetEmail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Unit> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
   }
 }
