@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_out_usecase.dart';
@@ -13,8 +14,13 @@ void main() {
     signOutUseCase = SignOutUseCase(repository: mockFirebaseAuthRepository);
   });
 
-  test('should call signOut from FirebaseAuthRepository', () async {
-    await signOutUseCase();
-    verify(mockFirebaseAuthRepository.signOut());
+  test('should sign out the user and return unit', () async {
+    when(mockFirebaseAuthRepository.signOut())
+        .thenAnswer((_) async => Future.value(const Right(unit)));
+
+    final result = await signOutUseCase.call();
+
+    verify(mockFirebaseAuthRepository.signOut()).called(1);
+    expect(result, const Right(unit));
   });
 }

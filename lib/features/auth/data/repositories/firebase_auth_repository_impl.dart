@@ -39,9 +39,13 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> signOut() async {
+    try {
+      await dataSource.signOut();
+      return const Right(unit);
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
   }
 
   @override

@@ -109,8 +109,12 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   }
 
   @override
-  Future<Unit> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Unit> signOut() async {
+    try {
+      await auth.signOut();
+      return unit;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
