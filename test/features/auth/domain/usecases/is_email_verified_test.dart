@@ -17,6 +17,7 @@ void main() {
   });
 
   const String tEmail = 'hello@world.com';
+  const String tEmptyEmail = '';
   final Failure tFailure = FirebaseAuthFailure(
     'Server Failure',
   );
@@ -46,6 +47,19 @@ void main() {
       // Assert
       expect(result, const Right(false));
       verify(repository.isEmailVerified(email: tEmail)).called(1);
+    });
+
+    test('should return a Failure when the email is empty', () async {
+      // Arrange
+      when(repository.isEmailVerified(email: tEmptyEmail))
+          .thenAnswer((_) async => Left(tFailure));
+
+      // Act
+      final result = await useCase(tEmptyEmail);
+
+      // Assert
+      expect(result, Left(tFailure));
+      verify(repository.isEmailVerified(email: tEmptyEmail)).called(1);
     });
 
     test('should return a Failure when the email verification fails', () async {
