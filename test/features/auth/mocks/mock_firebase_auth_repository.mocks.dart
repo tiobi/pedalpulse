@@ -6,8 +6,8 @@
 import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:pedalpulse/core/entities/user_entity.dart' as _i6;
 import 'package:pedalpulse/core/errors/failure.dart' as _i5;
 import 'package:pedalpulse/features/auth/domain/repositories/firebase_auth_repository.dart'
     as _i3;
@@ -43,7 +43,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>
       signInWithEmailAndPassword({
     required String? email,
     required String? password,
@@ -58,8 +58,8 @@ class MockFirebaseAuthRepository extends _i1.Mock
               },
             ),
             returnValue:
-                _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>.value(
-                    _FakeEither_0<_i5.Failure, _i6.UserEntity>(
+                _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>.value(
+                    _FakeEither_0<_i5.Failure, _i6.UserCredential>(
               this,
               Invocation.method(
                 #signInWithEmailAndPassword,
@@ -70,7 +70,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
                 },
               ),
             )),
-          ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>);
+          ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>);
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> signUpWithEmailAndPassword({

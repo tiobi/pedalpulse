@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pedalpulse/core/entities/user_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasource.dart';
@@ -32,7 +32,7 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
+  Future<Either<Failure, UserCredential>> signInWithEmailAndPassword(
       {required String email, required String password}) {
     // TODO: implement signInWithEmailAndPassword
     throw UnimplementedError();

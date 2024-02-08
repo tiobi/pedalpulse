@@ -3,11 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/firebase_auth_usecases.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_usecase.dart';
 
 import 'features/auth/data/datasources/firebase_auth_datasource.dart';
 import 'features/auth/data/datasources/firebase_auth_datasource_impl.dart';
 import 'features/auth/data/repositories/firebase_auth_repository_impl.dart';
 import 'features/auth/domain/repositories/firebase_auth_repository.dart';
+import 'features/auth/domain/usecases/send_password_reset_email_usecase.dart';
 import 'features/auth/domain/usecases/sign_in_with_email_and_password_usecase.dart';
 import 'features/auth/domain/usecases/sign_out_usecase.dart';
 
@@ -49,6 +51,16 @@ Future<void> initializeDependencies() async {
   );
   getIt.registerLazySingleton(
     () => SignOutUseCase(
+      repository: getIt<FirebaseAuthRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => SendPasswordResetEmailUseCase(
+      repository: getIt<FirebaseAuthRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => IsEmailVerifiedUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );

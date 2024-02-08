@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pedalpulse/core/entities/user_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../domain/entities/auth_entity.dart';
 
@@ -8,7 +8,7 @@ abstract class FirebaseAuthDataSource {
     required AuthEntity authEntity,
   });
 
-  Future<UserEntity> signInWithEmailAndPassword({
+  Future<UserCredential> signInWithEmailAndPassword({
     required AuthEntity authEntity,
   });
 

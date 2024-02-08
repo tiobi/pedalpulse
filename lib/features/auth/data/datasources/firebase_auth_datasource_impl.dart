@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../../core/entities/user_entity.dart';
 import '../../../../models/user_model.dart';
 import '../../domain/entities/auth_entity.dart';
 import 'firebase_auth_datasource.dart';
@@ -36,6 +35,13 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   }
 
   @override
+  Future<UserCredential> signInWithEmailAndPassword(
+      {required AuthEntity authEntity}) {
+    // TODO: implement signInWithEmailAndPassword
+    throw UnimplementedError();
+  }
+
+  @override
   Future<Unit> initializeUserData({
     required String uid,
     required String email,
@@ -54,38 +60,6 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
       await firestore.collection('users').doc(uid).set(newUser.toMap());
       return unit;
     } on FirebaseException {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<UserEntity> signInWithEmailAndPassword({
-    required AuthEntity authEntity,
-  }) async {
-    try {
-      await auth.signInWithEmailAndPassword(
-        email: authEntity.email,
-        password: authEntity.password,
-      );
-
-      final user = auth.currentUser;
-      if (user != null) {
-        return UserEntity(
-          uid: user.uid,
-          email: user.email!,
-          username: user.email!.split('@')[0],
-          profileImageUrl: '',
-          backgroundImageUrl: '',
-          bio: '',
-          joinedAt: DateTime.now(),
-        );
-      } else {
-        throw FirebaseAuthException(
-          code: 'user-not-found',
-          message: 'User not found',
-        );
-      }
-    } on FirebaseAuthException {
       rethrow;
     }
   }

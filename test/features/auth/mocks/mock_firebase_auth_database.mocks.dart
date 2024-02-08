@@ -6,8 +6,8 @@
 import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:firebase_auth/firebase_auth.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:pedalpulse/core/entities/user_entity.dart' as _i3;
 import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasource.dart'
     as _i4;
 import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart'
@@ -34,8 +34,9 @@ class _FakeUnit_0 extends _i1.SmartFake implements _i2.Unit {
         );
 }
 
-class _FakeUserEntity_1 extends _i1.SmartFake implements _i3.UserEntity {
-  _FakeUserEntity_1(
+class _FakeUserCredential_1 extends _i1.SmartFake
+    implements _i3.UserCredential {
+  _FakeUserCredential_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -73,7 +74,7 @@ class MockFirebaseAuthDatabase extends _i1.Mock
       ) as _i5.Future<_i2.Unit>);
 
   @override
-  _i5.Future<_i3.UserEntity> signInWithEmailAndPassword(
+  _i5.Future<_i3.UserCredential> signInWithEmailAndPassword(
           {required _i6.AuthEntity? authEntity}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -81,7 +82,7 @@ class MockFirebaseAuthDatabase extends _i1.Mock
           [],
           {#authEntity: authEntity},
         ),
-        returnValue: _i5.Future<_i3.UserEntity>.value(_FakeUserEntity_1(
+        returnValue: _i5.Future<_i3.UserCredential>.value(_FakeUserCredential_1(
           this,
           Invocation.method(
             #signInWithEmailAndPassword,
@@ -89,7 +90,7 @@ class MockFirebaseAuthDatabase extends _i1.Mock
             {#authEntity: authEntity},
           ),
         )),
-      ) as _i5.Future<_i3.UserEntity>);
+      ) as _i5.Future<_i3.UserCredential>);
 
   @override
   _i5.Future<_i2.Unit> sendEmailVerification({required String? email}) =>

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../../core/entities/user_entity.dart';
 import '../../../../core/errors/failure.dart';
 import '../repositories/firebase_auth_repository.dart';
 
@@ -11,7 +11,7 @@ class SignInWithEmailAndPasswordUseCase {
     required this.repository,
   });
 
-  Future<Either<Failure, UserEntity>> call({
+  Future<Either<Failure, UserCredential>> call({
     required String email,
     required String password,
   }) async {
