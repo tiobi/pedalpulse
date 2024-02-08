@@ -10,8 +10,8 @@ import 'package:pedalpulse/features/auth/domain/usecases/sign_out_usecase.dart';
 import '../../mocks/mock_firebase_auth_repository.mocks.dart';
 
 void main() {
-  late SignOutUseCase useCase;
-  late MockFirebaseAuthRepository repository;
+  late final SignOutUseCase useCase;
+  late final MockFirebaseAuthRepository repository;
 
   setUp(() {
     repository = MockFirebaseAuthRepository();
