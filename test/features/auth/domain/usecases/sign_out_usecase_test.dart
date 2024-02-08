@@ -37,7 +37,7 @@ void main() {
       // Arrange
       final Failure failure = AuthFailure(
         'Server Failure',
-      ); // Assuming ServerFailure is a class that extends Failure
+      );
       when(mockFirebaseAuthRepository.signOut())
           .thenAnswer((_) async => Left(failure));
 
