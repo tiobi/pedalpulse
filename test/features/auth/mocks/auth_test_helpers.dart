@@ -5,4 +5,5 @@ import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasour
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
-class MockFirebaseAuthDatabase extends Mock implements FirebaseAuthDataSource {}
+class MockFirebaseAuthDataSource extends Mock
+    implements FirebaseAuthDataSource {}
