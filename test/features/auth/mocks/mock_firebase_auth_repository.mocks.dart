@@ -9,6 +9,8 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:firebase_auth/firebase_auth.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/core/errors/failure.dart' as _i5;
+import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart'
+    as _i7;
 import 'package:pedalpulse/features/auth/domain/repositories/firebase_auth_repository.dart'
     as _i3;
 
@@ -44,18 +46,12 @@ class MockFirebaseAuthRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>
-      signInWithEmailAndPassword({
-    required String? email,
-    required String? password,
-  }) =>
+      signInWithEmailAndPassword({required _i7.AuthEntity? authEntity}) =>
           (super.noSuchMethod(
             Invocation.method(
               #signInWithEmailAndPassword,
               [],
-              {
-                #email: email,
-                #password: password,
-              },
+              {#authEntity: authEntity},
             ),
             returnValue:
                 _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>.value(
@@ -64,29 +60,19 @@ class MockFirebaseAuthRepository extends _i1.Mock
               Invocation.method(
                 #signInWithEmailAndPassword,
                 [],
-                {
-                  #email: email,
-                  #password: password,
-                },
+                {#authEntity: authEntity},
               ),
             )),
           ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> signUpWithEmailAndPassword({
-    required String? email,
-    required String? password,
-    required String? confirmPassword,
-  }) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> signUpWithEmailAndPassword(
+          {required _i7.AuthEntity? authEntity}) =>
       (super.noSuchMethod(
         Invocation.method(
           #signUpWithEmailAndPassword,
           [],
-          {
-            #email: email,
-            #password: password,
-            #confirmPassword: confirmPassword,
-          },
+          {#authEntity: authEntity},
         ),
         returnValue: _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
             _FakeEither_0<_i5.Failure, _i2.Unit>(
@@ -94,11 +80,7 @@ class MockFirebaseAuthRepository extends _i1.Mock
           Invocation.method(
             #signUpWithEmailAndPassword,
             [],
-            {
-              #email: email,
-              #password: password,
-              #confirmPassword: confirmPassword,
-            },
+            {#authEntity: authEntity},
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);

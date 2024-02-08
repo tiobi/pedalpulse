@@ -42,21 +42,16 @@ void main() {
     test('should sign in the user and get user credential', () async {
       // Arrange
       when(repository.signInWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
+        authEntity: tAuthEntity,
       )).thenAnswer((_) async => Right(tUserCredential));
 
       // Act
-      final result = await useCase.call(
-        email: tEmail,
-        password: tPassword,
-      );
+      final result = await useCase.call(authEntity: tAuthEntity);
 
       // Assert
       expect(result, Right(tUserCredential));
       verify(repository.signInWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
+        authEntity: tAuthEntity,
       )).called(1);
       verifyNoMoreInteractions(repository);
     });
@@ -66,21 +61,18 @@ void main() {
       // Arrange
 
       when(repository.signInWithEmailAndPassword(
-        email: tEmptyEmail,
-        password: tEmptyPassword,
+        authEntity: tEmptyAuthEntity,
       )).thenAnswer((_) async => Left(failure));
 
       // Act
       final result = await useCase.call(
-        email: tEmptyEmail,
-        password: tEmptyPassword,
+        authEntity: tEmptyAuthEntity,
       );
 
       // Assert
       expect(result, Left(failure));
       verify(repository.signInWithEmailAndPassword(
-        email: tEmptyEmail,
-        password: tEmptyPassword,
+        authEntity: tEmptyAuthEntity,
       )).called(1);
       verifyNoMoreInteractions(repository);
     });
@@ -91,21 +83,18 @@ void main() {
         'Server Failure',
       );
       when(repository.signInWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
+        authEntity: tAuthEntity,
       )).thenAnswer((_) async => Left(failure));
 
       // Act
       final result = await useCase.call(
-        email: tEmail,
-        password: tPassword,
+        authEntity: tAuthEntity,
       );
 
       // Assert
       expect(result, Left(failure));
       verify(repository.signInWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
+        authEntity: tAuthEntity,
       )).called(1);
       verifyNoMoreInteractions(repository);
     });

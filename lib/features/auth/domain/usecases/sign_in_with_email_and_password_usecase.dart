@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/errors/failure.dart';
+import '../entities/auth_entity.dart';
 import '../repositories/firebase_auth_repository.dart';
 
 class SignInWithEmailAndPasswordUseCase {
@@ -12,12 +13,10 @@ class SignInWithEmailAndPasswordUseCase {
   });
 
   Future<Either<Failure, UserCredential>> call({
-    required String email,
-    required String password,
+    required AuthEntity authEntity,
   }) async {
     return await repository.signInWithEmailAndPassword(
-      email: email,
-      password: password,
+      authEntity: authEntity,
     );
   }
 }
