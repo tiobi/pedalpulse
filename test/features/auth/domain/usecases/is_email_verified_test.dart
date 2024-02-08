@@ -8,8 +8,8 @@ import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_useca
 import '../../mocks/mock_firebase_auth_repository.mocks.dart';
 
 void main() {
-  late final IsEmailVerifiedUseCase useCase;
-  late final MockFirebaseAuthRepository repository;
+  late IsEmailVerifiedUseCase useCase;
+  late MockFirebaseAuthRepository repository;
 
   setUp(() {
     repository = MockFirebaseAuthRepository();
