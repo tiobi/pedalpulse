@@ -7,47 +7,45 @@ import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_out_usecase.dart';
 
-import '../../helpers/firebase_auth_repository_helper.mocks.dart';
+import '../../mocks/mock_firebase_auth_repository.mocks.dart';
 
 void main() {
-  late SignOutUseCase usecase;
-  late MockFirebaseAuthRepository mockFirebaseAuthRepository;
+  late SignOutUseCase useCase;
+  late MockFirebaseAuthRepository repository;
 
   setUp(() {
-    mockFirebaseAuthRepository = MockFirebaseAuthRepository();
-    usecase = SignOutUseCase(repository: mockFirebaseAuthRepository);
+    repository = MockFirebaseAuthRepository();
+    useCase = SignOutUseCase(repository: repository);
   });
 
   group('SignOutUseCase Text', () {
     test('should sign out the user successfully', () async {
       // Arrange
-      when(mockFirebaseAuthRepository.signOut())
-          .thenAnswer((_) async => Right(unit));
+      when(repository.signOut()).thenAnswer((_) async => Right(unit));
 
       // Act
-      final result = await usecase();
+      final result = await useCase();
 
       // Assert
       expect(result, Right(unit));
-      verify(mockFirebaseAuthRepository.signOut());
-      verifyNoMoreInteractions(mockFirebaseAuthRepository);
+      verify(repository.signOut());
+      verifyNoMoreInteractions(repository);
     });
 
     test('should return a Failure when the sign out fails', () async {
       // Arrange
-      final Failure failure = AuthFailure(
+      final Failure failure = FirebaseAuthFailure(
         'Server Failure',
       );
-      when(mockFirebaseAuthRepository.signOut())
-          .thenAnswer((_) async => Left(failure));
+      when(repository.signOut()).thenAnswer((_) async => Left(failure));
 
       // Act
-      final result = await usecase();
+      final result = await useCase();
 
       // Assert
       expect(result, Left(failure));
-      verify(mockFirebaseAuthRepository.signOut());
-      verifyNoMoreInteractions(mockFirebaseAuthRepository);
+      verify(repository.signOut());
+      verifyNoMoreInteractions(repository);
     });
   });
 

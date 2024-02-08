@@ -21,7 +21,7 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
       await dataSource.sendPasswordResetEmail(email: email);
       return const Right(unit);
     } catch (e) {
-      return Left(AuthFailure(e.toString()));
+      return Left(FirebaseAuthFailure(e.toString()));
     }
   }
 
@@ -44,7 +44,7 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
       await dataSource.signOut();
       return const Right(unit);
     } catch (e) {
-      return Left(AuthFailure(e.toString()));
+      return Left(FirebaseAuthFailure(e.toString()));
     }
   }
 

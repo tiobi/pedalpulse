@@ -1,9 +1,9 @@
 import 'failure.dart';
 
-class AuthFailure extends Failure {
+class FirebaseAuthFailure extends Failure {
   final String message;
 
-  AuthFailure(this.message);
+  FirebaseAuthFailure(this.message);
 
   @override
   String toString() => 'AuthFailure: $message';
