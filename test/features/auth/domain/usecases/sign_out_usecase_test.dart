@@ -18,34 +18,67 @@ void main() {
     usecase = SignOutUseCase(repository: mockFirebaseAuthRepository);
   });
 
-  test('should sign out the user successfully', () async {
-    // Arrange
-    when(mockFirebaseAuthRepository.signOut())
-        .thenAnswer((_) async => Right(unit));
+  group('SignOutUseCase Text', () {
+    test('should sign out the user successfully', () async {
+      // Arrange
+      when(mockFirebaseAuthRepository.signOut())
+          .thenAnswer((_) async => Right(unit));
 
-    // Act
-    final result = await usecase();
+      // Act
+      final result = await usecase();
 
-    // Assert
-    expect(result, Right(unit));
-    verify(mockFirebaseAuthRepository.signOut());
-    verifyNoMoreInteractions(mockFirebaseAuthRepository);
+      // Assert
+      expect(result, Right(unit));
+      verify(mockFirebaseAuthRepository.signOut());
+      verifyNoMoreInteractions(mockFirebaseAuthRepository);
+    });
+
+    test('should return a Failure when the sign out fails', () async {
+      // Arrange
+      final Failure failure = AuthFailure(
+        'Server Failure',
+      ); // Assuming ServerFailure is a class that extends Failure
+      when(mockFirebaseAuthRepository.signOut())
+          .thenAnswer((_) async => Left(failure));
+
+      // Act
+      final result = await usecase();
+
+      // Assert
+      expect(result, Left(failure));
+      verify(mockFirebaseAuthRepository.signOut());
+      verifyNoMoreInteractions(mockFirebaseAuthRepository);
+    });
   });
 
-  test('should return a Failure when the sign out fails', () async {
-    // Arrange
-    final Failure failure = AuthFailure(
-      'Server Failure',
-    ); // Assuming ServerFailure is a class that extends Failure
-    when(mockFirebaseAuthRepository.signOut())
-        .thenAnswer((_) async => Left(failure));
+  // test('should sign out the user successfully', () async {
+  //   // Arrange
+  //   when(mockFirebaseAuthRepository.signOut())
+  //       .thenAnswer((_) async => Right(unit));
 
-    // Act
-    final result = await usecase();
+  //   // Act
+  //   final result = await usecase();
 
-    // Assert
-    expect(result, Left(failure));
-    verify(mockFirebaseAuthRepository.signOut());
-    verifyNoMoreInteractions(mockFirebaseAuthRepository);
-  });
+  //   // Assert
+  //   expect(result, Right(unit));
+  //   verify(mockFirebaseAuthRepository.signOut());
+  //   verifyNoMoreInteractions(mockFirebaseAuthRepository);
+  // });
+
+  // test('should return a Failure when the sign out fails', () async {
+  //   // Arrange
+  //   final Failure failure = AuthFailure(
+  //     'Server Failure',
+  //   ); // Assuming ServerFailure is a class that extends Failure
+  //   when(mockFirebaseAuthRepository.signOut())
+  //       .thenAnswer((_) async => Left(failure));
+
+  //   // Act
+  //   final result = await usecase();
+
+  //   // Assert
+  //   expect(result, Left(failure));
+  //   verify(mockFirebaseAuthRepository.signOut());
+  //   verifyNoMoreInteractions(mockFirebaseAuthRepository);
+  // });
 }
