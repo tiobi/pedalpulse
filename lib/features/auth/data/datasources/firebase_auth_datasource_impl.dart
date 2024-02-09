@@ -79,7 +79,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     try {
       await auth.signOut();
       return unit;
-    } catch (e) {
+    } on FirebaseAuthException {
       rethrow;
     }
   }

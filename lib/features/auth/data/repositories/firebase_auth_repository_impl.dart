@@ -33,10 +33,19 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> signInWithEmailAndPassword(
-      {required AuthEntity authEntity}) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+  Future<Either<Failure, UserCredential>> signInWithEmailAndPassword({
+    required AuthEntity authEntity,
+  }) async {
+    try {
+      final UserCredential userCredential =
+          await dataSource.signInWithEmailAndPassword(authEntity: authEntity);
+
+      return Right(userCredential);
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(e.message.toString()));
+    } catch (e) {
+      return Left(FirebaseAuthFailure(e.toString()));
+    }
   }
 
   @override
@@ -44,8 +53,8 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
     try {
       await dataSource.signOut();
       return const Right(unit);
-    } catch (e) {
-      return Left(FirebaseAuthFailure(e.toString()));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(e.message.toString()));
     }
   }
 

@@ -40,14 +40,65 @@ void main() {
     'Server Failure',
   );
 
-  group('FirebaseAuthRepository Test', () {
+  group('FirebaseAuthRepository Sign In Test', () {
     /// Sign Up With Email And Password Test
     ///
-    test('should sign up the user and get user credential', () async {
+    group('SignInWithEmailAndPassword Test', () {
+      test('should sign in the user and get user credential', () async {
+        // Arrange
+        when(dataSource.signInWithEmailAndPassword(authEntity: tAuthEntity))
+            .thenAnswer((_) async => tUserCredential);
+
+        // Act
+        final result = await repository.signInWithEmailAndPassword(
+            authEntity: tAuthEntity);
+
+        // Assert
+        expect(result, Right(tUserCredential));
+        verify(dataSource.signInWithEmailAndPassword(authEntity: tAuthEntity))
+            .called(1);
+        verifyNoMoreInteractions(dataSource);
+      });
+
+      test('should return a Failure when the sign in fails', () async {
+        // Arrange
+        when(dataSource.signInWithEmailAndPassword(authEntity: tAuthEntity))
+            .thenThrow(FirebaseAuthFailure('Server Failure'));
+
+        // Act
+        final result = await repository.signInWithEmailAndPassword(
+            authEntity: tAuthEntity);
+
+        // Assert
+        expect(result, isA<Left>());
+      });
+    });
+  });
+
+  group('signOut Test', () {
+    test('should sign out the user', () async {
       // Arrange
-      when(dataSource.signUpWithEmailAndPassword(
-        authEntity: tAuthEntity,
-      )).thenAnswer((_) async => Right(tUserCredential));
+      when(dataSource.signOut()).thenAnswer((_) async => unit);
+
+      // Act
+      final result = await repository.signOut();
+
+      // Assert
+      expect(result, const Right(unit));
+      verify(dataSource.signOut()).called(1);
+      verifyNoMoreInteractions(dataSource);
+    });
+
+    test('should return a Failure when the sign out fails', () async {
+      // Arrange
+      when(dataSource.signOut())
+          .thenThrow(FirebaseAuthFailure('Server Failure'));
+
+      // Act
+      final result = await repository.signOut();
+
+      // Assert
+      expect(result, equals(Left(FirebaseAuthFailure('Server Failure'))));
     });
   });
 }
