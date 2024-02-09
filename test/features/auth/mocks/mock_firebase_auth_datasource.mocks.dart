@@ -5,8 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:dartz/dartz.dart' as _i2;
-import 'package:firebase_auth/firebase_auth.dart' as _i3;
+import 'package:dartz/dartz.dart' as _i3;
+import 'package:firebase_auth/firebase_auth.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasource.dart'
     as _i4;
@@ -24,8 +24,9 @@ import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeUnit_0 extends _i1.SmartFake implements _i2.Unit {
-  _FakeUnit_0(
+class _FakeUserCredential_0 extends _i1.SmartFake
+    implements _i2.UserCredential {
+  _FakeUserCredential_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -34,9 +35,8 @@ class _FakeUnit_0 extends _i1.SmartFake implements _i2.Unit {
         );
 }
 
-class _FakeUserCredential_1 extends _i1.SmartFake
-    implements _i3.UserCredential {
-  _FakeUserCredential_1(
+class _FakeUnit_1 extends _i1.SmartFake implements _i3.Unit {
+  _FakeUnit_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -55,7 +55,7 @@ class MockFirebaseAuthDataSource extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i2.Unit> signUpWithEmailAndPassword(
+  _i5.Future<_i2.UserCredential> signUpWithEmailAndPassword(
           {required _i6.AuthEntity? authEntity}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -63,7 +63,7 @@ class MockFirebaseAuthDataSource extends _i1.Mock
           [],
           {#authEntity: authEntity},
         ),
-        returnValue: _i5.Future<_i2.Unit>.value(_FakeUnit_0(
+        returnValue: _i5.Future<_i2.UserCredential>.value(_FakeUserCredential_0(
           this,
           Invocation.method(
             #signUpWithEmailAndPassword,
@@ -71,10 +71,10 @@ class MockFirebaseAuthDataSource extends _i1.Mock
             {#authEntity: authEntity},
           ),
         )),
-      ) as _i5.Future<_i2.Unit>);
+      ) as _i5.Future<_i2.UserCredential>);
 
   @override
-  _i5.Future<_i3.UserCredential> signInWithEmailAndPassword(
+  _i5.Future<_i2.UserCredential> signInWithEmailAndPassword(
           {required _i6.AuthEntity? authEntity}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -82,7 +82,7 @@ class MockFirebaseAuthDataSource extends _i1.Mock
           [],
           {#authEntity: authEntity},
         ),
-        returnValue: _i5.Future<_i3.UserCredential>.value(_FakeUserCredential_1(
+        returnValue: _i5.Future<_i2.UserCredential>.value(_FakeUserCredential_0(
           this,
           Invocation.method(
             #signInWithEmailAndPassword,
@@ -90,17 +90,17 @@ class MockFirebaseAuthDataSource extends _i1.Mock
             {#authEntity: authEntity},
           ),
         )),
-      ) as _i5.Future<_i3.UserCredential>);
+      ) as _i5.Future<_i2.UserCredential>);
 
   @override
-  _i5.Future<_i2.Unit> sendEmailVerification({required String? email}) =>
+  _i5.Future<_i3.Unit> sendEmailVerification({required String? email}) =>
       (super.noSuchMethod(
         Invocation.method(
           #sendEmailVerification,
           [],
           {#email: email},
         ),
-        returnValue: _i5.Future<_i2.Unit>.value(_FakeUnit_0(
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
           this,
           Invocation.method(
             #sendEmailVerification,
@@ -108,10 +108,10 @@ class MockFirebaseAuthDataSource extends _i1.Mock
             {#email: email},
           ),
         )),
-      ) as _i5.Future<_i2.Unit>);
+      ) as _i5.Future<_i3.Unit>);
 
   @override
-  _i5.Future<_i2.Unit> initializeUserData({
+  _i5.Future<_i3.Unit> initializeUserData({
     required String? uid,
     required String? email,
   }) =>
@@ -124,7 +124,7 @@ class MockFirebaseAuthDataSource extends _i1.Mock
             #email: email,
           },
         ),
-        returnValue: _i5.Future<_i2.Unit>.value(_FakeUnit_0(
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
           this,
           Invocation.method(
             #initializeUserData,
@@ -135,17 +135,17 @@ class MockFirebaseAuthDataSource extends _i1.Mock
             },
           ),
         )),
-      ) as _i5.Future<_i2.Unit>);
+      ) as _i5.Future<_i3.Unit>);
 
   @override
-  _i5.Future<_i2.Unit> sendPasswordResetEmail({required String? email}) =>
+  _i5.Future<_i3.Unit> sendPasswordResetEmail({required String? email}) =>
       (super.noSuchMethod(
         Invocation.method(
           #sendPasswordResetEmail,
           [],
           {#email: email},
         ),
-        returnValue: _i5.Future<_i2.Unit>.value(_FakeUnit_0(
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
           this,
           Invocation.method(
             #sendPasswordResetEmail,
@@ -153,22 +153,22 @@ class MockFirebaseAuthDataSource extends _i1.Mock
             {#email: email},
           ),
         )),
-      ) as _i5.Future<_i2.Unit>);
+      ) as _i5.Future<_i3.Unit>);
 
   @override
-  _i5.Future<_i2.Unit> signOut() => (super.noSuchMethod(
+  _i5.Future<_i3.Unit> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i5.Future<_i2.Unit>.value(_FakeUnit_0(
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
           this,
           Invocation.method(
             #signOut,
             [],
           ),
         )),
-      ) as _i5.Future<_i2.Unit>);
+      ) as _i5.Future<_i3.Unit>);
 
   @override
   _i5.Future<bool> isEmailVerified({required String? email}) =>

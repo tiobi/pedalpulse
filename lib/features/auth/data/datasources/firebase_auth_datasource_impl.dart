@@ -16,19 +16,11 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   });
 
   @override
-  Future<Unit> signUpWithEmailAndPassword({
+  Future<UserCredential> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   }) async {
     try {
-      await auth.createUserWithEmailAndPassword(
-        email: authEntity.email,
-        password: authEntity.password,
-      );
-      await auth.currentUser!.sendEmailVerification();
-
-      // TODO: initializeUserData is removed from this method. Implement it in the sign in.
-
-      return unit;
+      throw UnimplementedError();
     } catch (e) {
       rethrow;
     }

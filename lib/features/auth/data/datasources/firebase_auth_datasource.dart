@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../domain/entities/auth_entity.dart';
 
 abstract class FirebaseAuthDataSource {
-  Future<Unit> signUpWithEmailAndPassword({
+  Future<UserCredential> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   });
 

@@ -9,7 +9,7 @@ abstract class FirebaseAuthRepository {
     required AuthEntity authEntity,
   });
 
-  Future<Either<Failure, Unit>> signUpWithEmailAndPassword({
+  Future<Either<Failure, UserCredential>> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   });
 

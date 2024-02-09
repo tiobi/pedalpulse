@@ -50,7 +50,7 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> signUpWithEmailAndPassword({
+  Future<Either<Failure, UserCredential>> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   }) {
     // TODO: implement signUpWithEmailAndPassword

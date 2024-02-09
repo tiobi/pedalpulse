@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../entities/auth_entity.dart';
@@ -11,7 +12,7 @@ class SignUpWithEmailAndPasswordUseCase {
     required this.repository,
   });
 
-  Future<Either<Failure, Unit>> call({
+  Future<Either<Failure, UserCredential>> call({
     required AuthEntity authEntity,
   }) async {
     return await repository.signUpWithEmailAndPassword(

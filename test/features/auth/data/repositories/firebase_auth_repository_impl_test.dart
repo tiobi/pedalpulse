@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/data/repositories/firebase_auth_repository_impl.dart';
@@ -43,6 +45,9 @@ void main() {
     ///
     test('should sign up the user and get user credential', () async {
       // Arrange
+      when(dataSource.signUpWithEmailAndPassword(
+        authEntity: tAuthEntity,
+      )).thenAnswer((_) async => Right(tUserCredential));
     });
   });
 }

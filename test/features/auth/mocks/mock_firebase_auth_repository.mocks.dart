@@ -66,24 +66,25 @@ class MockFirebaseAuthRepository extends _i1.Mock
           ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> signUpWithEmailAndPassword(
-          {required _i7.AuthEntity? authEntity}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #signUpWithEmailAndPassword,
-          [],
-          {#authEntity: authEntity},
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
-            _FakeEither_0<_i5.Failure, _i2.Unit>(
-          this,
-          Invocation.method(
-            #signUpWithEmailAndPassword,
-            [],
-            {#authEntity: authEntity},
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
+  _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>
+      signUpWithEmailAndPassword({required _i7.AuthEntity? authEntity}) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #signUpWithEmailAndPassword,
+              [],
+              {#authEntity: authEntity},
+            ),
+            returnValue:
+                _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>.value(
+                    _FakeEither_0<_i5.Failure, _i6.UserCredential>(
+              this,
+              Invocation.method(
+                #signUpWithEmailAndPassword,
+                [],
+                {#authEntity: authEntity},
+              ),
+            )),
+          ) as _i4.Future<_i2.Either<_i5.Failure, _i6.UserCredential>>);
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> sendPasswordResetEmail(
