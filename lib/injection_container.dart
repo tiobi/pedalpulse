@@ -26,7 +26,7 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => firebaseFirestore);
   getIt.registerLazySingleton(() => firebaseStorage);
 
-  /// Auth
+  /// Auth Data Sources
   ///
   getIt.registerLazySingleton<FirebaseAuthDataSource>(
     () => FirebaseAuthDataSourceImpl(
@@ -34,6 +34,9 @@ Future<void> initializeDependencies() async {
       auth: getIt<FirebaseAuth>(),
     ),
   );
+
+  /// Auth Repositories
+  ///
   getIt.registerLazySingleton<FirebaseAuthRepository>(
     () => FirebaseAuthRepositoryImpl(
       dataSource: getIt<FirebaseAuthDataSource>(),
