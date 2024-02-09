@@ -1,12 +1,13 @@
-import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/data/repositories/firebase_auth_repository_impl.dart';
+import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart';
 import 'package:pedalpulse/features/auth/domain/repositories/firebase_auth_repository.dart';
 
 import '../../mocks/mock_firebase_auth_datasource.mocks.dart';
+import '../../mocks/mock_user_credential.mocks.dart';
 
 void main() {
   late FirebaseAuthRepository repository;
@@ -17,24 +18,31 @@ void main() {
     repository = FirebaseAuthRepositoryImpl(dataSource: dataSource);
   });
 
+  const String tEmail = 'hello@world.com';
+  const String tPassword = 'password1234';
+  const String tEmptyEmail = '';
+  const String tEmptyPassword = '';
+
+  const AuthEntity tAuthEntity = AuthEntity(
+    email: tEmail,
+    password: tPassword,
+  );
+  const AuthEntity tEmptyAuthEntity = AuthEntity(
+    email: tEmptyEmail,
+    password: tEmptyPassword,
+  );
+
+  final UserCredential tUserCredential = MockUserCredential();
+
   final Failure failure = FirebaseAuthFailure(
     'Server Failure',
   );
 
   group('FirebaseAuthRepository Test', () {
-    /// Sign Up
+    /// Sign Up With Email And Password Test
     ///
-    test('should sign out the user successfully', () async {
+    test('should sign up the user and get user credential', () async {
       // Arrange
-      when(dataSource.signOut()).thenAnswer((_) async => (unit));
-
-      // Act
-      final result = await repository.signOut();
-
-      // Assert
-      expect(result, const Right(unit));
-      verify(dataSource.signOut());
-      verifyNoMoreInteractions(dataSource);
     });
   });
 }
