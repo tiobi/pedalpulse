@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/data/repositories/firebase_auth_repository_impl.dart';
 import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart';
@@ -35,10 +34,6 @@ void main() {
   );
 
   final UserCredential tUserCredential = MockUserCredential();
-
-  final Failure failure = FirebaseAuthFailure(
-    'Server Failure',
-  );
 
   group('FirebaseAuthRepositoryImpl Test', () {
     /// Sign Up With Email And Password Test

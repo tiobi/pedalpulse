@@ -28,9 +28,18 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
 
   @override
   Future<UserCredential> signInWithEmailAndPassword(
-      {required AuthEntity authEntity}) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+      {required AuthEntity authEntity}) async {
+    try {
+      final UserCredential userCredential =
+          await auth.signInWithEmailAndPassword(
+        email: authEntity.email,
+        password: authEntity.password,
+      );
+
+      return userCredential;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
