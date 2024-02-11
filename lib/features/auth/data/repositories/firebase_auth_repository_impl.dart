@@ -27,9 +27,16 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> isEmailVerified({required String email}) {
-    // TODO: implement isEmailVerified
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> isEmailVerified({
+    required String email,
+  }) async {
+    try {
+      final bool isEmailVerified =
+          await dataSource.isEmailVerified(email: email);
+      return Right(isEmailVerified);
+    } catch (e) {
+      return Left(FirebaseAuthFailure(e.toString()));
+    }
   }
 
   @override
@@ -53,16 +60,24 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
     try {
       await dataSource.signOut();
       return const Right(unit);
-    } on FirebaseAuthException catch (e) {
-      return Left(FirebaseAuthFailure(e.message.toString()));
+    } on FirebaseAuthException {
+      return Left(FirebaseAuthFailure('Server Failure'));
     }
   }
 
   @override
   Future<Either<Failure, UserCredential>> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
-  }) {
-    // TODO: implement signUpWithEmailAndPassword
-    throw UnimplementedError();
+  }) async {
+    try {
+      final UserCredential userCredential =
+          await dataSource.signUpWithEmailAndPassword(authEntity: authEntity);
+
+      return Right(userCredential);
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(e.message.toString()));
+    } catch (e) {
+      return Left(FirebaseAuthFailure(e.toString()));
+    }
   }
 }
