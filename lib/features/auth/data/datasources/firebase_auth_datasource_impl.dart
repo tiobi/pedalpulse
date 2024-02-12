@@ -20,21 +20,43 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required AuthEntity authEntity,
   }) async {
     try {
-      throw UnimplementedError();
+      final UserCredential userCredential =
+          await auth.createUserWithEmailAndPassword(
+        email: authEntity.email,
+        password: authEntity.password,
+      );
+
+      await auth.currentUser!.sendEmailVerification();
+
+      await initializeUserData(
+        uid: userCredential.user!.uid,
+        email: authEntity.email,
+      );
+
+      return userCredential;
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<UserCredential> signInWithEmailAndPassword(
-      {required AuthEntity authEntity}) async {
+  Future<UserCredential> signInWithEmailAndPassword({
+    required AuthEntity authEntity,
+  }) async {
     try {
       final UserCredential userCredential =
           await auth.signInWithEmailAndPassword(
         email: authEntity.email,
         password: authEntity.password,
       );
+
+      // check if user is verified
+      if (isEmailVerified(email: authEntity.email) == false) {
+        throw FirebaseAuthException(
+          code: 'email-not-verified',
+          message: 'Email is not verified',
+        );
+      }
 
       return userCredential;
     } catch (e) {
@@ -66,9 +88,19 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   }
 
   @override
-  Future<bool> isEmailVerified({required String email}) {
-    // TODO: implement isEmailVerified
-    throw UnimplementedError();
+  Future<bool> isEmailVerified({required String email}) async {
+    try {
+      User? user = auth.currentUser;
+      if (user == null) {
+        throw FirebaseAuthException(
+          code: 'user-not-found',
+          message: 'User not found',
+        );
+      }
+      return user.emailVerified;
+    } on FirebaseAuthException {
+      rethrow;
+    }
   }
 
   @override
