@@ -26,10 +26,18 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         password: authEntity.password,
       );
 
+      // User null check
+      if (auth.currentUser == null) {
+        throw FirebaseAuthException(
+          code: 'user-not-found',
+          message: 'User not found',
+        );
+      }
+
       await auth.currentUser!.sendEmailVerification();
 
       await initializeUserData(
-        uid: userCredential.user!.uid,
+        uid: auth.currentUser!.uid,
         email: authEntity.email,
       );
 

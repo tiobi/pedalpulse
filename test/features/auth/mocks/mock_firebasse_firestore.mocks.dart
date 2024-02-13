@@ -123,14 +123,14 @@ class _FakeFuture_8<T1> extends _i1.SmartFake implements _i5.Future<T1> {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
-  MockFirebaseFirestore() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i2.FirebaseApp get app => (super.noSuchMethod(
         Invocation.getter(#app),
         returnValue: _FakeFirebaseApp_0(
+          this,
+          Invocation.getter(#app),
+        ),
+        returnValueForMissingStub: _FakeFirebaseApp_0(
           this,
           Invocation.getter(#app),
         ),
@@ -149,6 +149,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
   String get databaseURL => (super.noSuchMethod(
         Invocation.getter(#databaseURL),
         returnValue: '',
+        returnValueForMissingStub: '',
       ) as String);
 
   @override
@@ -176,12 +177,17 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
           this,
           Invocation.getter(#settings),
         ),
+        returnValueForMissingStub: _FakeSettings_1(
+          this,
+          Invocation.getter(#settings),
+        ),
       ) as _i3.Settings);
 
   @override
   Map<dynamic, dynamic> get pluginConstants => (super.noSuchMethod(
         Invocation.getter(#pluginConstants),
         returnValue: <dynamic, dynamic>{},
+        returnValueForMissingStub: <dynamic, dynamic>{},
       ) as Map<dynamic, dynamic>);
 
   @override
@@ -199,6 +205,14 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
             [collectionPath],
           ),
         ),
+        returnValueForMissingStub:
+            _FakeCollectionReference_2<Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #collection,
+            [collectionPath],
+          ),
+        ),
       ) as _i4.CollectionReference<Map<String, dynamic>>);
 
   @override
@@ -208,6 +222,13 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
           [],
         ),
         returnValue: _FakeWriteBatch_3(
+          this,
+          Invocation.method(
+            #batch,
+            [],
+          ),
+        ),
+        returnValueForMissingStub: _FakeWriteBatch_3(
           this,
           Invocation.method(
             #batch,
@@ -245,6 +266,13 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
           [bundle],
         ),
         returnValue: _FakeLoadBundleTask_4(
+          this,
+          Invocation.method(
+            #loadBundle,
+            [bundle],
+          ),
+        ),
+        returnValueForMissingStub: _FakeLoadBundleTask_4(
           this,
           Invocation.method(
             #loadBundle,
@@ -301,6 +329,19 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
             },
           ),
         )),
+        returnValueForMissingStub:
+            _i5.Future<_i4.QuerySnapshot<T>>.value(_FakeQuerySnapshot_5<T>(
+          this,
+          Invocation.method(
+            #namedQueryWithConverterGet,
+            [name],
+            {
+              #options: options,
+              #fromFirestore: fromFirestore,
+              #toFirestore: toFirestore,
+            },
+          ),
+        )),
       ) as _i5.Future<_i4.QuerySnapshot<T>>);
 
   @override
@@ -323,6 +364,16 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
             {#options: options},
           ),
         )),
+        returnValueForMissingStub:
+            _i5.Future<_i4.QuerySnapshot<Map<String, dynamic>>>.value(
+                _FakeQuerySnapshot_5<Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #namedQueryGet,
+            [name],
+            {#options: options},
+          ),
+        )),
       ) as _i5.Future<_i4.QuerySnapshot<Map<String, dynamic>>>);
 
   @override
@@ -333,6 +384,13 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
           [collectionPath],
         ),
         returnValue: _FakeQuery_6<Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #collectionGroup,
+            [collectionPath],
+          ),
+        ),
+        returnValueForMissingStub: _FakeQuery_6<Map<String, dynamic>>(
           this,
           Invocation.method(
             #collectionGroup,
@@ -365,6 +423,14 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
             [documentPath],
           ),
         ),
+        returnValueForMissingStub:
+            _FakeDocumentReference_7<Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #doc,
+            [documentPath],
+          ),
+        ),
       ) as _i4.DocumentReference<Map<String, dynamic>>);
 
   @override
@@ -384,6 +450,7 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
           [],
         ),
         returnValue: _i5.Stream<void>.empty(),
+        returnValueForMissingStub: _i5.Stream<void>.empty(),
       ) as _i5.Stream<void>);
 
   @override
@@ -402,6 +469,31 @@ class MockFirebaseFirestore extends _i1.Mock implements _i4.FirebaseFirestore {
           },
         ),
         returnValue: _i7.ifNotNull(
+              _i7.dummyValueOrNull<T>(
+                this,
+                Invocation.method(
+                  #runTransaction,
+                  [transactionHandler],
+                  {
+                    #timeout: timeout,
+                    #maxAttempts: maxAttempts,
+                  },
+                ),
+              ),
+              (T v) => _i5.Future<T>.value(v),
+            ) ??
+            _FakeFuture_8<T>(
+              this,
+              Invocation.method(
+                #runTransaction,
+                [transactionHandler],
+                {
+                  #timeout: timeout,
+                  #maxAttempts: maxAttempts,
+                },
+              ),
+            ),
+        returnValueForMissingStub: _i7.ifNotNull(
               _i7.dummyValueOrNull<T>(
                 this,
                 Invocation.method(

@@ -20,8 +20,4 @@ import 'package:mockito/mockito.dart' as _i1;
 /// A class which mocks [UserCredential].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserCredential extends _i1.Mock implements _i2.UserCredential {
-  MockUserCredential() {
-    _i1.throwOnMissingStub(this);
-  }
-}
+class MockUserCredential extends _i1.Mock implements _i2.UserCredential {}

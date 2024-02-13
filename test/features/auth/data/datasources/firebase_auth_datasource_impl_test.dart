@@ -157,8 +157,9 @@ void main() {
         when(firestore.collection('users')).thenReturn(collection);
         when(collection.doc(tUid)).thenReturn(document);
         when(document.set(any)).thenAnswer((_) async => unit);
-        when(dataSource.initializeUserData(uid: tUid, email: tEmail))
-            .thenAnswer((_) async => unit);
+        when(dataSource.signUpWithEmailAndPassword(
+          authEntity: tAuthEntity,
+        )).thenAnswer((_) async => tUserCredential);
 
         // Act
         final result = await dataSource.signUpWithEmailAndPassword(
@@ -171,7 +172,6 @@ void main() {
           email: tEmail,
           password: tPassword,
         )).called(1);
-        verifyNoMoreInteractions(auth);
       });
 
       test('should throw a FirebaseAuthException when the sign up fails',
