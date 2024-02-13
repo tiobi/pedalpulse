@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -6,6 +7,8 @@ import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasour
 import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasource_impl.dart';
 import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart';
 
+import '../../mocks/mock_collection_reference.mocks.dart';
+import '../../mocks/mock_document_refernce.mocks.dart';
 import '../../mocks/mock_firebase_auth.mocks.dart';
 import '../../mocks/mock_firebasse_firestore.mocks.dart';
 import '../../mocks/mock_user.mocks.dart';
@@ -13,9 +16,12 @@ import '../../mocks/mock_user_credential.mocks.dart';
 
 void main() {
   late FirebaseAuthDataSource dataSource;
-  late MockUser user = MockUser();
-  late MockFirebaseAuth auth = MockFirebaseAuth();
-  late MockFirebaseFirestore firestore = MockFirebaseFirestore();
+  late MockUser user;
+  late MockFirebaseAuth auth;
+  late MockFirebaseFirestore firestore;
+  late FakeFirebaseFirestore instance;
+  late MockCollectionReference collection;
+  late MockDocumentReference document;
 
   setUp(() {
     auth = MockFirebaseAuth();
@@ -25,12 +31,20 @@ void main() {
       auth: auth,
       firestore: firestore,
     );
+    collection = MockCollectionReference();
+    document = MockDocumentReference();
+    instance = FakeFirebaseFirestore();
+
+    when(firestore.collection(any)).thenReturn(collection);
+    when(collection.doc(any)).thenReturn(document);
   });
 
   const String tEmail = 'hello@world.com';
   const String tPassword = 'password1234';
   const String tEmptyEmail = '';
   const String tEmptyPassword = '';
+
+  const String tUid = '1b5d7f6c-3e5f-436a-9ff0-7200e0eef99c';
 
   const AuthEntity tAuthEntity = AuthEntity(
     email: tEmail,
@@ -143,7 +157,7 @@ void main() {
         )).thenAnswer((_) async => tUserCredential);
         when(auth.currentUser).thenReturn(user);
         when(user.sendEmailVerification()).thenAnswer((_) async => unit);
-        when(dataSource.initializeUserData(uid: '1234', email: tEmail))
+        when(dataSource.initializeUserData(uid: tUid, email: tEmail))
             .thenAnswer((_) async => unit);
 
         // Act
@@ -175,6 +189,161 @@ void main() {
         final call = dataSource.signUpWithEmailAndPassword(
           authEntity: tAuthEntity,
         );
+
+        // Assert
+        expect(() => call, throwsA(isA<FirebaseAuthException>()));
+      });
+    });
+
+    /// Send Email Verification Test
+    ///
+    group('SendEmailVerification Test', () {
+      test('should send an email verification', () async {
+        // Arrange
+        when(auth.currentUser).thenReturn(user);
+        when(user.sendEmailVerification()).thenAnswer((_) async => unit);
+
+        // Act
+        final result = await dataSource.sendEmailVerification(email: tEmail);
+
+        // Assert
+        expect(result, unit);
+        verify(auth.currentUser).called(1);
+        verifyNoMoreInteractions(auth);
+        verify(user.sendEmailVerification()).called(1);
+        verifyNoMoreInteractions(user);
+      });
+
+      test(
+          'should throw a FirebaseAuthException when the email verification fails',
+          () async {
+        // Arrange
+        when(auth.currentUser).thenReturn(user);
+        when(user.sendEmailVerification()).thenThrow(FirebaseAuthException(
+          code: 'Server Failure',
+          message: 'Server Failure',
+        ));
+
+        // Act
+        final call = dataSource.sendEmailVerification(email: tEmail);
+
+        // Assert
+        expect(() => call, throwsA(isA<FirebaseAuthException>()));
+      });
+    });
+
+    /// Initialize User Data Test
+    ///
+    group('InitializeUserData Test', () {
+      test('should initialize the user data', () async {
+        // Arrange
+        // when(firestore.collection('users').doc(tUid).set({
+        //   'uid': tUid,
+        //   'email': tEmail,
+        // }));
+
+        when(firestore.collection('users')).thenReturn(collection);
+        when(collection.doc(tUid)).thenReturn(document);
+        when(document.set({
+          'uid': tUid,
+          'email': tEmail,
+        })).thenAnswer((_) async => unit);
+
+        // Act
+        final result = await dataSource.initializeUserData(
+          uid: tUid,
+          email: tEmail,
+        );
+
+        // Assert
+        expect(result, unit);
+        verify(firestore.collection('users')).called(1);
+        verifyNoMoreInteractions(firestore);
+      });
+
+      test('should throw a FirebaseAuthException when the user data fails',
+          () async {
+        // Arrange
+        when(firestore.collection('users')).thenReturn(collection);
+        when(collection.doc(tUid)).thenReturn(document);
+        when(document.set({
+          'uid': tUid,
+          'email': tEmail,
+        })).thenThrow(FirebaseAuthException(code: 'Server Failure'));
+
+        // Act
+        final result = dataSource.initializeUserData(
+          uid: tUid,
+          email: tEmail,
+        );
+
+        // Assert
+        expect(() => result, throwsA(isA<FirebaseAuthException>()));
+      });
+    });
+
+    /// Send Password Reset Email Test
+    ///
+    group('SendPasswordResetEmail Test', () {
+      test('should send a password reset email', () async {
+        // Arrange
+        when(auth.sendPasswordResetEmail(email: tEmail))
+            .thenAnswer((_) async => unit);
+
+        // Act
+        final result = await dataSource.sendPasswordResetEmail(email: tEmail);
+
+        // Assert
+        expect(result, unit);
+        verify(auth.sendPasswordResetEmail(email: tEmail)).called(1);
+        verifyNoMoreInteractions(auth);
+      });
+
+      test(
+          'should throw a FirebaseAuthException when the password reset email fails',
+          () async {
+        // Arrange
+        when(auth.sendPasswordResetEmail(email: tEmail)).thenThrow(
+          FirebaseAuthException(
+            code: 'Server Failure',
+            message: 'Server Failure',
+          ),
+        );
+
+        // Act
+        final call = dataSource.sendPasswordResetEmail(email: tEmail);
+
+        // Assert
+        expect(() => call, throwsA(isA<FirebaseAuthException>()));
+      });
+    });
+
+    /// Sign Out Test
+    ///
+    group('SignOut Test', () {
+      test('should sign out the user', () async {
+        // Arrange
+        when(auth.signOut()).thenAnswer((_) async => unit);
+
+        // Act
+        final result = await dataSource.signOut();
+
+        // Assert
+        expect(result, unit);
+        verify(auth.signOut()).called(1);
+        verifyNoMoreInteractions(auth);
+      });
+
+      test('should throw a FirebaseAuthException when the sign out fails',
+          () async {
+        // Arrange
+        when(auth.signOut()).thenThrow(FirebaseAuthException(
+          code: 'Server Failure',
+          message: 'Server Failure',
+        ));
+
+        // Act
+        final call = dataSource.signOut();
 
         // Assert
         expect(() => call, throwsA(isA<FirebaseAuthException>()));

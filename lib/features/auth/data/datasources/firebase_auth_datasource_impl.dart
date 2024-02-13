@@ -104,15 +104,27 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   }
 
   @override
-  Future<Unit> sendEmailVerification({required String email}) {
-    // TODO: implement sendEmailVerification
-    throw UnimplementedError();
+  Future<Unit> sendEmailVerification({
+    required String email,
+  }) async {
+    try {
+      auth.currentUser!.sendEmailVerification();
+      return unit;
+    } on FirebaseAuthException {
+      rethrow;
+    }
   }
 
   @override
-  Future<Unit> sendPasswordResetEmail({required String email}) {
-    // TODO: implement sendPasswordResetEmail
-    throw UnimplementedError();
+  Future<Unit> sendPasswordResetEmail({
+    required String email,
+  }) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      return unit;
+    } on FirebaseAuthException {
+      rethrow;
+    }
   }
 
   @override
