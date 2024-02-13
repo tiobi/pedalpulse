@@ -10,7 +10,7 @@ class IsEmailVerifiedUseCase {
     required this.repository,
   });
 
-  Future<Either<Failure, bool>> call(String email) async {
+  Future<Either<Failure, bool>> call({required String email}) async {
     return repository.isEmailVerified(email: email);
   }
 }

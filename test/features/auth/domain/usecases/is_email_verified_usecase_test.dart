@@ -29,7 +29,7 @@ void main() {
           .thenAnswer((_) async => const Right(true));
 
       // Act
-      final result = await useCase(tEmail);
+      final result = await useCase(email: tEmail);
 
       // Assert
       expect(result, const Right(true));
@@ -42,7 +42,7 @@ void main() {
           .thenAnswer((_) async => const Right(false));
 
       // Act
-      final result = await useCase(tEmail);
+      final result = await useCase(email: tEmail);
 
       // Assert
       expect(result, const Right(false));
@@ -55,7 +55,7 @@ void main() {
           .thenAnswer((_) async => Left(tFailure));
 
       // Act
-      final result = await useCase(tEmptyEmail);
+      final result = await useCase(email: tEmptyEmail);
 
       // Assert
       expect(result, Left(tFailure));
@@ -68,7 +68,7 @@ void main() {
           .thenAnswer((_) async => Left(tFailure));
 
       // Act
-      final result = await useCase(tEmail);
+      final result = await useCase(email: tEmail);
 
       // Assert
       expect(result, Left(tFailure));

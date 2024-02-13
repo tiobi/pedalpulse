@@ -26,7 +26,7 @@ void main() {
       )).thenAnswer((_) async => const Right(unit));
 
       // Act
-      final result = await useCase(tEmail);
+      final result = await useCase(email: tEmail);
 
       // Assert
       expect(result, const Right(unit));
@@ -43,7 +43,7 @@ void main() {
       )).thenAnswer((_) async => Left(failure));
 
       // Act
-      final result = await useCase(tEmail);
+      final result = await useCase(email: tEmail);
 
       // Assert
       expect(result, Left(failure));
