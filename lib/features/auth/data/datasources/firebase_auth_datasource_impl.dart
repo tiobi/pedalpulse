@@ -59,7 +59,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
       }
 
       return userCredential;
-    } catch (e) {
+    } on FirebaseAuthException {
       rethrow;
     }
   }

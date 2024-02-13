@@ -117,12 +117,12 @@ void main() {
         ));
 
         // Act
-        final call = dataSource.signInWithEmailAndPassword(
+        final result = dataSource.signInWithEmailAndPassword(
           authEntity: tAuthEntity,
         );
 
         // Assert
-        expect(() => call, throwsA(isA<FirebaseAuthException>()));
+        expect(() => result, throwsA(isA<FirebaseAuthException>()));
       });
 
       test('should throw a FirebaseAuthException when the sign in fails',
@@ -157,6 +157,9 @@ void main() {
         )).thenAnswer((_) async => tUserCredential);
         when(auth.currentUser).thenReturn(user);
         when(user.sendEmailVerification()).thenAnswer((_) async => unit);
+        when(firestore.collection('users')).thenReturn(collection);
+        when(collection.doc(tUid)).thenReturn(document);
+        when(document.set(any)).thenAnswer((_) async => unit);
         when(dataSource.initializeUserData(uid: tUid, email: tEmail))
             .thenAnswer((_) async => unit);
 
@@ -261,24 +264,23 @@ void main() {
         verifyNoMoreInteractions(firestore);
       });
 
-      test('should throw a FirebaseAuthException when the user data fails',
-          () async {
+      test('should throw a FirebaseException when an error occurs', () async {
         // Arrange
         when(firestore.collection('users')).thenReturn(collection);
         when(collection.doc(tUid)).thenReturn(document);
-        when(document.set({
-          'uid': tUid,
-          'email': tEmail,
-        })).thenThrow(FirebaseAuthException(code: 'Server Failure'));
+        when(document.set(any)).thenThrow(FirebaseException(
+          plugin: 'firebase',
+          message: 'Server Failure',
+        ));
 
         // Act
-        final result = dataSource.initializeUserData(
+        final call = dataSource.initializeUserData(
           uid: tUid,
           email: tEmail,
         );
 
         // Assert
-        expect(() => result, throwsA(isA<FirebaseAuthException>()));
+        expect(call, throwsA(isA<FirebaseException>()));
       });
     });
 
