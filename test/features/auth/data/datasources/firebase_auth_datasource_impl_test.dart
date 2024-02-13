@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -19,7 +18,6 @@ void main() {
   late MockUser user;
   late MockFirebaseAuth auth;
   late MockFirebaseFirestore firestore;
-  late FakeFirebaseFirestore instance;
   late MockCollectionReference collection;
   late MockDocumentReference document;
 
@@ -33,7 +31,6 @@ void main() {
     );
     collection = MockCollectionReference();
     document = MockDocumentReference();
-    instance = FakeFirebaseFirestore();
 
     when(firestore.collection(any)).thenReturn(collection);
     when(collection.doc(any)).thenReturn(document);

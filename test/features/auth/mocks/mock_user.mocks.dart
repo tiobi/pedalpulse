@@ -87,20 +87,18 @@ class _FakeUser_5 extends _i1.SmartFake implements _i3.User {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUser extends _i1.Mock implements _i3.User {
-  MockUser() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   bool get emailVerified => (super.noSuchMethod(
         Invocation.getter(#emailVerified),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
 
   @override
   bool get isAnonymous => (super.noSuchMethod(
         Invocation.getter(#isAnonymous),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
 
   @override
@@ -110,24 +108,34 @@ class MockUser extends _i1.Mock implements _i3.User {
           this,
           Invocation.getter(#metadata),
         ),
+        returnValueForMissingStub: _FakeUserMetadata_0(
+          this,
+          Invocation.getter(#metadata),
+        ),
       ) as _i2.UserMetadata);
 
   @override
   List<_i2.UserInfo> get providerData => (super.noSuchMethod(
         Invocation.getter(#providerData),
         returnValue: <_i2.UserInfo>[],
+        returnValueForMissingStub: <_i2.UserInfo>[],
       ) as List<_i2.UserInfo>);
 
   @override
   String get uid => (super.noSuchMethod(
         Invocation.getter(#uid),
         returnValue: '',
+        returnValueForMissingStub: '',
       ) as String);
 
   @override
   _i3.MultiFactor get multiFactor => (super.noSuchMethod(
         Invocation.getter(#multiFactor),
         returnValue: _FakeMultiFactor_1(
+          this,
+          Invocation.getter(#multiFactor),
+        ),
+        returnValueForMissingStub: _FakeMultiFactor_1(
           this,
           Invocation.getter(#multiFactor),
         ),
@@ -151,6 +159,7 @@ class MockUser extends _i1.Mock implements _i3.User {
           [forceRefresh],
         ),
         returnValue: _i4.Future<String?>.value(),
+        returnValueForMissingStub: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
 
   @override
@@ -162,6 +171,14 @@ class MockUser extends _i1.Mock implements _i3.User {
           [forceRefresh],
         ),
         returnValue: _i4.Future<_i2.IdTokenResult>.value(_FakeIdTokenResult_2(
+          this,
+          Invocation.method(
+            #getIdTokenResult,
+            [forceRefresh],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.IdTokenResult>.value(_FakeIdTokenResult_2(
           this,
           Invocation.method(
             #getIdTokenResult,
@@ -185,6 +202,14 @@ class MockUser extends _i1.Mock implements _i3.User {
             [credential],
           ),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
+          this,
+          Invocation.method(
+            #linkWithCredential,
+            [credential],
+          ),
+        )),
       ) as _i4.Future<_i3.UserCredential>);
 
   @override
@@ -195,6 +220,14 @@ class MockUser extends _i1.Mock implements _i3.User {
           [provider],
         ),
         returnValue: _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
+          this,
+          Invocation.method(
+            #linkWithProvider,
+            [provider],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
           this,
           Invocation.method(
             #linkWithProvider,
@@ -218,6 +251,14 @@ class MockUser extends _i1.Mock implements _i3.User {
             [provider],
           ),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
+          this,
+          Invocation.method(
+            #reauthenticateWithProvider,
+            [provider],
+          ),
+        )),
       ) as _i4.Future<_i3.UserCredential>);
 
   @override
@@ -229,6 +270,14 @@ class MockUser extends _i1.Mock implements _i3.User {
           [provider],
         ),
         returnValue: _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
+          this,
+          Invocation.method(
+            #reauthenticateWithPopup,
+            [provider],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
           this,
           Invocation.method(
             #reauthenticateWithPopup,
@@ -256,6 +305,14 @@ class MockUser extends _i1.Mock implements _i3.User {
           [provider],
         ),
         returnValue: _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
+          this,
+          Invocation.method(
+            #linkWithPopup,
+            [provider],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
           this,
           Invocation.method(
             #linkWithPopup,
@@ -299,6 +356,17 @@ class MockUser extends _i1.Mock implements _i3.User {
             ],
           ),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.ConfirmationResult>.value(_FakeConfirmationResult_4(
+          this,
+          Invocation.method(
+            #linkWithPhoneNumber,
+            [
+              phoneNumber,
+              verifier,
+            ],
+          ),
+        )),
       ) as _i4.Future<_i3.ConfirmationResult>);
 
   @override
@@ -310,6 +378,14 @@ class MockUser extends _i1.Mock implements _i3.User {
           [credential],
         ),
         returnValue: _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
+          this,
+          Invocation.method(
+            #reauthenticateWithCredential,
+            [credential],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.UserCredential>.value(_FakeUserCredential_3(
           this,
           Invocation.method(
             #reauthenticateWithCredential,
@@ -347,6 +423,13 @@ class MockUser extends _i1.Mock implements _i3.User {
           [providerId],
         ),
         returnValue: _i4.Future<_i3.User>.value(_FakeUser_5(
+          this,
+          Invocation.method(
+            #unlink,
+            [providerId],
+          ),
+        )),
+        returnValueForMissingStub: _i4.Future<_i3.User>.value(_FakeUser_5(
           this,
           Invocation.method(
             #unlink,
