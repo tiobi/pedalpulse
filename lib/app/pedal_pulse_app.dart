@@ -80,7 +80,7 @@ class PedalPulseApp extends StatelessWidget {
               //   mobileLayout: MobileLayout(initialIndex: 0),
               //   desktopLayout: DesktopLayout(),
               // );
-              return const SignInPage();
+              return SignInPage();
             }
           },
         ),

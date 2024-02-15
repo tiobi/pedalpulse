@@ -22,7 +22,7 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
       await dataSource.sendPasswordResetEmail(email: email);
       return const Right(unit);
     } catch (e) {
-      return Left(FirebaseAuthFailure(e.toString()));
+      return Left(FirebaseAuthFailure(message: e.toString()));
     }
   }
 
@@ -35,7 +35,7 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
           await dataSource.isEmailVerified(email: email);
       return Right(isEmailVerified);
     } catch (e) {
-      return Left(FirebaseAuthFailure(e.toString()));
+      return Left(FirebaseAuthFailure(message: e.toString()));
     }
   }
 
@@ -49,9 +49,9 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
 
       return Right(userCredential);
     } on FirebaseAuthException catch (e) {
-      return Left(FirebaseAuthFailure(e.message.toString()));
+      return Left(FirebaseAuthFailure(message: e.message.toString()));
     } catch (e) {
-      return Left(FirebaseAuthFailure(e.toString()));
+      return Left(FirebaseAuthFailure(message: e.toString()));
     }
   }
 
@@ -61,7 +61,7 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
       await dataSource.signOut();
       return const Right(unit);
     } on FirebaseAuthException {
-      return Left(FirebaseAuthFailure('Server Failure'));
+      return Left(FirebaseAuthFailure(message: 'Server Failure'));
     }
   }
 
@@ -75,9 +75,9 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
 
       return Right(userCredential);
     } on FirebaseAuthException catch (e) {
-      return Left(FirebaseAuthFailure(e.message.toString()));
+      return Left(FirebaseAuthFailure(message: e.message.toString()));
     } catch (e) {
-      return Left(FirebaseAuthFailure(e.toString()));
+      return Left(FirebaseAuthFailure(message: e.toString()));
     }
   }
 }
