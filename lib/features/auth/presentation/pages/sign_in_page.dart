@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/log_in_title_widget.dart';
 import 'package:pedalpulse/widgets/custom_button_widget.dart';
-import 'package:pedalpulse/widgets/custom_textfield_widget.dart';
+import 'package:pedalpulse/features/auth/presentation/widgets/custom_textfield_widget.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/auth_provider.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -9,6 +12,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -18,7 +22,9 @@ class SignInPage extends StatelessWidget {
           child: Column(
             children: [
               const LogInTitleWidget(),
-              CustomTextfieldWidget(placeholder: 'email'),
+              CustomTextfieldWidget(
+                placeholder: 'email',
+              ),
               CustomTextfieldWidget(placeholder: 'password', isObscure: true),
               const CustomButtonWidget(placeholder: 'Sign In'),
             ],

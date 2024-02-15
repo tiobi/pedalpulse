@@ -8,7 +8,7 @@ import '../utils/managers/string_manager.dart';
 import '../widgets/admob_banner_ad_widget.dart';
 import '../widgets/comment_dialog_widget.dart';
 import '../widgets/comment_widget.dart';
-import '../widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 import '../widgets/loading_placeholder_widget.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';

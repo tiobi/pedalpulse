@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/managers/color_manager.dart';
+import '../../../../utils/managers/color_manager.dart';
 
 class CustomTextButtonWidget extends StatelessWidget {
   final String placeholder;

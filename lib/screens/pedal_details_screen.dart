@@ -14,7 +14,7 @@ import '../utils/managers/color_manager.dart';
 import '../utils/managers/route_manager.dart';
 import '../utils/managers/string_manager.dart';
 import '../widgets/admob_banner_ad_widget.dart';
-import '../widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 import '../widgets/image_pageview_indicator_widget.dart';
 import '../widgets/post_listview_widget.dart';
 import '../widgets/review_dialog_widget.dart';

@@ -8,8 +8,8 @@ import '../providers/pedal_provider.dart';
 import '../services/algolia/algolia.dart';
 import '../screens/request_pedal_screen.dart';
 import '../utils/managers/string_manager.dart';
-import '../widgets/custom_text_button_widget.dart';
-import '../widgets/custom_textfield_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_textfield_widget.dart';
 import '../widgets/loading_pedal_card_widget.dart';
 import '../widgets/pedal_card_widget.dart';
 

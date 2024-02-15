@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 ///
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../features/auth/presentation/pages/sign_in_page.dart';
+
+import '../features/auth/presentation/providers/auth_provider.dart';
 
 /// Models and Providers
 ///
@@ -18,11 +21,6 @@ import '../providers/user_provider.dart';
 import '../providers/pedal_provider.dart';
 import '../providers/user_likes_provider.dart';
 
-/// Screens and Layouts
-///
-import '../responsive/responsive_layout.dart';
-import '../responsive/mobile_layout.dart';
-import '../responsive/desktop_layout.dart';
 import '../screens/mobile_web_screen.dart';
 import '../screens/sign_in_screen.dart';
 
@@ -52,6 +50,9 @@ class PedalPulseApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<UserLikesProvider>(
           create: (_) => UserLikesProvider(),
+        ),
+        ChangeNotifierProvider<AuthProvider>(
+          create: (_) => getIt<AuthProvider>(),
         ),
       ],
       child: MaterialApp(

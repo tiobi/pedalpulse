@@ -8,7 +8,7 @@ import '../services/firebase/pedal_firestore_methods.dart';
 import '../utils/managers/color_manager.dart';
 import '../utils/managers/string_manager.dart';
 import '../widgets/admob_banner_ad_widget.dart';
-import '../widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 import '../widgets/loading_placeholder_widget.dart';
 import '../widgets/review_dialog_widget.dart';
 import '../widgets/review_widget.dart';

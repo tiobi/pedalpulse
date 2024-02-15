@@ -18,7 +18,7 @@ import '../utils/utils.dart';
 import '../widgets/admob_banner_ad_widget.dart';
 import '../widgets/comment_dialog_widget.dart';
 import '../widgets/comment_widget.dart';
-import '../widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 import '../widgets/dragger_widget.dart';
 import '../widgets/image_pageview_indicator_widget.dart';
 import '../widgets/safe_area_padding_widget.dart';

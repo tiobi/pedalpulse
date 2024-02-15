@@ -17,8 +17,8 @@ import '../utils/managers/message_manager.dart';
 import '../utils/managers/route_manager.dart';
 import '../utils/managers/string_manager.dart';
 import '../widgets/custom_button_widget.dart';
-import '../widgets/custom_text_button_widget.dart';
-import '../widgets/custom_textfield_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_textfield_widget.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);

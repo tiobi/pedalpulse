@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../utils/managers/asset_manager.dart';
-import '../utils/managers/log_in_title_widget.dart';
+import '../features/auth/presentation/widgets/log_in_title_widget.dart';
 import '../utils/managers/string_manager.dart';
-import '../widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MobileWebScreen extends StatelessWidget {

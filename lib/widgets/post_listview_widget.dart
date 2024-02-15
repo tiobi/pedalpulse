@@ -5,7 +5,7 @@ import 'package:pedalpulse/widgets/post_card_widget.dart';
 
 import '../models/search_option_model.dart';
 import '../utils/managers/route_manager.dart';
-import 'custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 
 class PostListviewWidget extends StatefulWidget {
   final List<PostModel> postList;

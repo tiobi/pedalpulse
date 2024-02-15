@@ -22,8 +22,8 @@ import '../utils/managers/message_manager.dart';
 import '../utils/managers/route_manager.dart';
 import '../utils/utils.dart';
 import '../widgets/custom_dynamic_height_textfield_widget.dart';
-import '../widgets/custom_text_button_widget.dart';
-import '../widgets/custom_textfield_widget.dart';
+import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
+import '../features/auth/presentation/widgets/custom_textfield_widget.dart';
 import '../widgets/loading_placeholder_widget.dart';
 import '../widgets/pedal_card_widget.dart';
 
