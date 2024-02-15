@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const LogInTitleWidget(),
+              const SignInTitleWidget(),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(

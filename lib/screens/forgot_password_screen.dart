@@ -82,7 +82,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const LogInTitleWidget(),
+              const SignInTitleWidget(),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(

@@ -24,7 +24,7 @@ class SignInPage extends HookWidget {
           height: height,
           child: Column(
             children: [
-              const LogInTitleWidget(),
+              const SignInTitleWidget(),
               _buildSignInForm(context),
             ],
           ),

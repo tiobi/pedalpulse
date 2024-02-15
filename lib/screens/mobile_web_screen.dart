@@ -23,7 +23,7 @@ class MobileWebScreen extends StatelessWidget {
         height: size.height,
         child: Column(
           children: [
-            const LogInTitleWidget(),
+            const SignInTitleWidget(),
             const Expanded(
               child: Center(
                 child: Text(

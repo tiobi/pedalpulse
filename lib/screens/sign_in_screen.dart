@@ -145,7 +145,7 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const LogInTitleWidget(),
+              const SignInTitleWidget(),
 
               // Sign In with Email Section
               const Align(
