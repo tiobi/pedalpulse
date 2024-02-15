@@ -7,9 +7,9 @@ class AppSizeProvider extends ChangeNotifier {
   double get appWidth => _appWidth;
   double get appHeight => _appHeight;
 
-  void setAppSize(double width, double height) {
-    _appWidth = width;
-    _appHeight = height;
+  void setAppSize({required Size size}) {
+    _appWidth = size.width;
+    _appHeight = size.height;
     notifyListeners();
   }
 }

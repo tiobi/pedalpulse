@@ -36,7 +36,7 @@ void main() {
         () async {
       // Arrange
       final Failure failure = FirebaseAuthFailure(
-        'Server Failure',
+        message: 'Server Failure',
       );
       when(repository.sendPasswordResetEmail(
         email: tEmail,

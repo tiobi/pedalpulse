@@ -7,4 +7,8 @@ class AuthString {
   static const String password = 'Password';
   static const String forgotPassword = 'Forgot Password?';
   static const String dontHaveAnAccount = 'Don\'t have an account?';
+
+  // social
+  static const String signInWithGoogle = 'Sign In with Google';
+  static const String signInWithApple = 'Sign In with Apple';
 }

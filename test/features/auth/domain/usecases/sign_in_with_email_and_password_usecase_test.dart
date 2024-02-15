@@ -35,7 +35,7 @@ void main() {
   final UserCredential tUserCredential = MockUserCredential();
 
   final Failure failure = FirebaseAuthFailure(
-    'Email and password cannot be empty',
+    message: 'Email and password cannot be empty',
   );
 
   group('SignInWithEmailAndPasswordUseCase Text', () {
@@ -80,7 +80,7 @@ void main() {
     test('should return a failure when the sign in fails', () async {
       // Arrange
       final Failure failure = FirebaseAuthFailure(
-        'Server Failure',
+        message: 'Server Failure',
       );
       when(repository.signInWithEmailAndPassword(
         authEntity: tAuthEntity,

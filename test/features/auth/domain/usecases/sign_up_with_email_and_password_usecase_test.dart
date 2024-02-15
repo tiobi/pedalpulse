@@ -36,7 +36,7 @@ void main() {
   final UserCredential tUserCredential = MockUserCredential();
 
   final Failure failure = FirebaseAuthFailure(
-    'Email and password cannot be empty',
+    message: 'Email and password cannot be empty',
   );
 
   group('SignUpWithEmailAndPasswordUseCase Test', () {

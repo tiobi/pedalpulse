@@ -58,7 +58,7 @@ void main() {
       test('should return a Failure when the sign in fails', () async {
         // Arrange
         when(dataSource.signInWithEmailAndPassword(authEntity: tAuthEntity))
-            .thenThrow(FirebaseAuthFailure('Server Failure'));
+            .thenThrow(FirebaseAuthFailure(message: 'Server Failure'));
 
         // Act
         final result = await repository.signInWithEmailAndPassword(
@@ -75,7 +75,7 @@ void main() {
         // Arrange
         when(dataSource.signInWithEmailAndPassword(
                 authEntity: tEmptyAuthEntity))
-            .thenThrow(FirebaseAuthFailure('Server Failure'));
+            .thenThrow(FirebaseAuthFailure(message: 'Server Failure'));
 
         // Act
         final result = await repository.signInWithEmailAndPassword(
@@ -110,7 +110,7 @@ void main() {
       test('should return a Failure when the sign up fails', () async {
         // Arrange
         when(dataSource.signUpWithEmailAndPassword(authEntity: tAuthEntity))
-            .thenThrow(FirebaseAuthFailure('Server Failure'));
+            .thenThrow(FirebaseAuthFailure(message: 'Server Failure'));
 
         // Act
         final result = await repository.signUpWithEmailAndPassword(
@@ -144,7 +144,7 @@ void main() {
           () async {
         // Arrange
         when(dataSource.sendPasswordResetEmail(email: tEmail))
-            .thenThrow(FirebaseAuthFailure('Server Failure'));
+            .thenThrow(FirebaseAuthFailure(message: 'Server Failure'));
 
         // Act
         final result = await repository.sendPasswordResetEmail(email: tEmail);
@@ -222,7 +222,7 @@ void main() {
           () async {
         // Arrange
         when(dataSource.isEmailVerified(email: tEmail))
-            .thenThrow(FirebaseAuthFailure('Server Failure'));
+            .thenThrow(FirebaseAuthFailure(message: 'Server Failure'));
 
         // Act
         final result = await repository.isEmailVerified(email: tEmail);

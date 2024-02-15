@@ -35,7 +35,7 @@ void main() {
     test('should return a Failure when the sign out fails', () async {
       // Arrange
       final Failure failure = FirebaseAuthFailure(
-        'Server Failure',
+        message: 'Server Failure',
       );
       when(repository.signOut()).thenAnswer((_) async => Left(failure));
 

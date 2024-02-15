@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
+import 'package:pedalpulse/features/auth/presentation/widgets/social_auth_divider_widget.dart';
 import 'package:pedalpulse/widgets/custom_button_widget.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_textfield_widget.dart';
-import 'package:provider/provider.dart';
 
 import '../../core/constants/auth_string.dart';
 import '../../domain/entities/auth_entity.dart';
@@ -25,6 +29,7 @@ class SignInPage extends HookWidget {
             children: [
               const SignInTitleWidget(),
               _buildSignInForm(context),
+              _buildSocialSignIn(context),
             ],
           ),
         ),
@@ -39,6 +44,7 @@ class SignInPage extends HookWidget {
         useTextEditingController.fromValue(TextEditingValue.empty);
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         CustomTextfieldWidget(
           placeholder: AuthString.email,
@@ -61,6 +67,24 @@ class SignInPage extends HookWidget {
     );
   }
 
+  Widget _buildSocialSignIn(BuildContext context) {
+    return Column(
+      children: [
+        const SocialAuthDividerWidget(),
+        Platform.isIOS
+            ? SignInButton(
+                Buttons.Apple,
+                onPressed: () {},
+              )
+            : Container(),
+        SignInButton(
+          Buttons.Google,
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
   void _onSignIn(
     BuildContext context, {
     required String email,
@@ -76,8 +100,7 @@ class SignInPage extends HookWidget {
       return;
     }
 
-    final AuthProvider authProvider =
-        Provider.of<AuthProvider>(context, listen: false);
+    final AuthProvider authProvider = GetIt.instance<AuthProvider>();
     final AuthEntity authEntity = AuthEntity(
       email: email,
       password: password,
@@ -90,7 +113,7 @@ class SignInPage extends HookWidget {
       (failure) => ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(failure.toString()),
-          duration: const Duration(seconds: 2),
+          duration: const Duration(seconds: 5),
         ),
       ),
       (success) => Navigator.pushReplacementNamed(context, '/home'),

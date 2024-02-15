@@ -1,18 +1,16 @@
-/// Flutter and Dart packages
-///
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// 3rd party packages
 ///
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
 
 import '../features/auth/presentation/pages/sign_in_page.dart';
-
 import '../features/auth/presentation/providers/auth_provider.dart';
 
 /// Models and Providers
@@ -23,11 +21,11 @@ import '../providers/user_likes_provider.dart';
 
 import '../screens/mobile_web_screen.dart';
 import '../screens/sign_in_screen.dart';
+import '../utils/managers/route_manager.dart';
 
 /// Utils
 ///
 import '../utils/managers/theme_manager.dart';
-import '../utils/managers/route_manager.dart';
 
 class PedalPulseApp extends StatelessWidget {
   const PedalPulseApp({Key? key}) : super(key: key);
@@ -76,11 +74,11 @@ class PedalPulseApp extends StatelessWidget {
             if (!snapshot.hasData) {
               return const SignInScreen();
             } else {
-              // return const ResponsiveLayout(
-              //   mobileLayout: MobileLayout(initialIndex: 0),
-              //   desktopLayout: DesktopLayout(),
-              // );
-              return SignInPage();
+              //       // return const ResponsiveLayout(
+              //       //   mobileLayout: MobileLayout(initialIndex: 0),
+              //       //   desktopLayout: DesktopLayout(),
+              //       // );
+              return const SignInPage();
             }
           },
         ),
@@ -88,4 +86,16 @@ class PedalPulseApp extends StatelessWidget {
       ),
     );
   }
+
+  // final _router = GoRouter(
+  //   observers: [FirebaseAnalyticsObserver(analytics: analytics)],
+  //   routes: [
+  //     GoRoute(
+  //       path: 'signin',
+  //       pageBuilder: (context, state) {
+  //         return const SignInScreen();
+  //       },
+  //     ),
+  //   ],
+  // );
 }

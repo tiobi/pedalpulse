@@ -19,7 +19,7 @@ void main() {
   const String tEmail = 'hello@world.com';
   const String tEmptyEmail = '';
   final Failure tFailure = FirebaseAuthFailure(
-    'Server Failure',
+    message: 'Server Failure',
   );
 
   group('IsEmailVerifiedUseCase Test', () {
