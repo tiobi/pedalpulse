@@ -16,14 +16,14 @@ import 'package:pedalpulse/injection_container.dart';
 import 'app/pedal_pulse_app.dart';
 
 void main() async {
-  /// Initialize Dependency Injection
-  ///
-  await initializeDependencies();
-
   /// Initialize App and Firebase
   ///
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  /// Initialize Dependency Injection
+  ///
+  await initializeDependencies();
 
   /// Initialize Google Mobile Ads SDK
   /// Google Mobile Ads SDK does not support web.

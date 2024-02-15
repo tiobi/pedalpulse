@@ -41,13 +41,7 @@ class AuthProvider extends ChangeNotifier {
     await signInWithEmailAndPasswordUseCase(authEntity: authEntity);
   }
 
-  Future<void> signOut() async {
-    final result = await signOutUseCase();
-
-    if (result.isRight()) {
-      notifyListeners();
-    } else {}
-  }
+  Future<void> signOut() async {}
 
   Future<void> signUpWithEmailAndPassword({
     required AuthEntity authEntity,

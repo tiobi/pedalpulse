@@ -10,6 +10,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../features/auth/presentation/pages/sign_in_page.dart';
+
 /// Models and Providers
 ///
 import '../providers/user_provider.dart';
@@ -49,7 +51,8 @@ class PedalPulseApp extends StatelessWidget {
           create: (_) => PedalProvider(),
         ),
         ChangeNotifierProvider<UserLikesProvider>(
-            create: (_) => UserLikesProvider()),
+          create: (_) => UserLikesProvider(),
+        ),
       ],
       child: MaterialApp(
         title: AppStringManager.appTitle,
@@ -72,10 +75,11 @@ class PedalPulseApp extends StatelessWidget {
             if (!snapshot.hasData) {
               return const SignInScreen();
             } else {
-              return const ResponsiveLayout(
-                mobileLayout: MobileLayout(initialIndex: 0),
-                desktopLayout: DesktopLayout(),
-              );
+              // return const ResponsiveLayout(
+              //   mobileLayout: MobileLayout(initialIndex: 0),
+              //   desktopLayout: DesktopLayout(),
+              // );
+              return const SignInPage();
             }
           },
         ),

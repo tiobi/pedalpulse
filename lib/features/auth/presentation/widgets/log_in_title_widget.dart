@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'asset_manager.dart';
+import '../../../../utils/managers/asset_manager.dart';
 
 class LogInTitleWidget extends StatelessWidget {
   const LogInTitleWidget({Key? key}) : super(key: key);
