@@ -12,7 +12,7 @@ import '../providers/user_provider.dart';
 import '../services/auth/auth_methods.dart';
 import '../services/auth/social_auth_methods.dart';
 import '../utils/managers/color_manager.dart';
-import '../features/auth/presentation/widgets/log_in_title_widget.dart';
+import '../features/auth/presentation/widgets/sign_in_title_widget.dart';
 import '../utils/managers/message_manager.dart';
 import '../utils/managers/route_manager.dart';
 import '../utils/managers/string_manager.dart';

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:pedalpulse/features/auth/presentation/widgets/log_in_title_widget.dart';
+import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
 import 'package:pedalpulse/widgets/custom_button_widget.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_textfield_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/managers/route_manager.dart';
 import '../../core/constants/auth_string.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../providers/auth_provider.dart';
@@ -94,10 +93,7 @@ class SignInPage extends HookWidget {
           duration: const Duration(seconds: 2),
         ),
       ),
-      (success) => Navigator.pushReplacementNamed(
-        context,
-        Routes.mobileLayout,
-      ),
+      (success) => Navigator.pushReplacementNamed(context, '/home'),
     );
   }
 }
