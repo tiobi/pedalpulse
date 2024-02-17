@@ -20,7 +20,7 @@ void main() {
 
   final UserCredential tUserCredential = MockUserCredential();
 
-  final Failure failure = GoogleAuthFailure('Google sign in failed');
+  final Failure failure = GoogleAuthFailure(message: 'Google sign in failed');
 
   group('SignInWithGoogleTest', () {
     test('should sign in the user and get user credential', () async {

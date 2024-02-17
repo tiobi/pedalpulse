@@ -20,7 +20,7 @@ void main() {
 
   final UserCredential tUserCredential = MockUserCredential();
 
-  final Failure failure = AppleAuthFailure('Apple sign in failed');
+  final Failure failure = AppleAuthFailure(message: 'Apple sign in failed');
 
   group('SignInWithAppleTest', () {
     test('should sign in the user and get user credential', () async {

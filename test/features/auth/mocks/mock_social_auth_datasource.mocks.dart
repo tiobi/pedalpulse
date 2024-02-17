@@ -3,9 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i4;
+
+import 'package:firebase_auth/firebase_auth.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource.dart'
-    as _i2;
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -18,12 +21,53 @@ import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeUserCredential_0 extends _i1.SmartFake
+    implements _i2.UserCredential {
+  _FakeUserCredential_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [SocialAuthDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSocialAuthDataSource extends _i1.Mock
-    implements _i2.SocialAuthDataSource {
+    implements _i3.SocialAuthDataSource {
   MockSocialAuthDataSource() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  _i4.Future<_i2.UserCredential> signInWithGoogle() => (super.noSuchMethod(
+        Invocation.method(
+          #signInWithGoogle,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.UserCredential>.value(_FakeUserCredential_0(
+          this,
+          Invocation.method(
+            #signInWithGoogle,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserCredential>);
+
+  @override
+  _i4.Future<_i2.UserCredential> signInWithApple() => (super.noSuchMethod(
+        Invocation.method(
+          #signInWithApple,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.UserCredential>.value(_FakeUserCredential_0(
+          this,
+          Invocation.method(
+            #signInWithApple,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserCredential>);
 }
