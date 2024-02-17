@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button_widget.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/social_auth_divider_widget.dart';
 import 'package:pedalpulse/widgets/custom_button_widget.dart';
@@ -31,6 +32,7 @@ class SignInPage extends HookWidget {
               children: [
                 _buildSignInForm(context),
                 const Spacer(),
+                _buildSignUpButton(context),
                 _buildSocialSignIn(context),
               ],
             ),
@@ -68,6 +70,21 @@ class SignInPage extends HookWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildSignUpButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomTextButtonWidget(
+            placeholder: AuthString.signUp,
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 
