@@ -23,14 +23,17 @@ class SignInPage extends HookWidget {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
-        child: SizedBox(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 20),
           height: height,
-          child: Column(
-            children: [
-              const SignInTitleWidget(),
-              _buildSignInForm(context),
-              _buildSocialSignIn(context),
-            ],
+          child: SafeArea(
+            child: Column(
+              children: [
+                _buildSignInForm(context),
+                const Spacer(),
+                _buildSocialSignIn(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -46,6 +49,7 @@ class SignInPage extends HookWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SignInTitleWidget(),
         CustomTextfieldWidget(
           placeholder: AuthString.email,
           controller: emailController,

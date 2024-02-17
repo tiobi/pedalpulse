@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 /// 3rd party packages
 ///
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +19,6 @@ import '../providers/pedal_provider.dart';
 import '../providers/user_likes_provider.dart';
 
 import '../screens/mobile_web_screen.dart';
-import '../screens/sign_in_screen.dart';
 import '../utils/managers/route_manager.dart';
 
 /// Utils
@@ -72,7 +70,7 @@ class PedalPulseApp extends StatelessWidget {
               return const MobileWebScreen();
             }
             if (!snapshot.hasData) {
-              return const SignInScreen();
+              return const SignInPage();
             } else {
               //       // return const ResponsiveLayout(
               //       //   mobileLayout: MobileLayout(initialIndex: 0),

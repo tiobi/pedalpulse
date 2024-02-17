@@ -37,7 +37,7 @@ class CustomButtonWidget extends StatelessWidget {
                   placeholder,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
