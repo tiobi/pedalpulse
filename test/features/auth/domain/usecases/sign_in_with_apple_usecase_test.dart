@@ -6,8 +6,8 @@ import 'package:pedalpulse/core/errors/apple_auth_failure.dart';
 import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 
-import '../../mocks/mock_social_auth_repository.mocks.dart';
-import '../../mocks/mock_user_credential.mocks.dart';
+import '../../../../mocks/mock_social_auth_repository.mocks.dart';
+import '../../../../mocks/mock_user_credential.mocks.dart';
 
 void main() {
   late SignInWithAppleUseCase useCase;
