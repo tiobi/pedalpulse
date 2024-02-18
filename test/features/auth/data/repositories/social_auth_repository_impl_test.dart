@@ -8,7 +8,7 @@ import 'package:pedalpulse/core/errors/google_auth_failure.dart';
 import 'package:pedalpulse/features/auth/data/repositories/social_auth_repository_impl.dart';
 import 'package:pedalpulse/features/auth/domain/repositories/social_auth_repository.dart';
 
-import '../../../../mocks/auth/mock_user_credential.mocks.dart';
+import '../../../../mocks/auth/user_credential/mock_user_credential.mocks.dart';
 import '../../../../mocks/auth/social/mock_social_auth_datasource.mocks.dart';
 
 void main() {

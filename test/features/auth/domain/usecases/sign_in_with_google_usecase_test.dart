@@ -6,7 +6,7 @@ import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/core/errors/google_auth_failure.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 
-import '../../../../mocks/auth/mock_user_credential.mocks.dart';
+import '../../../../mocks/auth/user_credential/mock_user_credential.mocks.dart';
 import '../../../../mocks/auth/social/mock_social_auth_repository.mocks.dart';
 
 void main() {

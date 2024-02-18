@@ -8,7 +8,7 @@ import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart';
 import 'package:pedalpulse/features/auth/domain/repositories/firebase_auth_repository.dart';
 
 import '../../../../mocks/auth/firebase/mock_firebase_auth_datasource.mocks.dart';
-import '../../../../mocks/auth/mock_user_credential.mocks.dart';
+import '../../../../mocks/auth/user_credential/mock_user_credential.mocks.dart';
 
 void main() {
   late FirebaseAuthRepository repository;

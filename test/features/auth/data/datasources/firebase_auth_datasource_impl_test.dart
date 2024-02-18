@@ -7,7 +7,7 @@ import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasour
 import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart';
 
 import '../../../../mocks/auth/firebase/mock_firebase_auth.mocks.dart';
-import '../../../../mocks/auth/mock_user_credential.mocks.dart';
+import '../../../../mocks/auth/user_credential/mock_user_credential.mocks.dart';
 import '../../../../mocks/database/mock_collection_reference.mocks.dart';
 import '../../../../mocks/database/mock_document_refernce.mocks.dart';
 import '../../../../mocks/database/mock_firebasse_firestore.mocks.dart';
