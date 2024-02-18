@@ -7,7 +7,7 @@ import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_out_usecase.dart';
 
-import '../../../../mocks/mock_firebase_auth_repository.mocks.dart';
+import '../../../../mocks/auth/firebase/mock_firebase_auth_repository.mocks.dart';
 
 void main() {
   late SignOutUseCase useCase;

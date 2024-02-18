@@ -6,12 +6,12 @@ import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasour
 import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasource_impl.dart';
 import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart';
 
-import '../../../../mocks/mock_collection_reference.mocks.dart';
-import '../../../../mocks/mock_document_refernce.mocks.dart';
-import '../../../../mocks/mock_firebase_auth.mocks.dart';
-import '../../../../mocks/mock_firebasse_firestore.mocks.dart';
-import '../../../../mocks/mock_user.mocks.dart';
-import '../../../../mocks/mock_user_credential.mocks.dart';
+import '../../../../mocks/auth/firebase/mock_firebase_auth.mocks.dart';
+import '../../../../mocks/auth/mock_user_credential.mocks.dart';
+import '../../../../mocks/database/mock_collection_reference.mocks.dart';
+import '../../../../mocks/database/mock_document_refernce.mocks.dart';
+import '../../../../mocks/database/mock_firebasse_firestore.mocks.dart';
+import '../../../../mocks/user/mock_user.mocks.dart';
 
 void main() {
   late FirebaseAuthDataSource dataSource;

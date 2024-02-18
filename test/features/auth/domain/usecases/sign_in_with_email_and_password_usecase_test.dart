@@ -7,8 +7,8 @@ import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/domain/entities/auth_entity.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_email_and_password_usecase.dart';
 
-import '../../../../mocks/mock_firebase_auth_repository.mocks.dart';
-import '../../../../mocks/mock_user_credential.mocks.dart';
+import '../../../../mocks/auth/firebase/mock_firebase_auth_repository.mocks.dart';
+import '../../../../mocks/auth/mock_user_credential.mocks.dart';
 
 void main() {
   late SignInWithEmailAndPasswordUseCase useCase;

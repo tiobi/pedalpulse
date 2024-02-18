@@ -3,12 +3,14 @@ import 'package:mockito/mockito.dart';
 import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource.dart';
 import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource_impl.dart';
 
-import '../../mocks/mock_collection_reference.mocks.dart';
-import '../../mocks/mock_document_refernce.mocks.dart';
-import '../../mocks/mock_firebase_auth.mocks.dart';
-import '../../mocks/mock_firebasse_firestore.mocks.dart';
-import '../../mocks/mock_google_sign_in.mocks.dart';
-import '../../mocks/mock_user.mocks.dart';
+import '../../../../mocks/auth/firebase/mock_firebase_auth.mocks.dart';
+import '../../../../mocks/auth/social/mock_google_sign_in.mocks.dart';
+import '../../../../mocks/auth/social/mock_google_sign_in_account.mocks.dart';
+import '../../../../mocks/auth/social/mock_google_sign_in_authentication.mocks.dart';
+import '../../../../mocks/database/mock_collection_reference.mocks.dart';
+import '../../../../mocks/database/mock_document_refernce.mocks.dart';
+import '../../../../mocks/database/mock_firebasse_firestore.mocks.dart';
+import '../../../../mocks/user/mock_user.mocks.dart';
 
 void main() {
   late SocialAuthDataSource dataSource;
@@ -17,6 +19,8 @@ void main() {
   late MockGoogleSignIn googleSignIn;
 
   late MockUser user;
+  late MockGoogleSignInAccount googleSignInAccount;
+  late MockGoogleSignInAuthentication googleSignInAuthentication;
   late MockCollectionReference collection;
   late MockDocumentReference document;
 
@@ -32,6 +36,10 @@ void main() {
       googleSignIn: googleSignIn,
     );
 
+    user = MockUser();
+    googleSignInAccount = MockGoogleSignInAccount();
+    googleSignInAuthentication = MockGoogleSignInAuthentication();
+
     collection = MockCollectionReference();
     document = MockDocumentReference();
 
@@ -41,12 +49,10 @@ void main() {
 
   group('Social Auth Datasource Impl Test', () {
     group('SignInWithGoogle Test', () {
-      test('should sign in the use with google account.', () async {
-        when(googleSignIn)
-      });
-      test('if google sign in account is null, throw FirebaseAuthException',
-          () async {});
-      test('if user is not found, throw FirebaseAuthException', () async {});
+      test('should sign in the use with google account.', () async {});
     });
+    test('if google sign in account is null, throw FirebaseAuthException',
+        () async {});
+    test('if user is not found, throw FirebaseAuthException', () async {});
   });
 }
