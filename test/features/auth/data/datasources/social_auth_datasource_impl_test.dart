@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource.dart';
@@ -7,6 +8,7 @@ import '../../../../mocks/auth/firebase/mock_firebase_auth.mocks.dart';
 import '../../../../mocks/auth/social/mock_google_sign_in.mocks.dart';
 import '../../../../mocks/auth/social/mock_google_sign_in_account.mocks.dart';
 import '../../../../mocks/auth/social/mock_google_sign_in_authentication.mocks.dart';
+import '../../../../mocks/auth/user_credential/mock_user_credential.mocks.dart';
 import '../../../../mocks/database/mock_collection_reference.mocks.dart';
 import '../../../../mocks/database/mock_document_refernce.mocks.dart';
 import '../../../../mocks/database/mock_firebasse_firestore.mocks.dart';
@@ -19,8 +21,10 @@ void main() {
   late MockGoogleSignIn googleSignIn;
 
   late MockUser user;
+  late MockUserCredential userCredential;
   late MockGoogleSignInAccount googleSignInAccount;
   late MockGoogleSignInAuthentication googleSignInAuthentication;
+
   late MockCollectionReference collection;
   late MockDocumentReference document;
 
@@ -29,6 +33,7 @@ void main() {
     firestore = MockFirebaseFirestore();
     googleSignIn = MockGoogleSignIn();
     user = MockUser();
+    userCredential = MockUserCredential();
 
     dataSource = SocialAuthDataSourceImpl(
       auth: auth,
@@ -47,12 +52,35 @@ void main() {
     when(collection.doc(any)).thenReturn(document);
   });
 
+  final UserCredential tUserCredential = MockUserCredential();
+
   group('Social Auth Datasource Impl Test', () {
+    /// Sign In With Google Test
+    ///
     group('SignInWithGoogle Test', () {
-      test('should sign in the use with google account.', () async {});
+      test('should sign in the use with google account.', () async {
+        when(googleSignIn.signIn())
+            .thenAnswer((_) async => googleSignInAccount);
+        when(googleSignInAccount.authentication)
+            .thenAnswer((_) async => googleSignInAuthentication);
+        when(googleSignInAuthentication.accessToken).thenReturn('accessToken');
+        when(googleSignInAuthentication.idToken).thenReturn('idToken');
+
+        final result = await dataSource.signInWithGoogle();
+
+        expect(result, user);
+      });
+      test('if google sign in account is null, throw FirebaseAuthException',
+          () async {
+        when(googleSignIn.signIn()).thenAnswer((_) async => null);
+      });
+      test('if user is not found, throw FirebaseAuthException', () async {});
     });
-    test('if google sign in account is null, throw FirebaseAuthException',
-        () async {});
-    test('if user is not found, throw FirebaseAuthException', () async {});
+
+    /// Sign In With Apple Test
+    ///
+    group('SignInWithApple Test', () {
+      test('should sign in the use with apple account.', () async {});
+    });
   });
 }

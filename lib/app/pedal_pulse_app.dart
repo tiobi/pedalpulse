@@ -70,13 +70,13 @@ class PedalPulseApp extends StatelessWidget {
               return const MobileWebScreen();
             }
             if (!snapshot.hasData) {
-              return const SignInPage();
+              return SignInPage();
             } else {
               //       // return const ResponsiveLayout(
               //       //   mobileLayout: MobileLayout(initialIndex: 0),
               //       //   desktopLayout: DesktopLayout(),
               //       // );
-              return const SignInPage();
+              return SignInPage();
             }
           },
         ),

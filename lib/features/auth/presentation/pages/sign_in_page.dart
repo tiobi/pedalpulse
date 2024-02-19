@@ -15,7 +15,9 @@ import '../../domain/entities/auth_entity.dart';
 import '../providers/auth_provider.dart';
 
 class SignInPage extends HookWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  SignInPage({Key? key}) : super(key: key);
+
+  final AuthProvider authProvider = GetIt.instance<AuthProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -95,12 +97,16 @@ class SignInPage extends HookWidget {
         Platform.isIOS
             ? SignInButton(
                 Buttons.Apple,
-                onPressed: () {},
+                onPressed: () {
+                  authProvider.signInWithAppleUseCase();
+                },
               )
             : Container(),
         SignInButton(
           Buttons.Google,
-          onPressed: () {},
+          onPressed: () {
+            authProvider.signInWithGoogleUseCase();
+          },
         ),
       ],
     );
@@ -121,7 +127,6 @@ class SignInPage extends HookWidget {
       return;
     }
 
-    final AuthProvider authProvider = GetIt.instance<AuthProvider>();
     final AuthEntity authEntity = AuthEntity(
       email: email,
       password: password,

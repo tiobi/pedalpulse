@@ -71,14 +71,14 @@ class _FakeDocumentReference_3<T extends Object?> extends _i1.SmartFake
 // ignore: must_be_immutable
 class MockDocumentReference extends _i1.Mock
     implements _i2.DocumentReference<Map<String, dynamic>> {
-  MockDocumentReference() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i2.FirebaseFirestore get firestore => (super.noSuchMethod(
         Invocation.getter(#firestore),
         returnValue: _FakeFirebaseFirestore_0(
+          this,
+          Invocation.getter(#firestore),
+        ),
+        returnValueForMissingStub: _FakeFirebaseFirestore_0(
           this,
           Invocation.getter(#firestore),
         ),
@@ -88,6 +88,7 @@ class MockDocumentReference extends _i1.Mock
   String get id => (super.noSuchMethod(
         Invocation.getter(#id),
         returnValue: '',
+        returnValueForMissingStub: '',
       ) as String);
 
   @override
@@ -98,12 +99,18 @@ class MockDocumentReference extends _i1.Mock
           this,
           Invocation.getter(#parent),
         ),
+        returnValueForMissingStub:
+            _FakeCollectionReference_1<Map<String, dynamic>>(
+          this,
+          Invocation.getter(#parent),
+        ),
       ) as _i2.CollectionReference<Map<String, dynamic>>);
 
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
         returnValue: '',
+        returnValueForMissingStub: '',
       ) as String);
 
   @override
@@ -115,6 +122,14 @@ class MockDocumentReference extends _i1.Mock
           [collectionPath],
         ),
         returnValue: _FakeCollectionReference_1<Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #collection,
+            [collectionPath],
+          ),
+        ),
+        returnValueForMissingStub:
+            _FakeCollectionReference_1<Map<String, dynamic>>(
           this,
           Invocation.method(
             #collection,
@@ -160,6 +175,15 @@ class MockDocumentReference extends _i1.Mock
             [options],
           ),
         )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.DocumentSnapshot<Map<String, dynamic>>>.value(
+                _FakeDocumentSnapshot_2<Map<String, dynamic>>(
+          this,
+          Invocation.method(
+            #get,
+            [options],
+          ),
+        )),
       ) as _i3.Future<_i2.DocumentSnapshot<Map<String, dynamic>>>);
 
   @override
@@ -172,6 +196,8 @@ class MockDocumentReference extends _i1.Mock
           {#includeMetadataChanges: includeMetadataChanges},
         ),
         returnValue:
+            _i3.Stream<_i2.DocumentSnapshot<Map<String, dynamic>>>.empty(),
+        returnValueForMissingStub:
             _i3.Stream<_i2.DocumentSnapshot<Map<String, dynamic>>>.empty(),
       ) as _i3.Stream<_i2.DocumentSnapshot<Map<String, dynamic>>>);
 
@@ -207,6 +233,17 @@ class MockDocumentReference extends _i1.Mock
           },
         ),
         returnValue: _FakeDocumentReference_3<R>(
+          this,
+          Invocation.method(
+            #withConverter,
+            [],
+            {
+              #fromFirestore: fromFirestore,
+              #toFirestore: toFirestore,
+            },
+          ),
+        ),
+        returnValueForMissingStub: _FakeDocumentReference_3<R>(
           this,
           Invocation.method(
             #withConverter,

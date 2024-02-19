@@ -2,15 +2,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource.dart';
+import 'package:pedalpulse/features/auth/domain/repositories/social_auth_repository.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_usecase.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
 
 import 'features/auth/data/datasources/firebase_auth_datasource.dart';
 import 'features/auth/data/datasources/firebase_auth_datasource_impl.dart';
+import 'features/auth/data/datasources/social_auth_datasource_impl.dart';
 import 'features/auth/data/repositories/firebase_auth_repository_impl.dart';
+import 'features/auth/data/repositories/social_auth_repository_impl.dart';
 import 'features/auth/domain/repositories/firebase_auth_repository.dart';
 import 'features/auth/domain/usecases/send_password_reset_email_usecase.dart';
 import 'features/auth/domain/usecases/sign_in_with_email_and_password_usecase.dart';
+import 'features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'features/auth/domain/usecases/sign_out_usecase.dart';
 import 'features/auth/domain/usecases/sign_up_with_email_and_password_usecase.dart';
 
@@ -20,12 +27,14 @@ Future<void> initializeDependencies() async {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+  GoogleSignIn googleSignIn = GoogleSignIn();
 
   /// External
   ///
   getIt.registerLazySingleton(() => firebaseAuth);
   getIt.registerLazySingleton(() => firebaseFirestore);
   getIt.registerLazySingleton(() => firebaseStorage);
+  getIt.registerLazySingleton(() => googleSignIn);
 
   /// Auth Data Sources
   ///
@@ -35,12 +44,24 @@ Future<void> initializeDependencies() async {
       auth: getIt<FirebaseAuth>(),
     ),
   );
+  getIt.registerLazySingleton<SocialAuthDataSource>(
+    () => SocialAuthDataSourceImpl(
+      auth: getIt<FirebaseAuth>(),
+      firestore: getIt<FirebaseFirestore>(),
+      googleSignIn: getIt<GoogleSignIn>(),
+    ),
+  );
 
   /// Auth Repositories
   ///
   getIt.registerLazySingleton<FirebaseAuthRepository>(
     () => FirebaseAuthRepositoryImpl(
       dataSource: getIt<FirebaseAuthDataSource>(),
+    ),
+  );
+  getIt.registerLazySingleton<SocialAuthRepository>(
+    () => SocialAuthRepositoryImpl(
+      dataSource: getIt<SocialAuthDataSource>(),
     ),
   );
 
@@ -71,6 +92,16 @@ Future<void> initializeDependencies() async {
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );
+  getIt.registerLazySingleton(
+    () => SignInWithGoogleUseCase(
+      repository: getIt<SocialAuthRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => SignInWithAppleUseCase(
+      repository: getIt<SocialAuthRepository>(),
+    ),
+  );
 
   /// Auth Provider
   ///
@@ -83,6 +114,8 @@ Future<void> initializeDependencies() async {
       signOutUseCase: getIt<SignOutUseCase>(),
       signUpWithEmailAndPasswordUseCase:
           getIt<SignUpWithEmailAndPasswordUseCase>(),
+      signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
+      signInWithAppleUseCase: getIt<SignInWithAppleUseCase>(),
     ),
   );
 }

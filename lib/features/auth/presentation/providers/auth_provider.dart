@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import '../../../../core/errors/failure.dart';
 import '../../domain/usecases/is_email_verified_usecase.dart';
 import '../../domain/usecases/send_password_reset_email_usecase.dart';
@@ -16,6 +18,8 @@ class AuthProvider extends ChangeNotifier {
   SignInWithEmailAndPasswordUseCase signInWithEmailAndPasswordUseCase;
   SignOutUseCase signOutUseCase;
   SignUpWithEmailAndPasswordUseCase signUpWithEmailAndPasswordUseCase;
+  SignInWithAppleUseCase signInWithAppleUseCase;
+  SignInWithGoogleUseCase signInWithGoogleUseCase;
 
   AuthProvider({
     required this.isEmailVerifiedUseCase,
@@ -23,6 +27,8 @@ class AuthProvider extends ChangeNotifier {
     required this.signInWithEmailAndPasswordUseCase,
     required this.signOutUseCase,
     required this.signUpWithEmailAndPasswordUseCase,
+    required this.signInWithAppleUseCase,
+    required this.signInWithGoogleUseCase,
   });
 
   Future<void> isEmailVerified({
