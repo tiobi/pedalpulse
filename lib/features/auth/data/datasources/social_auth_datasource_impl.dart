@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pedalpulse/features/auth/core/constants/web_auth_options.keys.dart';
 import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SocialAuthDataSourceImpl implements SocialAuthDataSource {
   final FirebaseAuth auth;
@@ -64,6 +66,45 @@ class SocialAuthDataSourceImpl implements SocialAuthDataSource {
 
   @override
   Future<UserCredential> signInWithApple() async {
-    throw UnimplementedError();
+    try {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        webAuthenticationOptions: WebAuthenticationOptions(
+          clientId: clientId,
+          redirectUri: Uri.parse(
+            redirectUri,
+          ),
+        ),
+      );
+
+      final OAuthCredential credential = OAuthProvider('apple.com').credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      final UserCredential userCredential =
+          await auth.signInWithCredential(credential);
+
+      final String uid = userCredential.user!.uid;
+      final bool isUserExists = await firestore
+          .collection('users')
+          .doc(uid)
+          .get()
+          .then((doc) => doc.exists);
+
+      if (!isUserExists) {
+        await firestore.collection('users').doc(uid).set({
+          'uid': uid,
+          'email': userCredential.user!.email!,
+        });
+      }
+
+      return userCredential;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
