@@ -118,6 +118,10 @@ class AuthMethods {
 
   Future<UserModel> getUserDetails() async {
     User? user = _auth.currentUser;
+    if (user == null) {
+      // User user = FirebaseAuth.instance.currentUser!;
+    }
+
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)

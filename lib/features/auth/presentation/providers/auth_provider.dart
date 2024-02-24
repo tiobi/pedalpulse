@@ -71,9 +71,23 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> signOut() async {}
 
-  Future<void> signUpWithEmailAndPassword({
+  Future<Either<Failure, UserCredential>> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   }) async {
-    await signUpWithEmailAndPasswordUseCase(authEntity: authEntity);
+    try {
+      final result =
+          await signUpWithEmailAndPasswordUseCase(authEntity: authEntity);
+      return result;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == FirebaseAuthFailure.emailAlreadyInUseCode) {
+        return Left(FirebaseAuthFailure(
+          message: FirebaseAuthFailure.emailAlreadyInUseMessage,
+        ));
+      } else {
+        return Left(FirebaseAuthFailure(
+          message: e.message.toString(),
+        ));
+      }
+    }
   }
 }

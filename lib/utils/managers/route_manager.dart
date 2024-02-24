@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pedalpulse/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:pedalpulse/models/user_model.dart';
 import 'package:pedalpulse/responsive/desktop_layout.dart';
 import 'package:pedalpulse/responsive/mobile_layout.dart';
@@ -21,7 +22,6 @@ import '../../screens/pedal_details_screen.dart';
 import '../../screens/post_details_screen.dart';
 import '../../screens/profile_screen.dart';
 import '../../screens/search_screen.dart';
-import '../../screens/sign_in_screen.dart';
 import '../../screens/upload_screen.dart';
 
 class Routes {
@@ -58,7 +58,7 @@ class RouteManager {
       case Routes.desktopLayout:
         return MaterialPageRoute(builder: (_) => const DesktopLayout());
       case Routes.signIn:
-        return MaterialPageRoute(builder: (_) => const SignInScreen());
+        return MaterialPageRoute(builder: (_) => SignInPage());
       case Routes.signUp:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.forgotPassword:

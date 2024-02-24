@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../models/featured_post_model.dart';
@@ -125,18 +126,20 @@ class _HomeScreenState extends State<HomeScreen> {
           fit: BoxFit.cover,
           height: 30,
         ),
-        actions: const [
-          // Padding(
-          //   padding: const EdgeInsets.only(right: 15),
-          //   child: IconButton(
-          //     icon: const Icon(
-          //       Icons.notifications_none_outlined,
-          //       color: Colors.black,
-          //       size: 30,
-          //     ),
-          //     onPressed: () {},
-          //   ),
-          // ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: IconButton(
+              icon: const Icon(
+                Icons.notifications_none_outlined,
+                color: Colors.black,
+                size: 30,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+            ),
+          ),
 
           // Padding(
           //   padding: const EdgeInsets.all(8.0),

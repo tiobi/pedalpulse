@@ -9,6 +9,7 @@ import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../core/routes/routes.dart';
 import '../features/auth/presentation/pages/sign_in_page.dart';
 import '../features/auth/presentation/providers/auth_provider.dart';
 
@@ -18,8 +19,10 @@ import '../providers/user_provider.dart';
 import '../providers/pedal_provider.dart';
 import '../providers/user_likes_provider.dart';
 
+import '../responsive/desktop_layout.dart';
+import '../responsive/mobile_layout.dart';
+import '../responsive/responsive_layout.dart';
 import '../screens/mobile_web_screen.dart';
-import '../utils/managers/route_manager.dart';
 
 /// Utils
 ///
@@ -72,11 +75,10 @@ class PedalPulseApp extends StatelessWidget {
             if (!snapshot.hasData) {
               return SignInPage();
             } else {
-              //       // return const ResponsiveLayout(
-              //       //   mobileLayout: MobileLayout(initialIndex: 0),
-              //       //   desktopLayout: DesktopLayout(),
-              //       // );
-              return SignInPage();
+              return const ResponsiveLayout(
+                mobileLayout: MobileLayout(initialIndex: 0),
+                desktopLayout: DesktopLayout(),
+              );
             }
           },
         ),

@@ -35,14 +35,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late UserModel _user;
   bool _showOptions = false;
   bool _isEditing = false;
-  bool _isLoading = true;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _showOptions = showOptions();
-    getUserPost();
-    getUser();
+    // getUserPost();
+    // getUser();
   }
 
   bool showOptions() {

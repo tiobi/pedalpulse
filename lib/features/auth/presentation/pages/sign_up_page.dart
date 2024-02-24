@@ -1,22 +1,18 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pedalpulse/core/routes/routes.dart';
+import 'package:pedalpulse/features/auth/core/constants/auth_string.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button_widget.dart';
-import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
-import 'package:pedalpulse/features/auth/presentation/widgets/social_auth_divider_widget.dart';
-import 'package:pedalpulse/widgets/custom_button_widget.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_textfield_widget.dart';
+import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
+import 'package:pedalpulse/widgets/custom_button_widget.dart';
 
-import '../../core/constants/auth_string.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../providers/auth_provider.dart';
 
-class SignInPage extends HookWidget {
-  SignInPage({Key? key}) : super(key: key);
+class SignUpPage extends HookWidget {
+  SignUpPage({Key? key}) : super(key: key);
 
   final AuthProvider authProvider = GetIt.instance<AuthProvider>();
 
@@ -33,15 +29,9 @@ class SignInPage extends HookWidget {
           child: SafeArea(
             child: Column(
               children: [
-                _buildSignInForm(context),
+                _buildSignUpForm(context),
                 const Spacer(),
-                _buildSignUpButton(context),
-                _buildSocialSignInSection(context),
-                IconButton(
-                    onPressed: () async {
-                      await authProvider.signOutUseCase();
-                    },
-                    icon: const Icon(Icons.logout))
+                _buildSignInButton(context),
               ],
             ),
           ),
@@ -50,10 +40,12 @@ class SignInPage extends HookWidget {
     );
   }
 
-  Widget _buildSignInForm(BuildContext context) {
+  Widget _buildSignUpForm(BuildContext context) {
     final TextEditingController emailController =
         useTextEditingController.fromValue(TextEditingValue.empty);
     final TextEditingController passwordController =
+        useTextEditingController.fromValue(TextEditingValue.empty);
+    final TextEditingController confirmPasswordController =
         useTextEditingController.fromValue(TextEditingValue.empty);
 
     return Column(
@@ -65,7 +57,7 @@ class SignInPage extends HookWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              AuthString.signInWithEmail,
+              AuthString.signUpWithEmail,
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -82,79 +74,48 @@ class SignInPage extends HookWidget {
           controller: passwordController,
           isObscure: true,
         ),
-        CustomButtonWidget(
-          placeholder: AuthString.signIn,
-          onTap: () => _onSignIn(
-            context,
-            email: emailController.text,
-            password: passwordController.text,
-          ),
+        CustomTextfieldWidget(
+          placeholder: AuthString.confirmPassword,
+          controller: confirmPasswordController,
+          isObscure: true,
         ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: CustomTextButtonWidget(
-              placeholder: AuthString.forgotPassword,
-              onTap: () {
-                Navigator.pushNamed(context, Routes.forgotPassword);
-              },
-            ),
+        CustomButtonWidget(
+          placeholder: AuthString.signUp,
+          onTap: () => _onSignUp(
+            context,
+            emailController.text,
+            passwordController.text,
+            confirmPasswordController.text,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildSignUpButton(BuildContext context) {
+  Widget _buildSignInButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(AuthString.dontHaveAnAccount),
+          const Text(AuthString.alreadyHaveAnAccount),
           CustomTextButtonWidget(
-              placeholder: AuthString.signUpWithEmail,
-              onTap: () {
-                Navigator.pushReplacementNamed(context, Routes.signUp);
-              }),
+            placeholder: AuthString.signIn,
+            onTap: () {
+              Navigator.pushReplacementNamed(context, Routes.signIn);
+            },
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSocialSignInSection(BuildContext context) {
-    return Column(
-      children: [
-        const SocialAuthDividerWidget(),
-        Platform.isIOS
-            ? SignInButton(
-                Buttons.Apple,
-                onPressed: () {
-                  authProvider.signInWithAppleUseCase();
-                },
-              )
-            : Container(),
-        SignInButton(
-          Buttons.Google,
-          onPressed: () {
-            authProvider.signInWithGoogleUseCase();
-          },
-        ),
-      ],
-    );
-  }
-
-  void _onSignIn(
-    BuildContext context, {
-    required String email,
-    required String password,
-  }) async {
-    if (email.isEmpty || password.isEmpty) {
+  void _onSignUp(BuildContext context, String email, String password,
+      String confirmPassword) async {
+    if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(AuthString.fillInAllFields),
-          duration: Duration(seconds: 2),
+          content: Text(AuthString.passwordsDoNotMatch),
         ),
       );
       return;
@@ -166,7 +127,7 @@ class SignInPage extends HookWidget {
     );
 
     final result =
-        await authProvider.signInWithEmailAndPassword(authEntity: authEntity);
+        await authProvider.signUpWithEmailAndPassword(authEntity: authEntity);
 
     result.fold(
       (failure) => ScaffoldMessenger.of(context).showSnackBar(
@@ -175,7 +136,7 @@ class SignInPage extends HookWidget {
           duration: const Duration(seconds: 5),
         ),
       ),
-      (success) => Navigator.pushReplacementNamed(context, Routes.home),
+      (success) => Navigator.pushReplacementNamed(context, Routes.signIn),
     );
   }
 }

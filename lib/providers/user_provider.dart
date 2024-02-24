@@ -9,8 +9,8 @@ class UserProvider with ChangeNotifier {
   UserModel? get user => _user;
 
   Future<void> setUser() async {
-    UserModel user = await _authMethods.getUserDetails();
-    _user = user;
-    notifyListeners();
+    // UserModel user = await _authMethods.getUserDetails();
+    // _user = user;
+    // notifyListeners();
   }
 }
