@@ -69,7 +69,18 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> signOut() async {}
+  Future<Either<Failure, Unit>> signOut() async {
+    try {
+      final result = await signOutUseCase();
+      return result;
+    } on FirebaseAuthException catch (e) {
+      return Left(
+        FirebaseAuthFailure(
+          message: e.message.toString(),
+        ),
+      );
+    }
+  }
 
   Future<Either<Failure, UserCredential>> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
