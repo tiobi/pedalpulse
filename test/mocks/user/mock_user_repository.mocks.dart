@@ -6,6 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:image_picker/image_picker.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/core/errors/failure.dart' as _i5;
 import 'package:pedalpulse/features/user/domain/entities/user_entity.dart'
@@ -236,6 +237,51 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
             #deleteUser,
             [],
             {#uid: uid},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> updateUserProfileImage({
+    required String? uid,
+    _i7.XFile? profileImage,
+    _i7.XFile? coverImage,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserProfileImage,
+          [],
+          {
+            #uid: uid,
+            #profileImage: profileImage,
+            #coverImage: coverImage,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
+            _FakeEither_0<_i5.Failure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #updateUserProfileImage,
+            [],
+            {
+              #uid: uid,
+              #profileImage: profileImage,
+              #coverImage: coverImage,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
+                _FakeEither_0<_i5.Failure, _i2.Unit>(
+          this,
+          Invocation.method(
+            #updateUserProfileImage,
+            [],
+            {
+              #uid: uid,
+              #profileImage: profileImage,
+              #coverImage: coverImage,
+            },
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
