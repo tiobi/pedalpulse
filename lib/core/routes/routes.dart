@@ -40,6 +40,10 @@ class RouteManager {
       case Routes.forgotPassword:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
 
+      case Routes.home:
+        return MaterialPageRoute(
+            builder: (_) => const Scaffold(body: Center(child: Text('Home'))));
+
       default:
         return MaterialPageRoute(builder: (_) => const Scaffold());
     }

@@ -4,16 +4,16 @@ import '../../../../core/errors/failure.dart';
 import '../entities/user_entity.dart';
 import '../repositories/user_repository.dart';
 
-class GetUserUseCase {
+class UpdateUserUseCase {
   final UserRepository repository;
 
-  GetUserUseCase({
+  UpdateUserUseCase({
     required this.repository,
   });
 
   Future<Either<Failure, UserEntity>> call({
-    required String uid,
+    required UserEntity userEntity,
   }) async {
-    return repository.getUser(uid: uid);
+    return repository.updateUser(userEntity: userEntity);
   }
 }

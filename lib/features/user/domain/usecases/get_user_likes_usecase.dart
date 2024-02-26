@@ -1,19 +1,18 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../entities/user_entity.dart';
 import '../repositories/user_repository.dart';
 
-class GetUserUseCase {
+class GetUserLikesUseCase {
   final UserRepository repository;
 
-  GetUserUseCase({
+  GetUserLikesUseCase({
     required this.repository,
   });
 
-  Future<Either<Failure, UserEntity>> call({
-    required String uid,
+  Future<Either<Failure, List<String>>> call({
+    required String userUid,
   }) async {
-    return repository.getUser(uid: uid);
+    return repository.getUserLikes(userUid: userUid);
   }
 }
