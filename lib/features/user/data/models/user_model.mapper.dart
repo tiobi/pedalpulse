@@ -28,12 +28,12 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
       Field('username', _$username);
   static String _$email(UserModel v) => v.email;
   static const Field<UserModel, String> _f$email = Field('email', _$email);
-  static String _$profileImageUrl(UserModel v) => v.profileImage;
-  static const Field<UserModel, String> _f$profileImageUrl =
-      Field('profileImageUrl', _$profileImageUrl);
-  static String _$backgroundImageUrl(UserModel v) => v.coverImage;
-  static const Field<UserModel, String> _f$backgroundImageUrl =
-      Field('backgroundImageUrl', _$backgroundImageUrl);
+  static String _$profileImage(UserModel v) => v.profileImage;
+  static const Field<UserModel, String> _f$profileImage =
+      Field('profileImage', _$profileImage, key: 'profileImageUrl');
+  static String _$coverImage(UserModel v) => v.coverImage;
+  static const Field<UserModel, String> _f$coverImage =
+      Field('coverImage', _$coverImage, key: 'backgroundImageUrl');
   static String _$bio(UserModel v) => v.bio;
   static const Field<UserModel, String> _f$bio = Field('bio', _$bio);
   static DateTime _$joinedAt(UserModel v) => v.joinedAt;
@@ -45,8 +45,8 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
     #uid: _f$uid,
     #username: _f$username,
     #email: _f$email,
-    #profileImageUrl: _f$profileImageUrl,
-    #backgroundImageUrl: _f$backgroundImageUrl,
+    #profileImage: _f$profileImage,
+    #coverImage: _f$coverImage,
     #bio: _f$bio,
     #joinedAt: _f$joinedAt,
   };
@@ -56,8 +56,8 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
         uid: data.dec(_f$uid),
         username: data.dec(_f$username),
         email: data.dec(_f$email),
-        profileImageUrl: data.dec(_f$profileImageUrl),
-        backgroundImageUrl: data.dec(_f$backgroundImageUrl),
+        profileImageUrl: data.dec(_f$profileImage),
+        backgroundImageUrl: data.dec(_f$coverImage),
         bio: data.dec(_f$bio),
         joinedAt: data.dec(_f$joinedAt));
   }
@@ -119,8 +119,8 @@ abstract class UserModelCopyWith<$R, $In extends UserModel, $Out>
       {String? uid,
       String? username,
       String? email,
-      String? profileImageUrl,
-      String? backgroundImageUrl,
+      String? profileImage,
+      String? coverImage,
       String? bio,
       DateTime? joinedAt});
   UserModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -139,16 +139,16 @@ class _UserModelCopyWithImpl<$R, $Out>
           {String? uid,
           String? username,
           String? email,
-          String? profileImageUrl,
-          String? backgroundImageUrl,
+          String? profileImage,
+          String? coverImage,
           String? bio,
           DateTime? joinedAt}) =>
       $apply(FieldCopyWithData({
         if (uid != null) #uid: uid,
         if (username != null) #username: username,
         if (email != null) #email: email,
-        if (profileImageUrl != null) #profileImageUrl: profileImageUrl,
-        if (backgroundImageUrl != null) #backgroundImageUrl: backgroundImageUrl,
+        if (profileImage != null) #profileImage: profileImage,
+        if (coverImage != null) #coverImage: coverImage,
         if (bio != null) #bio: bio,
         if (joinedAt != null) #joinedAt: joinedAt
       }));
@@ -157,8 +157,8 @@ class _UserModelCopyWithImpl<$R, $Out>
       uid: data.get(#uid, or: $value.uid),
       username: data.get(#username, or: $value.username),
       email: data.get(#email, or: $value.email),
-      profileImageUrl: data.get(#profileImageUrl, or: $value.profileImage),
-      backgroundImageUrl: data.get(#backgroundImageUrl, or: $value.coverImage),
+      profileImageUrl: data.get(#profileImage, or: $value.profileImage),
+      backgroundImageUrl: data.get(#coverImage, or: $value.coverImage),
       bio: data.get(#bio, or: $value.bio),
       joinedAt: data.get(#joinedAt, or: $value.joinedAt));
 

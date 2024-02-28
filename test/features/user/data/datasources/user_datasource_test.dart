@@ -17,6 +17,7 @@ void main() {
   late MockCollectionReference collection;
   late MockDocumentReference document;
   late UserEntity tUserEntity;
+  late Map<String, dynamic> tUserMap;
 
   setUp(() {
     firestore = MockFirebaseFirestore();
@@ -28,6 +29,7 @@ void main() {
     );
 
     tUserEntity = MockUserEntity();
+    tUserMap = tUserEntity.toMap();
 
     when(firestore.collection(any)).thenReturn(collection);
     when(collection.doc(any)).thenReturn(document);
@@ -51,8 +53,8 @@ void main() {
         // Arrange
         when(firestore.collection('users')).thenReturn(collection);
         when(collection.doc(tUserUid)).thenReturn(document);
-        when(document.get()).thenAnswer((_) async => Future.value(
-            tUserEntity as DocumentSnapshot<Map<String, dynamic>>));
+        when(document.get()).thenAnswer((_) async =>
+            Future.value(tUserMap as DocumentSnapshot<Map<String, dynamic>>));
 
         // Act
         final result = await dataSource.getUser(uid: tUserUid);
