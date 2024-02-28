@@ -18,8 +18,8 @@ class UserModel extends UserEntity with UserModelMappable {
           uid: uid,
           username: username,
           email: email,
-          profileImageUrl: profileImageUrl,
-          backgroundImageUrl: backgroundImageUrl,
+          profileImage: profileImageUrl,
+          coverImage: backgroundImageUrl,
           bio: bio,
           joinedAt: joinedAt,
         );

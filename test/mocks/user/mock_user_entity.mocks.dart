@@ -54,14 +54,14 @@ class MockUserEntity extends _i1.Mock implements _i2.UserEntity {
       ) as String);
 
   @override
-  String get profileImageUrl => (super.noSuchMethod(
+  String get profileImage => (super.noSuchMethod(
         Invocation.getter(#profileImageUrl),
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
 
   @override
-  String get backgroundImageUrl => (super.noSuchMethod(
+  String get coverImage => (super.noSuchMethod(
         Invocation.getter(#backgroundImageUrl),
         returnValue: '',
         returnValueForMissingStub: '',

@@ -28,10 +28,10 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
       Field('username', _$username);
   static String _$email(UserModel v) => v.email;
   static const Field<UserModel, String> _f$email = Field('email', _$email);
-  static String _$profileImageUrl(UserModel v) => v.profileImageUrl;
+  static String _$profileImageUrl(UserModel v) => v.profileImage;
   static const Field<UserModel, String> _f$profileImageUrl =
       Field('profileImageUrl', _$profileImageUrl);
-  static String _$backgroundImageUrl(UserModel v) => v.backgroundImageUrl;
+  static String _$backgroundImageUrl(UserModel v) => v.coverImage;
   static const Field<UserModel, String> _f$backgroundImageUrl =
       Field('backgroundImageUrl', _$backgroundImageUrl);
   static String _$bio(UserModel v) => v.bio;
@@ -157,9 +157,8 @@ class _UserModelCopyWithImpl<$R, $Out>
       uid: data.get(#uid, or: $value.uid),
       username: data.get(#username, or: $value.username),
       email: data.get(#email, or: $value.email),
-      profileImageUrl: data.get(#profileImageUrl, or: $value.profileImageUrl),
-      backgroundImageUrl:
-          data.get(#backgroundImageUrl, or: $value.backgroundImageUrl),
+      profileImageUrl: data.get(#profileImageUrl, or: $value.profileImage),
+      backgroundImageUrl: data.get(#backgroundImageUrl, or: $value.coverImage),
       bio: data.get(#bio, or: $value.bio),
       joinedAt: data.get(#joinedAt, or: $value.joinedAt));
 

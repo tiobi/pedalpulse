@@ -27,10 +27,10 @@ class UserEntityMapper extends ClassMapperBase<UserEntity> {
       Field('username', _$username);
   static String _$email(UserEntity v) => v.email;
   static const Field<UserEntity, String> _f$email = Field('email', _$email);
-  static String _$profileImageUrl(UserEntity v) => v.profileImageUrl;
+  static String _$profileImageUrl(UserEntity v) => v.profileImage;
   static const Field<UserEntity, String> _f$profileImageUrl =
       Field('profileImageUrl', _$profileImageUrl);
-  static String _$backgroundImageUrl(UserEntity v) => v.backgroundImageUrl;
+  static String _$backgroundImageUrl(UserEntity v) => v.coverImage;
   static const Field<UserEntity, String> _f$backgroundImageUrl =
       Field('backgroundImageUrl', _$backgroundImageUrl);
   static String _$bio(UserEntity v) => v.bio;
@@ -55,8 +55,8 @@ class UserEntityMapper extends ClassMapperBase<UserEntity> {
         uid: data.dec(_f$uid),
         username: data.dec(_f$username),
         email: data.dec(_f$email),
-        profileImageUrl: data.dec(_f$profileImageUrl),
-        backgroundImageUrl: data.dec(_f$backgroundImageUrl),
+        profileImage: data.dec(_f$profileImageUrl),
+        coverImage: data.dec(_f$backgroundImageUrl),
         bio: data.dec(_f$bio),
         joinedAt: data.dec(_f$joinedAt));
   }
@@ -156,9 +156,8 @@ class _UserEntityCopyWithImpl<$R, $Out>
       uid: data.get(#uid, or: $value.uid),
       username: data.get(#username, or: $value.username),
       email: data.get(#email, or: $value.email),
-      profileImageUrl: data.get(#profileImageUrl, or: $value.profileImageUrl),
-      backgroundImageUrl:
-          data.get(#backgroundImageUrl, or: $value.backgroundImageUrl),
+      profileImage: data.get(#profileImageUrl, or: $value.profileImage),
+      coverImage: data.get(#backgroundImageUrl, or: $value.coverImage),
       bio: data.get(#bio, or: $value.bio),
       joinedAt: data.get(#joinedAt, or: $value.joinedAt));
 
