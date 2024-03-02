@@ -19,15 +19,7 @@ class UserDataSourceImpl implements UserDataSource {
       final DocumentSnapshot<Map<String, dynamic>> userDocument =
           await firestore.collection('users').doc(uid).get();
 
-      return UserEntity(
-        uid: userDocument.data()!['uid'],
-        email: userDocument.data()!['email'],
-        username: userDocument.data()!['name'],
-        profileImage: userDocument.data()!['profileImage'],
-        coverImage: userDocument.data()!['coverImage'],
-        bio: userDocument.data()!['bio'],
-        joinedAt: userDocument.data()!['joinedAt'].toDate(),
-      );
+      return UserEntity.fromMap(userDocument.data()!);
     } catch (e) {
       rethrow;
     }
@@ -37,7 +29,19 @@ class UserDataSourceImpl implements UserDataSource {
   Future<UserEntity> updateUser({
     required UserEntity userEntity,
   }) async {
-    throw UnimplementedError();
+    try {
+      await firestore
+          .collection('users')
+          .doc(userEntity.uid)
+          .update(userEntity.toMap());
+
+      // return await getUser(uid: userEntity.uid);
+      final UserEntity newUserEntity = await getUser(uid: userEntity.uid);
+
+      return newUserEntity;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override

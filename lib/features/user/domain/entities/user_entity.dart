@@ -21,4 +21,7 @@ class UserEntity with UserEntityMappable {
     required this.bio,
     required this.joinedAt,
   });
+
+  static const fromMap = UserEntityMapper.fromMap;
+  static const fromJson = UserEntityMapper.fromJson;
 }
