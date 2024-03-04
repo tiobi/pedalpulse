@@ -1,10 +1,8 @@
-import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
-import '../../../../core/errors/failure.dart';
+import '../../../../core/common/widgets/snack_bar_widget.dart';
 import '../../domain/usecases/is_email_verified_usecase.dart';
 import '../../domain/usecases/send_password_reset_email_usecase.dart';
 import '../../domain/usecases/sign_in_with_email_and_password_usecase.dart';
@@ -31,74 +29,72 @@ class AuthProvider extends ChangeNotifier {
     required this.signInWithGoogleUseCase,
   });
 
-  Future<void> isEmailVerified({
-    required String email,
-  }) async {
-    final result = await isEmailVerifiedUseCase(email: email);
-
-    if (result.isRight()) {}
-  }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> sendPasswordResetEmail({
     required String email,
   }) async {
-    await sendPasswordResetEmailUseCase(email: email);
+    final result = await sendPasswordResetEmailUseCase(email: email);
+
+    result.fold((failure) {
+      CustomSnackBar.showErrorSnackBar(
+          _scaffoldKey.currentState!.context, failure.message);
+    }, (r) {
+      CustomSnackBar.showSuccessSnackBar(_scaffoldKey.currentState!.context,
+          'Password reset email sent. Please check your email.');
+    });
   }
 
-  Future<Either<Failure, UserCredential>> signInWithEmailAndPassword({
+  Future<void> signInWithEmailAndPassword({
     required AuthEntity authEntity,
   }) async {
-    try {
-      final Either<Failure, UserCredential> result =
-          await signInWithEmailAndPasswordUseCase(authEntity: authEntity);
+    final result =
+        await signInWithEmailAndPasswordUseCase(authEntity: authEntity);
 
-      return result;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == FirebaseAuthFailure.userNotFoundCode) {
-        return Left(FirebaseAuthFailure(
-            message: FirebaseAuthFailure.userNotFoundMessage));
-      } else if (e.code == FirebaseAuthFailure.wrongPasswordCode) {
-        return Left(FirebaseAuthFailure(
-          message: FirebaseAuthFailure.wrongPasswordMessage,
-        ));
+    result.fold((l) {
+      if (l.message == FirebaseAuthFailure.userNotFoundCode) {
+        CustomSnackBar.showErrorSnackBar(
+            _scaffoldKey.currentState!.context, 'User not found');
       } else {
-        return Left(
-          FirebaseAuthFailure(message: e.message.toString()),
-        );
+        CustomSnackBar.showErrorSnackBar(
+            _scaffoldKey.currentState!.context, l.message);
       }
-    }
+    }, (r) {
+      CustomSnackBar.showSuccessSnackBar(
+          _scaffoldKey.currentState!.context, 'Signed in');
+    });
   }
 
-  Future<Either<Failure, Unit>> signOut() async {
-    try {
-      final result = await signOutUseCase();
-      return result;
-    } on FirebaseAuthException catch (e) {
-      return Left(
-        FirebaseAuthFailure(
-          message: e.message.toString(),
-        ),
-      );
-    }
+  Future<void> signOut() async {
+    final result = await signOutUseCase();
+
+    result.fold((failure) {
+      CustomSnackBar.showErrorSnackBar(
+          _scaffoldKey.currentState!.context, failure.message);
+    }, (r) {
+      CustomSnackBar.showSuccessSnackBar(
+          _scaffoldKey.currentState!.context, 'Signed out');
+    });
   }
 
-  Future<Either<Failure, UserCredential>> signUpWithEmailAndPassword({
+  Future<void> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
   }) async {
-    try {
-      final result =
-          await signUpWithEmailAndPasswordUseCase(authEntity: authEntity);
-      return result;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == FirebaseAuthFailure.emailAlreadyInUseCode) {
-        return Left(FirebaseAuthFailure(
-          message: FirebaseAuthFailure.emailAlreadyInUseMessage,
-        ));
-      } else {
-        return Left(FirebaseAuthFailure(
-          message: e.message.toString(),
-        ));
-      }
+    final result =
+        await signUpWithEmailAndPasswordUseCase(authEntity: authEntity);
+
+    final BuildContext? context = _scaffoldKey.currentState?.context;
+
+    if (context == null) {
+      return;
     }
+
+    result.fold((failure) {
+      CustomSnackBar.showErrorSnackBar(
+          _scaffoldKey.currentState!.context, failure.message);
+    }, (r) {
+      CustomSnackBar.showSuccessSnackBar(
+          _scaffoldKey.currentState!.context, 'Signed up');
+    });
   }
 }

@@ -20,6 +20,18 @@ import 'features/auth/domain/usecases/sign_in_with_email_and_password_usecase.da
 import 'features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'features/auth/domain/usecases/sign_out_usecase.dart';
 import 'features/auth/domain/usecases/sign_up_with_email_and_password_usecase.dart';
+import 'features/user/data/datasources/user_datasource.dart';
+import 'features/user/data/datasources/user_datasource_impl.dart';
+import 'features/user/data/repositories/user_repository_impl.dart';
+import 'features/user/domain/repositories/user_repository.dart';
+import 'features/user/domain/usecases/add_user_likes_usecase.dart';
+import 'features/user/domain/usecases/delete_user_usecase.dart';
+import 'features/user/domain/usecases/get_user_likes_usecase.dart';
+import 'features/user/domain/usecases/get_user_usecase.dart';
+import 'features/user/domain/usecases/remove_user_like_usecase.dart';
+import 'features/user/domain/usecases/update_user_profile_image_usecase.dart';
+import 'features/user/domain/usecases/update_user_usecase.dart';
+import 'features/user/presentation/providers/user_provider.dart';
 
 final getIt = GetIt.instance;
 
@@ -35,6 +47,74 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => firebaseFirestore);
   getIt.registerLazySingleton(() => firebaseStorage);
   getIt.registerLazySingleton(() => googleSignIn);
+
+  /// User Data Sources
+  ///
+  getIt.registerLazySingleton<UserDataSource>(
+    () => UserDataSourceImpl(
+      firestore: getIt<FirebaseFirestore>(),
+    ),
+  );
+
+  /// User Repositories
+  ///
+  getIt.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(
+      dataSource: getIt<UserDataSource>(),
+    ),
+  );
+
+  /// User Use Cases
+  ///
+  getIt.registerLazySingleton(
+    () => GetUserUseCase(
+      repository: getIt<UserRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => UpdateUserUseCase(
+      repository: getIt<UserRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => GetUserLikesUseCase(
+      repository: getIt<UserRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => AddUserLikesUseCase(
+      repository: getIt<UserRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => RemoveUserLikeUseCase(
+      repository: getIt<UserRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => DeleteUserUseCase(
+      repository: getIt<UserRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => UpdateUserProfileImageUseCase(
+      repository: getIt<UserRepository>(),
+    ),
+  );
+
+  /// User Providers
+  ///
+  getIt.registerLazySingleton(
+    () => UserProvider(
+      getUserUseCase: getIt<GetUserUseCase>(),
+      updateUserUseCase: getIt<UpdateUserUseCase>(),
+      getUserLikesUseCase: getIt<GetUserLikesUseCase>(),
+      addUserLikesUseCase: getIt<AddUserLikesUseCase>(),
+      removeUserLikeUseCase: getIt<RemoveUserLikeUseCase>(),
+      deleteUserUseCase: getIt<DeleteUserUseCase>(),
+      updateUserProfileImageUseCase: getIt<UpdateUserProfileImageUseCase>(),
+    ),
+  );
 
   /// Auth Data Sources
   ///

@@ -165,17 +165,6 @@ class SignInPage extends HookWidget {
       password: password,
     );
 
-    final result =
-        await authProvider.signInWithEmailAndPassword(authEntity: authEntity);
-
-    result.fold(
-      (failure) => ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(failure.toString()),
-          duration: const Duration(seconds: 5),
-        ),
-      ),
-      (success) => Navigator.pushReplacementNamed(context, Routes.home),
-    );
+    await authProvider.signInWithEmailAndPassword(authEntity: authEntity);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pedalpulse/core/common/widgets/snack_bar_widget.dart';
 import 'package:pedalpulse/core/routes/routes.dart';
 import 'package:pedalpulse/features/auth/core/constants/auth_string.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button_widget.dart';
@@ -40,7 +41,9 @@ class SignUpPage extends HookWidget {
     );
   }
 
-  Widget _buildSignUpForm(BuildContext context) {
+  Widget _buildSignUpForm(
+    BuildContext context,
+  ) {
     final TextEditingController emailController =
         useTextEditingController.fromValue(TextEditingValue.empty);
     final TextEditingController passwordController =
@@ -92,7 +95,9 @@ class SignUpPage extends HookWidget {
     );
   }
 
-  Widget _buildSignInButton(BuildContext context) {
+  Widget _buildSignInButton(
+    BuildContext context,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -110,14 +115,28 @@ class SignUpPage extends HookWidget {
     );
   }
 
-  void _onSignUp(BuildContext context, String email, String password,
-      String confirmPassword) async {
-    if (password != confirmPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(AuthString.passwordsDoNotMatch),
-        ),
+  void _onSignUp(
+    BuildContext context,
+    String email,
+    String password,
+    String confirmPassword,
+  ) async {
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      // show snackbar
+
+      CustomSnackBar.showErrorSnackBar(
+        context,
+        AuthString.fillInAllFields,
       );
+      return;
+    }
+
+    if (password != confirmPassword) {
+      CustomSnackBar.showErrorSnackBar(
+        context,
+        AuthString.passwordsDoNotMatch,
+      );
+
       return;
     }
 
@@ -126,17 +145,8 @@ class SignUpPage extends HookWidget {
       password: password,
     );
 
-    final result =
-        await authProvider.signUpWithEmailAndPassword(authEntity: authEntity);
-
-    result.fold(
-      (failure) => ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(failure.toString()),
-          duration: const Duration(seconds: 5),
-        ),
-      ),
-      (success) => Navigator.pushReplacementNamed(context, Routes.signIn),
+    await authProvider.signUpWithEmailAndPassword(
+      authEntity: authEntity,
     );
   }
 }

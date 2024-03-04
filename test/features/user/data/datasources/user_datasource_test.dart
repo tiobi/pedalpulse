@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -73,6 +74,9 @@ void main() {
     'bio': 'user-bio',
     'joinedAt': joinedAtFixed,
   };
+
+  final List<String> tUserLikes = ['post-uid1', 'post-uid2', 'post-uid3'];
+  final Map<String, dynamic> tUserLikesMap = {'likes': tUserLikes};
 
   final Failure serverFailure = UserFailure(message: 'Server Failure');
   final Failure userNotFoundFailure = UserFailure(message: 'User Not Found');
@@ -166,5 +170,122 @@ void main() {
         expect(result, throwsA(userNotFoundFailure));
       });
     });
+
+    /// Get User Likes Test
+    ///
+    group('GetUserLikes Test', () {
+      test('should get the user likes from the datasource', () async {
+        // Arrange
+        when(snapshot.data()).thenReturn(tUserLikesMap);
+
+        // Act
+        final result = await dataSource.getUserLikes(userUid: tUserUid);
+
+        // Assert
+        expect(result, tUserEntity);
+        verify(firestore.collection('users')).called(1);
+        verifyNoMoreInteractions(firestore);
+      });
+    });
+
+    /// RemoveUserLike Test
+    ///
+    group('RemoveUserLike Test', () {
+      test('should remove the user like from the datasource', () async {
+        // Arrange
+        when(firestore.collection('users')).thenReturn(collection);
+        when(collection.doc(tUserUid)).thenReturn(document);
+        when(document.collection('likes')).thenReturn(collection);
+        when(collection.doc(any)).thenReturn(document);
+        when(document.delete()).thenAnswer((_) async => unit);
+
+        // Act
+        final result = await dataSource.removeUserLike(
+          userUid: tUserUid,
+          postUid: tPostUid,
+        );
+
+        // Assert
+        expect(result, unit);
+        verify(document.delete()).called(1);
+        verifyNoMoreInteractions(document);
+      });
+
+      test(
+          'should throw a FirebaseException when the call to Firestore is unsuccessful',
+          () async {
+        // Arrange
+        when(document.delete()).thenThrow(serverFailure);
+
+        // Act
+        final result = dataSource.removeUserLike(
+          userUid: tUserUid,
+          postUid: tPostUid,
+        );
+
+        // Assert
+        expect(result, throwsA(serverFailure));
+      });
+
+      test('should throw a UserNotFoundFailure when the user is not found',
+          () async {
+        // Arrange
+        when(document.delete()).thenThrow(userNotFoundFailure);
+
+        // Act
+        final result = dataSource.removeUserLike(
+          userUid: tUserUid,
+          postUid: tPostUid,
+        );
+
+        // Assert
+        expect(result, throwsA(userNotFoundFailure));
+      });
+    });
+
+    /// DeleteUser Test
+    ///
+    group('DeleteUser Test', () {
+      test('should delete the user from the datasource', () async {
+        // Arrange
+        when(document.delete()).thenAnswer((_) async => unit);
+
+        // Act
+        final result = await dataSource.deleteUser(uid: tUserUid);
+
+        // Assert
+        expect(result, unit);
+        verify(document.delete()).called(1);
+        verifyNoMoreInteractions(document);
+      });
+
+      test(
+          'should throw a FirebaseException when the call to Firestore is unsuccessful',
+          () async {
+        // Arrange
+        when(document.delete()).thenThrow(serverFailure);
+
+        // Act
+        final result = dataSource.deleteUser(uid: tUserUid);
+
+        // Assert
+        expect(result, throwsA(serverFailure));
+      });
+
+      test('should throw a UserNotFoundFailure when the user is not found',
+          () async {
+        // Arrange
+        when(document.delete()).thenThrow(userNotFoundFailure);
+
+        // Act
+        final result = dataSource.deleteUser(uid: tUserUid);
+
+        // Assert
+        expect(result, throwsA(userNotFoundFailure));
+      });
+    });
+
+    /// UpdateUserProfileImage Test
+    ///
   });
 }

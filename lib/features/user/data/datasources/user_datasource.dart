@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 import '../../domain/entities/user_entity.dart';
@@ -15,21 +16,21 @@ abstract class UserDataSource {
     required String userUid,
   });
 
-  Future<void> addUserLike({
+  Future<Unit> addUserLike({
     required String userUid,
     required String postUid,
   });
 
-  Future<void> removeUserLike({
+  Future<Unit> removeUserLike({
     required String userUid,
     required String postUid,
   });
 
-  Future<void> deleteUser({
+  Future<Unit> deleteUser({
     required String uid,
   });
 
-  Future<void> updateUserProfileImage({
+  Future<Unit> updateUserProfileImage({
     required String uid,
     XFile? profileImage,
     XFile? coverImage,

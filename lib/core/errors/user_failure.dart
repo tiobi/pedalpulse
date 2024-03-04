@@ -1,7 +1,8 @@
 import 'failure.dart';
 
 class UserFailure extends Failure {
-  final String message;
+  UserFailure({required String message}) : super(message: message);
 
-  UserFailure({required this.message});
+  @override
+  String toString() => 'UserFailure: $message';
 }

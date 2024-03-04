@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 import '../../domain/entities/user_entity.dart';
@@ -35,10 +36,7 @@ class UserDataSourceImpl implements UserDataSource {
           .doc(userEntity.uid)
           .update(userEntity.toMap());
 
-      // return await getUser(uid: userEntity.uid);
-      final UserEntity newUserEntity = await getUser(uid: userEntity.uid);
-
-      return newUserEntity;
+      return userEntity;
     } catch (e) {
       rethrow;
     }
@@ -52,7 +50,7 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<void> addUserLike({
+  Future<Unit> addUserLike({
     required String userUid,
     required String postUid,
   }) async {
@@ -60,7 +58,7 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<void> removeUserLike({
+  Future<Unit> removeUserLike({
     required String userUid,
     required String postUid,
   }) async {
@@ -68,14 +66,19 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<void> deleteUser({
+  Future<Unit> deleteUser({
     required String uid,
   }) async {
-    throw UnimplementedError();
+    try {
+      await firestore.collection('users').doc(uid).delete();
+      return unit;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> updateUserProfileImage({
+  Future<Unit> updateUserProfileImage({
     required String uid,
     XFile? profileImage,
     XFile? coverImage,

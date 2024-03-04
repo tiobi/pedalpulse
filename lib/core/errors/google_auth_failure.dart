@@ -1,9 +1,7 @@
 import 'failure.dart';
 
 class GoogleAuthFailure extends Failure {
-  final String message;
-
-  GoogleAuthFailure({required this.message});
+  GoogleAuthFailure({required String message}) : super(message: message);
 
   @override
   String toString() => 'GoogleAuthFailure: $message';

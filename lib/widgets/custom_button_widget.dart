@@ -29,7 +29,11 @@ class CustomButtonWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child: isLoading
-          ? const Center(child: CircularProgressIndicator(color: Colors.white))
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            )
           : InkWell(
               onTap: onTap,
               child: Center(

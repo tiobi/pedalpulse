@@ -3,12 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:flutter_image_compress/flutter_image_compress.dart' as _i5;
+import 'package:dartz/dartz.dart' as _i3;
+import 'package:flutter_image_compress/flutter_image_compress.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/features/user/data/datasources/user_datasource.dart'
-    as _i3;
+    as _i4;
 import 'package:pedalpulse/features/user/domain/entities/user_entity.dart'
     as _i2;
 
@@ -33,19 +34,29 @@ class _FakeUserEntity_0 extends _i1.SmartFake implements _i2.UserEntity {
         );
 }
 
+class _FakeUnit_1 extends _i1.SmartFake implements _i3.Unit {
+  _FakeUnit_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [UserDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
+class MockUserDataSource extends _i1.Mock implements _i4.UserDataSource {
   @override
-  _i4.Future<_i2.UserEntity> getUser({required String? uid}) =>
+  _i5.Future<_i2.UserEntity> getUser({required String? uid}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [],
           {#uid: uid},
         ),
-        returnValue: _i4.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+        returnValue: _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
           this,
           Invocation.method(
             #getUser,
@@ -54,7 +65,7 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+            _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
           this,
           Invocation.method(
             #getUser,
@@ -62,10 +73,10 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
             {#uid: uid},
           ),
         )),
-      ) as _i4.Future<_i2.UserEntity>);
+      ) as _i5.Future<_i2.UserEntity>);
 
   @override
-  _i4.Future<_i2.UserEntity> updateUser(
+  _i5.Future<_i2.UserEntity> updateUser(
           {required _i2.UserEntity? userEntity}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -73,7 +84,7 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
           [],
           {#userEntity: userEntity},
         ),
-        returnValue: _i4.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+        returnValue: _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
           this,
           Invocation.method(
             #updateUser,
@@ -82,7 +93,7 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+            _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
           this,
           Invocation.method(
             #updateUser,
@@ -90,22 +101,22 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
             {#userEntity: userEntity},
           ),
         )),
-      ) as _i4.Future<_i2.UserEntity>);
+      ) as _i5.Future<_i2.UserEntity>);
 
   @override
-  _i4.Future<List<String>> getUserLikes({required String? userUid}) =>
+  _i5.Future<List<String>> getUserLikes({required String? userUid}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserLikes,
           [],
           {#userUid: userUid},
         ),
-        returnValue: _i4.Future<List<String>>.value(<String>[]),
-        returnValueForMissingStub: _i4.Future<List<String>>.value(<String>[]),
-      ) as _i4.Future<List<String>>);
+        returnValue: _i5.Future<List<String>>.value(<String>[]),
+        returnValueForMissingStub: _i5.Future<List<String>>.value(<String>[]),
+      ) as _i5.Future<List<String>>);
 
   @override
-  _i4.Future<void> addUserLike({
+  _i5.Future<_i3.Unit> addUserLike({
     required String? userUid,
     required String? postUid,
   }) =>
@@ -118,12 +129,32 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
             #postUid: postUid,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #addUserLike,
+            [],
+            {
+              #userUid: userUid,
+              #postUid: postUid,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #addUserLike,
+            [],
+            {
+              #userUid: userUid,
+              #postUid: postUid,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.Unit>);
 
   @override
-  _i4.Future<void> removeUserLike({
+  _i5.Future<_i3.Unit> removeUserLike({
     required String? userUid,
     required String? postUid,
   }) =>
@@ -136,26 +167,61 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
             #postUid: postUid,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #removeUserLike,
+            [],
+            {
+              #userUid: userUid,
+              #postUid: postUid,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #removeUserLike,
+            [],
+            {
+              #userUid: userUid,
+              #postUid: postUid,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.Unit>);
 
   @override
-  _i4.Future<void> deleteUser({required String? uid}) => (super.noSuchMethod(
+  _i5.Future<_i3.Unit> deleteUser({required String? uid}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #deleteUser,
           [],
           {#uid: uid},
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #deleteUser,
+            [],
+            {#uid: uid},
+          ),
+        )),
+        returnValueForMissingStub: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #deleteUser,
+            [],
+            {#uid: uid},
+          ),
+        )),
+      ) as _i5.Future<_i3.Unit>);
 
   @override
-  _i4.Future<void> updateUserProfileImage({
+  _i5.Future<_i3.Unit> updateUserProfileImage({
     required String? uid,
-    _i5.XFile? profileImage,
-    _i5.XFile? coverImage,
+    _i6.XFile? profileImage,
+    _i6.XFile? coverImage,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -167,7 +233,29 @@ class MockUserDataSource extends _i1.Mock implements _i3.UserDataSource {
             #coverImage: coverImage,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #updateUserProfileImage,
+            [],
+            {
+              #uid: uid,
+              #profileImage: profileImage,
+              #coverImage: coverImage,
+            },
+          ),
+        )),
+        returnValueForMissingStub: _i5.Future<_i3.Unit>.value(_FakeUnit_1(
+          this,
+          Invocation.method(
+            #updateUserProfileImage,
+            [],
+            {
+              #uid: uid,
+              #profileImage: profileImage,
+              #coverImage: coverImage,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.Unit>);
 }

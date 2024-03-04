@@ -1,1 +1,5 @@
-abstract class Failure {}
+abstract class Failure {
+  final String message;
+
+  Failure({required this.message});
+}

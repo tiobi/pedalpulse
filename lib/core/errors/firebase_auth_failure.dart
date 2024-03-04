@@ -1,6 +1,7 @@
 import 'failure.dart';
 
 class FirebaseAuthFailure extends Failure {
+  @override
   final String message;
 
   static const String userNotFoundMessage = 'No user found for that email.';
@@ -22,7 +23,7 @@ class FirebaseAuthFailure extends Failure {
   static const String userDisabledCode = 'user-disabled';
   static const String userTokenExpiredCode = 'user-token-expired';
 
-  FirebaseAuthFailure({required this.message});
+  FirebaseAuthFailure({required this.message}) : super(message: message);
 
   @override
   String toString() => 'AuthFailure: $message';
