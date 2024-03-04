@@ -396,5 +396,53 @@ void main() {
         expect(() => call, throwsA(isA<FirebaseAuthException>()));
       });
     });
+
+    /// Get Current User Test
+    ///
+    group('GetCurrentUserUid Test', () {
+      test('should get the current user uid', () async {
+        // Arrange
+        when(auth.currentUser).thenReturn(user);
+        when(user.uid).thenReturn(tUid);
+
+        // Act
+        final result = await dataSource.getCurrentUserUid();
+
+        // Assert
+        expect(result, tUid);
+        verify(auth.currentUser).called(1);
+        verifyNoMoreInteractions(auth);
+        verify(user.uid).called(1);
+        verifyNoMoreInteractions(user);
+      });
+
+      test('should throw a FirebaseAuthException when the user is not found',
+          () async {
+        // Arrange
+        when(auth.currentUser).thenReturn(null);
+
+        // Act
+        final call = dataSource.getCurrentUserUid();
+
+        // Assert
+        expect(() => call, throwsA(isA<FirebaseAuthException>()));
+      });
+
+      test('should throw a FirebaseAuthException when the server fails',
+          () async {
+        // Arrange
+        when(auth.currentUser).thenReturn(user);
+        when(user.uid).thenThrow(FirebaseAuthException(
+          code: 'Server Failure',
+          message: 'Server Failure',
+        ));
+
+        // Act
+        final call = dataSource.getCurrentUserUid();
+
+        // Assert
+        expect(() => call, throwsA(isA<FirebaseAuthException>()));
+      });
+    });
   });
 }

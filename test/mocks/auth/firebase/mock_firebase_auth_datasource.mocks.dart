@@ -229,4 +229,14 @@ class MockFirebaseAuthDataSource extends _i1.Mock
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<String> getCurrentUserUid() => (super.noSuchMethod(
+        Invocation.method(
+          #getCurrentUserUid,
+          [],
+        ),
+        returnValue: _i5.Future<String>.value(''),
+        returnValueForMissingStub: _i5.Future<String>.value(''),
+      ) as _i5.Future<String>);
 }

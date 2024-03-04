@@ -16,15 +16,19 @@ class ProfilePage extends HookWidget {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : _buildProfile(userProvider.user!),
+          : _buildProfile(userProvider.user),
     );
   }
 
-  Widget _buildProfile(UserEntity user) {
-    return Column(
-      children: [
-        Text(user.email),
-      ],
-    );
+  Widget _buildProfile(UserEntity? user) {
+    return user == null
+        ? const Center(
+            child: Text('No user found'),
+          )
+        : Column(
+            children: [
+              Text(user.email),
+            ],
+          );
   }
 }

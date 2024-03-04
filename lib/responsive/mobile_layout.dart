@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pedalpulse/features/profile/presentation/pages/profile_page.dart';
 import 'package:pedalpulse/screens/feed_screen.dart';
 import 'package:pedalpulse/screens/home_screen.dart';
-import 'package:pedalpulse/screens/profile_screen.dart';
 import 'package:pedalpulse/screens/upload_post_screen.dart';
 import 'package:pedalpulse/utils/managers/color_manager.dart';
 
@@ -82,7 +82,7 @@ List<Widget> tabItems = <Widget>[
   const FeedScreen(),
   const UploadScreen(),
   const SearchScreen(),
-  const ProfileScreen(),
+  const ProfilePage(),
 ];
 
 const bottomNavigationBarItems = [

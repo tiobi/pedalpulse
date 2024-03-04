@@ -30,6 +30,15 @@ class AuthProvider extends ChangeNotifier {
     required this.signInWithGoogleUseCase,
   });
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
   Future<void> sendPasswordResetEmail({
     required String email,
     required BuildContext context,
@@ -37,10 +46,23 @@ class AuthProvider extends ChangeNotifier {
     final result = await sendPasswordResetEmailUseCase(email: email);
 
     result.fold((failure) {
-      CustomSnackBar.showErrorSnackBar(context, failure.message);
+      if (failure.message == FirebaseAuthFailure.userNotFoundCode) {
+        CustomSnackBar.showErrorSnackBar(
+          context,
+          'User is not found',
+        );
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+          context,
+          failure.message,
+        );
+      }
     }, (r) {
       CustomSnackBar.showSuccessSnackBar(
-          context, 'Password reset email sent. Please check your email.');
+        context,
+        'Password reset email sent. Please check your email.',
+      );
+      Navigator.pushReplacementNamed(context, Routes.signIn);
     });
   }
 
@@ -78,8 +100,11 @@ class AuthProvider extends ChangeNotifier {
     required AuthEntity authEntity,
     required BuildContext context,
   }) async {
+    setLoading(true);
     final result =
         await signUpWithEmailAndPasswordUseCase(authEntity: authEntity);
+
+    setLoading(false);
 
     result.fold((failure) {
       CustomSnackBar.showErrorSnackBar(context, failure.message);
@@ -89,6 +114,18 @@ class AuthProvider extends ChangeNotifier {
         'Please check your email to verify',
       );
       Navigator.pushReplacementNamed(context, Routes.signIn);
+    });
+  }
+
+  Future<void> signInWithApple({
+    required BuildContext context,
+  }) async {
+    final result = await signInWithAppleUseCase();
+
+    result.fold((failure) {
+      CustomSnackBar.showErrorSnackBar(context, failure.message);
+    }, (r) {
+      Navigator.pushReplacementNamed(context, Routes.home);
     });
   }
 }

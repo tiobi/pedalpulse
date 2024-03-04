@@ -30,5 +30,8 @@ class UserProvider extends ChangeNotifier {
     required this.updateUserProfileImageUseCase,
   });
 
-  Future<void> getUser() async {}
+  void setLoading(bool value) {
+    isLoading = value;
+    notifyListeners();
+  }
 }

@@ -30,4 +30,6 @@ abstract class FirebaseAuthDataSource {
   Future<bool> isEmailVerified({
     required String email,
   });
+
+  Future<String> getCurrentUserUid();
 }

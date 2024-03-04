@@ -37,11 +37,6 @@ class SignInPage extends HookWidget {
                 const Spacer(),
                 _buildSignUpButton(context),
                 _buildSocialSignInSection(context),
-                IconButton(
-                    onPressed: () async {
-                      await authProvider.signOutUseCase();
-                    },
-                    icon: const Icon(Icons.logout))
               ],
             ),
           ),
@@ -131,7 +126,7 @@ class SignInPage extends HookWidget {
             ? SignInButton(
                 Buttons.Apple,
                 onPressed: () {
-                  authProvider.signInWithAppleUseCase();
+                  authProvider.signInWithApple(context: context);
                 },
               )
             : Container(),

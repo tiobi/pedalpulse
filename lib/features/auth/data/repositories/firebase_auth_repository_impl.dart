@@ -80,4 +80,16 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
       return Left(FirebaseAuthFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> getCurrentUserUid() async {
+    try {
+      final String uid = await dataSource.getCurrentUserUid();
+      return Right(uid);
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(message: e.message.toString()));
+    } catch (e) {
+      return Left(FirebaseAuthFailure(message: e.toString()));
+    }
+  }
 }

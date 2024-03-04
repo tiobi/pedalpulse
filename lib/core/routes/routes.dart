@@ -38,7 +38,7 @@ class RouteManager {
         return MaterialPageRoute(builder: (_) => SignUpPage());
 
       case Routes.forgotPassword:
-        return MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
+        return MaterialPageRoute(builder: (_) => ForgotPasswordPage());
 
       case Routes.home:
         return MaterialPageRoute(

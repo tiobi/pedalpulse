@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 /// 3rd party packages
 ///
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +32,6 @@ import '../utils/managers/theme_manager.dart';
 class PedalPulseApp extends StatelessWidget {
   const PedalPulseApp({Key? key}) : super(key: key);
 
-  /// TODO: make dependency injection
-  ///
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
@@ -75,6 +74,12 @@ class PedalPulseApp extends StatelessWidget {
             if (!snapshot.hasData) {
               return SignInPage();
             } else {
+              UserProvider userProvider = GetIt.instance<UserProvider>();
+
+              if (userProvider.user == null) {
+                //! Fetch user data
+              }
+
               return const ResponsiveLayout(
                 mobileLayout: MobileLayout(initialIndex: 0),
                 desktopLayout: DesktopLayout(),
@@ -86,16 +91,4 @@ class PedalPulseApp extends StatelessWidget {
       ),
     );
   }
-
-  // final _router = GoRouter(
-  //   observers: [FirebaseAnalyticsObserver(analytics: analytics)],
-  //   routes: [
-  //     GoRoute(
-  //       path: 'signin',
-  //       pageBuilder: (context, state) {
-  //         return const SignInScreen();
-  //       },
-  //     ),
-  //   ],
-  // );
 }

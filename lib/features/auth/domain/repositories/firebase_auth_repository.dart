@@ -22,4 +22,6 @@ abstract class FirebaseAuthRepository {
   Future<Either<Failure, bool>> isEmailVerified({
     required String email,
   });
+
+  Future<Either<Failure, String>> getCurrentUserUid();
 }

@@ -144,4 +144,20 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<String> getCurrentUserUid() async {
+    try {
+      User? user = auth.currentUser;
+      if (user == null) {
+        throw FirebaseAuthException(
+          code: 'user-not-found',
+          message: 'User not found',
+        );
+      }
+      return user.uid;
+    } on FirebaseAuthException {
+      rethrow;
+    }
+  }
 }

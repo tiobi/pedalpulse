@@ -233,5 +233,50 @@ void main() {
             isA<FirebaseAuthFailure>());
       });
     });
+
+    /// Get Current User Uid Test
+    ///
+    group('GetCurrentUserUid Test', () {
+      test('should get current user uid', () async {
+        // Arrange
+        when(dataSource.getCurrentUserUid()).thenAnswer((_) async => tEmail);
+
+        // Act
+        final result = await repository.getCurrentUserUid();
+
+        // Assert
+        expect(result, const Right(tEmail));
+        verify(dataSource.getCurrentUserUid()).called(1);
+        verifyNoMoreInteractions(dataSource);
+      });
+
+      test('should return a Failure when the current user uid fails', () async {
+        // Arrange
+        when(dataSource.getCurrentUserUid())
+            .thenThrow(FirebaseAuthFailure(message: 'Server Failure'));
+
+        // Act
+        final result = await repository.getCurrentUserUid();
+
+        // Assert
+        expect(result.isLeft(), true);
+        expect(result.fold((failure) => failure, (r) => r),
+            isA<FirebaseAuthFailure>());
+      });
+
+      test('should return a Failure when the user is not found', () async {
+        // Arrange
+        when(dataSource.getCurrentUserUid())
+            .thenThrow(FirebaseAuthFailure(message: 'User is not found'));
+
+        // Act
+        final result = await repository.getCurrentUserUid();
+
+        // Assert
+        expect(result.isLeft(), true);
+        expect(result.fold((failure) => failure, (r) => r),
+            isA<FirebaseAuthFailure>());
+      });
+    });
   });
 }

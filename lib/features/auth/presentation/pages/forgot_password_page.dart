@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
 
 import '../../../../core/routes/routes.dart';
@@ -9,7 +11,9 @@ import '../widgets/custom_text_button_widget.dart';
 import '../widgets/custom_textfield_widget.dart';
 
 class ForgotPasswordPage extends HookWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+  ForgotPasswordPage({Key? key}) : super(key: key);
+
+  final AuthProvider authProvider = GetIt.instance<AuthProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +78,28 @@ class ForgotPasswordPage extends HookWidget {
           ),
         ),
         CustomTextfieldWidget(
-            placeholder: 'Email', controller: emailController),
+          placeholder: 'Email',
+          controller: emailController,
+        ),
         CustomButtonWidget(
           placeholder: AuthString.resetPassword,
           isLoading: false,
-          onTap: () {},
+          onTap: () => _onResetPassword(
+            context,
+            emailController.text,
+          ),
         ),
       ],
+    );
+  }
+
+  void _onResetPassword(
+    BuildContext context,
+    String email,
+  ) async {
+    await authProvider.sendPasswordResetEmail(
+      email: email,
+      context: context,
     );
   }
 }

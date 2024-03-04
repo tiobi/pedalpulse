@@ -85,6 +85,7 @@ class SignUpPage extends HookWidget {
           isObscure: true,
         ),
         CustomButtonWidget(
+          isLoading: authProvider.isLoading,
           placeholder: AuthString.signUp,
           onTap: () => _onSignUp(
             context,
@@ -124,7 +125,6 @@ class SignUpPage extends HookWidget {
     String confirmPassword,
   ) async {
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-      // show snckbar
       CustomSnackBar.showErrorSnackBar(
         context,
         AuthString.fillInAllFields,
