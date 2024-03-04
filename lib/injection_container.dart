@@ -48,6 +48,9 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => firebaseStorage);
   getIt.registerLazySingleton(() => googleSignIn);
 
+  /// Core
+  ///
+
   /// User Data Sources
   ///
   getIt.registerLazySingleton<UserDataSource>(

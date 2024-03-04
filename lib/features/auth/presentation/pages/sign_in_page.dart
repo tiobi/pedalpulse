@@ -165,6 +165,9 @@ class SignInPage extends HookWidget {
       password: password,
     );
 
-    await authProvider.signInWithEmailAndPassword(authEntity: authEntity);
+    await authProvider.signInWithEmailAndPassword(
+      authEntity: authEntity,
+      context: context,
+    );
   }
 }

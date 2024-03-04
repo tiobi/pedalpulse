@@ -15,7 +15,7 @@ import '../features/auth/presentation/providers/auth_provider.dart';
 
 /// Models and Providers
 ///
-import '../providers/user_provider.dart';
+import '../features/user/presentation/providers/user_provider.dart';
 import '../providers/pedal_provider.dart';
 import '../providers/user_likes_provider.dart';
 
@@ -42,7 +42,7 @@ class PedalPulseApp extends StatelessWidget {
       ///
       providers: [
         ChangeNotifierProvider<UserProvider>(
-          create: (_) => UserProvider(),
+          create: (_) => getIt<UserProvider>(),
         ),
         ChangeNotifierProvider<PedalProvider>(
           create: (_) => PedalProvider(),

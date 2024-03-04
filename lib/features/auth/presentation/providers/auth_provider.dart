@@ -29,72 +29,65 @@ class AuthProvider extends ChangeNotifier {
     required this.signInWithGoogleUseCase,
   });
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Future<void> sendPasswordResetEmail({
     required String email,
+    required BuildContext context,
   }) async {
     final result = await sendPasswordResetEmailUseCase(email: email);
 
     result.fold((failure) {
-      CustomSnackBar.showErrorSnackBar(
-          _scaffoldKey.currentState!.context, failure.message);
+      CustomSnackBar.showErrorSnackBar(context, failure.message);
     }, (r) {
-      CustomSnackBar.showSuccessSnackBar(_scaffoldKey.currentState!.context,
-          'Password reset email sent. Please check your email.');
+      CustomSnackBar.showSuccessSnackBar(
+          context, 'Password reset email sent. Please check your email.');
     });
   }
 
   Future<void> signInWithEmailAndPassword({
     required AuthEntity authEntity,
+    required BuildContext context,
   }) async {
     final result =
         await signInWithEmailAndPasswordUseCase(authEntity: authEntity);
 
     result.fold((l) {
       if (l.message == FirebaseAuthFailure.userNotFoundCode) {
-        CustomSnackBar.showErrorSnackBar(
-            _scaffoldKey.currentState!.context, 'User not found');
+        CustomSnackBar.showErrorSnackBar(context, 'User not found');
       } else {
-        CustomSnackBar.showErrorSnackBar(
-            _scaffoldKey.currentState!.context, l.message);
+        CustomSnackBar.showErrorSnackBar(context, l.message);
       }
     }, (r) {
-      CustomSnackBar.showSuccessSnackBar(
-          _scaffoldKey.currentState!.context, 'Signed in');
+      CustomSnackBar.showSuccessSnackBar(context, 'Signed in');
     });
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut({
+    required BuildContext context,
+  }) async {
     final result = await signOutUseCase();
 
     result.fold((failure) {
-      CustomSnackBar.showErrorSnackBar(
-          _scaffoldKey.currentState!.context, failure.message);
+      CustomSnackBar.showErrorSnackBar(context, failure.message);
     }, (r) {
-      CustomSnackBar.showSuccessSnackBar(
-          _scaffoldKey.currentState!.context, 'Signed out');
+      CustomSnackBar.showSuccessSnackBar(context, 'Signed out');
     });
   }
 
   Future<void> signUpWithEmailAndPassword({
     required AuthEntity authEntity,
+    required BuildContext context,
   }) async {
     final result =
         await signUpWithEmailAndPasswordUseCase(authEntity: authEntity);
 
-    final BuildContext? context = _scaffoldKey.currentState?.context;
-
-    if (context == null) {
-      return;
-    }
-
     result.fold((failure) {
-      CustomSnackBar.showErrorSnackBar(
-          _scaffoldKey.currentState!.context, failure.message);
+      CustomSnackBar.showErrorSnackBar(context, failure.message);
     }, (r) {
       CustomSnackBar.showSuccessSnackBar(
-          _scaffoldKey.currentState!.context, 'Signed up');
+        context,
+        'Please check your email to verify',
+      );
+      Navigator.of(context).pop();
     });
   }
 }

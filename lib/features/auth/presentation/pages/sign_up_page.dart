@@ -20,8 +20,10 @@ class SignUpPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
+      key: scaffoldKey,
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Container(
@@ -122,12 +124,12 @@ class SignUpPage extends HookWidget {
     String confirmPassword,
   ) async {
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-      // show snackbar
-
+      // show snckbar
       CustomSnackBar.showErrorSnackBar(
         context,
         AuthString.fillInAllFields,
       );
+
       return;
     }
 
@@ -147,6 +149,7 @@ class SignUpPage extends HookWidget {
 
     await authProvider.signUpWithEmailAndPassword(
       authEntity: authEntity,
+      context: context,
     );
   }
 }
