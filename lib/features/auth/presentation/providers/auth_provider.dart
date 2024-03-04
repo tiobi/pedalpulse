@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
+import 'package:pedalpulse/core/routes/routes.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import '../../../../core/common/widgets/snack_bar_widget.dart';
@@ -87,7 +88,7 @@ class AuthProvider extends ChangeNotifier {
         context,
         'Please check your email to verify',
       );
-      Navigator.of(context).pop();
+      Navigator.pushReplacementNamed(context, Routes.signIn);
     });
   }
 }

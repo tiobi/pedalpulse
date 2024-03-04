@@ -23,13 +23,12 @@ class CustomSnackBar {
   }
 
   static void showSuccessSnackBar(BuildContext context, String message) {
-    final String snackBarMessage = message.split(':')[1];
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: const Color.fromARGB(255, 46, 204, 112),
         elevation: 0,
         content: Text(
-          snackBarMessage,
+          message,
           style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
