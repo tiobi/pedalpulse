@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
 import 'package:pedalpulse/features/auth/data/datasources/social_auth_datasource.dart';
 import 'package:pedalpulse/features/auth/domain/repositories/social_auth_repository.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_usecase.dart';
@@ -51,6 +52,9 @@ Future<void> initializeDependencies() async {
 
   /// Core
   ///
+  getIt.registerLazySingleton<AppSizeProvider>(
+    () => AppSizeProvider(),
+  );
 
   /// User Data Sources
   ///

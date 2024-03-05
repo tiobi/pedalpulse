@@ -39,27 +39,17 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> getUser() async {
-    print('getUser');
     setLoading(true);
     final getCurrentUserUidResult = await getCurrentUserUidUseCase();
 
-    getCurrentUserUidResult.fold((l) {
-      print('getCurrentUserUidResult fail');
-    }, (uid) async {
-      print('getCurrentUserUidResult success');
-      final String userUid = uid;
-      print(uid);
-
+    getCurrentUserUidResult.fold((l) {}, (uid) async {
       final result = await getUserUseCase(
         uid: uid,
       );
 
       result.fold((l) {
-        print('getUser fail');
-        print(l.message);
         setLoading(false);
       }, (user) {
-        print('getUser success');
         this.user = user;
       });
     });

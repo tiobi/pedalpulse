@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 ///
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
 import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
@@ -52,6 +53,9 @@ class PedalPulseApp extends StatelessWidget {
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => getIt<AuthProvider>(),
         ),
+        ChangeNotifierProvider<AppSizeProvider>(
+          create: (_) => getIt<AppSizeProvider>(),
+        ),
       ],
       child: MaterialApp(
         title: AppStringManager.appTitle,
@@ -79,6 +83,13 @@ class PedalPulseApp extends StatelessWidget {
               if (userProvider.user == null) {
                 //! Fetch user data
                 userProvider.getUser();
+              }
+
+              AppSizeProvider appSizeProvider =
+                  GetIt.instance<AppSizeProvider>();
+
+              if (appSizeProvider.size == Size.zero) {
+                appSizeProvider.setAppSize(context: context);
               }
 
               return const ResponsiveLayout(
