@@ -49,8 +49,8 @@ void main() {
     uid: 'user-uid',
     email: 'user-email',
     username: 'user-username',
-    profileImage: 'user-profile-image',
-    coverImage: 'user-cover-image',
+    profileImageUrl: 'user-profile-image',
+    backgroundImageUrl: 'user-cover-image',
     bio: 'user-bio',
     joinedAt: joinedAtFixed,
   );
@@ -59,8 +59,8 @@ void main() {
     uid: 'user-uid',
     email: 'user-email',
     username: 'user-username',
-    profileImage: 'user-profile-image',
-    coverImage: 'user-cover-image',
+    profileImageUrl: 'user-profile-image',
+    backgroundImageUrl: 'user-cover-image',
     bio: 'user-bio',
     joinedAt: joinedAtFixed,
   );

@@ -25,10 +25,8 @@ class ProfilePage extends HookWidget {
         ? const Center(
             child: Text('No user found'),
           )
-        : Column(
-            children: [
-              Text(user.email),
-            ],
+        : Container(
+            child: const Text('User found'),
           );
   }
 }

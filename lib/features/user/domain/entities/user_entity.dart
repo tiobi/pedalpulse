@@ -7,8 +7,8 @@ class UserEntity with UserEntityMappable {
   final String uid;
   final String username;
   final String email;
-  final String profileImage;
-  final String coverImage;
+  final String profileImageUrl;
+  final String backgroundImageUrl;
   final String bio;
   final DateTime joinedAt;
 
@@ -16,8 +16,8 @@ class UserEntity with UserEntityMappable {
     required this.uid,
     required this.username,
     required this.email,
-    required this.profileImage,
-    required this.coverImage,
+    required this.profileImageUrl,
+    required this.backgroundImageUrl,
     required this.bio,
     required this.joinedAt,
   });

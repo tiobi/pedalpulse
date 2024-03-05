@@ -15,6 +15,7 @@ import 'features/auth/data/datasources/social_auth_datasource_impl.dart';
 import 'features/auth/data/repositories/firebase_auth_repository_impl.dart';
 import 'features/auth/data/repositories/social_auth_repository_impl.dart';
 import 'features/auth/domain/repositories/firebase_auth_repository.dart';
+import 'features/auth/domain/usecases/get_current_user_uid_usecase.dart';
 import 'features/auth/domain/usecases/send_password_reset_email_usecase.dart';
 import 'features/auth/domain/usecases/sign_in_with_email_and_password_usecase.dart';
 import 'features/auth/domain/usecases/sign_in_with_google_usecase.dart';
@@ -104,6 +105,11 @@ Future<void> initializeDependencies() async {
       repository: getIt<UserRepository>(),
     ),
   );
+  getIt.registerLazySingleton(
+    () => GetCurrentUserUidUseCase(
+      repository: getIt<FirebaseAuthRepository>(),
+    ),
+  );
 
   /// User Providers
   ///
@@ -116,6 +122,7 @@ Future<void> initializeDependencies() async {
       removeUserLikeUseCase: getIt<RemoveUserLikeUseCase>(),
       deleteUserUseCase: getIt<DeleteUserUseCase>(),
       updateUserProfileImageUseCase: getIt<UpdateUserProfileImageUseCase>(),
+      getCurrentUserUidUseCase: getIt<GetCurrentUserUidUseCase>(),
     ),
   );
 

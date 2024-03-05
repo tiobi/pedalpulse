@@ -78,6 +78,7 @@ class PedalPulseApp extends StatelessWidget {
 
               if (userProvider.user == null) {
                 //! Fetch user data
+                userProvider.getUser();
               }
 
               return const ResponsiveLayout(
