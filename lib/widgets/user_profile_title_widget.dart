@@ -103,10 +103,7 @@ class _UserProfileTitleWidgetState extends State<UserProfileTitleWidget> {
       profileImageFile: _profileImageFile,
     );
 
-    if (message == NetworkMessageManager.success) {
-      await Provider.of<UserProvider>(context, listen: false).setUser();
-      user = Provider.of<UserProvider>(context, listen: false).user!;
-    }
+    if (message == NetworkMessageManager.success) {}
   }
 
   String formatDate(DateTime date) {
