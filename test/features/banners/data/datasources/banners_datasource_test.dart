@@ -11,6 +11,8 @@ import '../../../../mocks/database/mock_collection_reference.mocks.dart';
 import '../../../../mocks/database/mock_document_refernce.mocks.dart';
 import '../../../../mocks/database/mock_document_snapshot.mocks.dart';
 import '../../../../mocks/database/mock_firebasse_firestore.mocks.dart';
+import '../../../../mocks/database/mock_query.mocks.dart';
+import '../../../../mocks/database/mock_query_document_snapshot.mocks.dart';
 import '../../../../mocks/database/mock_query_snapshot.mocks.dart';
 
 void main() {
@@ -19,23 +21,23 @@ void main() {
   late MockCollectionReference collection;
   late MockDocumentReference document;
   late MockDocumentSnapshot documentSnapshot;
+  late MockQuery query;
   late MockQuerySnapshot querySnapshot;
+  late MockQueryDocumentSnapshot queryDocumentSnapshot;
 
   setUp(() {
     firestore = MockFirebaseFirestore();
     dataSource = BannersDataSourceImpl(firestore: firestore);
-
     collection = MockCollectionReference();
+
+    query = MockQuery();
+    querySnapshot = MockQuerySnapshot();
+    queryDocumentSnapshot = MockQueryDocumentSnapshot();
     document = MockDocumentReference();
     documentSnapshot = MockDocumentSnapshot();
-    querySnapshot = MockQuerySnapshot();
 
     when(firestore.collection(any)).thenReturn(collection);
-    when(collection.doc(any)).thenReturn(document);
-    when(collection.orderBy(any)).thenReturn(collection);
-    when(collection.get()).thenAnswer((_) async => documentSnapshot);
-    when(querySnapshot.docs).thenReturn([documentSnashot]);
-
+    when(collection.orderBy(any).get()).thenAnswer((_) async => querySnapshot);
     when(document.get()).thenAnswer((_) async => documentSnapshot);
   });
 
@@ -80,10 +82,7 @@ void main() {
     ///
     test('should get the list of Banner Entity from the datasource', () async {
       // Arrange
-      when(firestore.collection(any).orderBy('order').get())
-          .thenAnswer((_) async => MockQuerySnapshot());
-
-      when(querySnapshot.docs).thenReturn([]);
+      when(documentSnapshot.data()).thenReturn(tBannerMapList);
 
       // Act
       final result = await dataSource.getBanners();
@@ -96,8 +95,8 @@ void main() {
         'should return a ServerFailure when the call to datasource is unsuccessful',
         () async {
       // Arrange
-      when(firestore.collection('banners')).thenReturn(collection);
-      when(collection.get()).thenThrow(Exception());
+      when(firestore.collection(any).orderBy('order').get())
+          .thenThrow(Exception());
 
       // Act
       final result = await dataSource.getBanners();
@@ -110,9 +109,6 @@ void main() {
     ///
     test('should increase the views of a banner', () async {
       // Arrange
-      when(firestore.collection('banners')).thenReturn(collection);
-      when(collection.doc(tUid)).thenReturn(document);
-      when(document.update({'views': 1})).thenAnswer((_) async {});
 
       // Act
       final result = await dataSource.increaseBannerViews(uid: tUid);
