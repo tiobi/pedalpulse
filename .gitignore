@@ -49,3 +49,6 @@ app.*.map.json
 *.jks
 *.keystore
 key.properties
+
+# Global Variable
+global_variable.dart

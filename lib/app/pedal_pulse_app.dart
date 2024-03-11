@@ -79,14 +79,12 @@ class PedalPulseApp extends StatelessWidget {
               return SignInPage();
             } else {
               UserProvider userProvider = GetIt.instance<UserProvider>();
-
-              if (userProvider.user == null) {
-                //! Fetch user data
-                userProvider.getUser();
-              }
-
               AppSizeProvider appSizeProvider =
                   GetIt.instance<AppSizeProvider>();
+
+              if (userProvider.user == null) {
+                userProvider.getUser();
+              }
 
               if (appSizeProvider.size == Size.zero) {
                 appSizeProvider.setAppSize(context: context);

@@ -9,8 +9,9 @@ class ThemeManager {
     //     ? ThemeData.dark().copyWith(useMaterial3: true)
     //     : ThemeData.light(useMaterial3: true);
     return ThemeData(
-        useMaterial3: true,
-        primaryColor: ColorManager.appPrimaryColor,
-        scaffoldBackgroundColor: ColorManager.backgroundColorLight);
+      useMaterial3: true,
+      primaryColor: ColorManager.appPrimaryColor,
+      scaffoldBackgroundColor: ColorManager.backgroundColorLight,
+    );
   }
 }

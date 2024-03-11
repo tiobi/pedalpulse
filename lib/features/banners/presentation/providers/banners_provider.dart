@@ -6,9 +6,8 @@ import 'package:pedalpulse/features/banners/domain/usecases/increase_banner_view
 import '../../domain/entities/banners_entity.dart';
 
 class BannersProvider extends ChangeNotifier {
-  final List<BannerEntity> _bannerList = [];
-
-  List<BannerEntity> get bannerList => _bannerList;
+  List<BannerEntity?> bannerList = [];
+  bool isLoading = false;
 
   final GetBannersUseCase getBannersUseCase;
   final IncreaseBannerViewsUseCase increaseBannerViewsUseCase;
@@ -17,4 +16,8 @@ class BannersProvider extends ChangeNotifier {
     required this.getBannersUseCase,
     required this.increaseBannerViewsUseCase,
   });
+
+  void setLoading(bool value) {
+    notifyListeners();
+  }
 }
