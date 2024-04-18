@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/features/banners/data/datasources/banners_datasource.dart'
     as _i3;
-import 'package:pedalpulse/features/banners/domain/entities/banners_entity.dart'
+import 'package:pedalpulse/features/banners/domain/entities/banner_entity.dart'
     as _i5;
 
 // ignore_for_file: type=lint

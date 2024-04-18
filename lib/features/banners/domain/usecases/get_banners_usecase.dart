@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../entities/banners_entity.dart';
+import '../entities/banner_entity.dart';
 import '../repositories/banners_repository.dart';
 
 class GetBannersUseCase {

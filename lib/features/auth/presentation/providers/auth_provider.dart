@@ -92,7 +92,8 @@ class AuthProvider extends ChangeNotifier {
     result.fold((failure) {
       CustomSnackBar.showErrorSnackBar(context, failure.message);
     }, (r) {
-      CustomSnackBar.showSuccessSnackBar(context, 'Signed out');
+      CustomSnackBar.showSuccessSnackBar(
+          context, 'You are successfully signed out');
     });
   }
 
@@ -124,8 +125,14 @@ class AuthProvider extends ChangeNotifier {
 
     result.fold((failure) {
       CustomSnackBar.showErrorSnackBar(context, failure.message);
-    }, (r) {
-      Navigator.pushReplacementNamed(context, Routes.home);
-    });
+    }, (r) {});
+  }
+
+  Future<void> signInWithGoogle({required BuildContext context}) async {
+    final result = await signInWithGoogleUseCase();
+
+    result.fold((failure) {
+      CustomSnackBar.showErrorSnackBar(context, failure.message);
+    }, (r) {});
   }
 }

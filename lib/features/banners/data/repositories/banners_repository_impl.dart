@@ -3,7 +3,7 @@ import 'package:pedalpulse/features/banners/domain/repositories/banners_reposito
 
 import '../../../../core/errors/banner_failure.dart';
 import '../../../../core/errors/failure.dart';
-import '../../domain/entities/banners_entity.dart';
+import '../../domain/entities/banner_entity.dart';
 import '../datasources/banners_datasource.dart';
 
 class BannersRepositoryImpl extends BannersRepository {

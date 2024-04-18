@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'banners_entity.mapper.dart';
+part 'banner_entity.mapper.dart';
 
 @MappableClass()
 class BannerEntity with BannerEntityMappable {

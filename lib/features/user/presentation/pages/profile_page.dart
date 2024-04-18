@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button_widget.dart';
 import 'package:pedalpulse/features/user/constants/user_string.dart';
 import 'package:pedalpulse/injection_container.dart';
@@ -65,39 +64,53 @@ class ProfilePage extends HookWidget {
             user.backgroundImageUrl,
           ),
         ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: size.width * 0.5,
-            ),
-            // Profile Image and User Info
-            CircleAvatar(
-              radius: 85,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 80,
-                backgroundImage: NetworkImage(user.profileImageUrl),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: size.width * 0.5,
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  user.username,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+              // Profile Image and User Info
+              CircleAvatar(
+                radius: 85,
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                  radius: 80,
+                  backgroundImage: NetworkImage(user.profileImageUrl),
                 ),
-                Text(
-                  'Joined At: ${DateFormat('dd/MM/yyyy').format(user.joinedAt)}',
-                )
-              ],
-            ),
-            Text(user.bio),
-          ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    user.username,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  /// Uncomment Joined At if necessary.
+                  ///
+
+                  // Text(
+                  //   'Joined At: ${DateFormat('dd/MM/yyyy').format(user.joinedAt)}',
+                  //   style: const TextStyle(
+                  //     fontSize: 15,
+                  //     color: Colors.grey,
+                  //   ),
+                  // )
+                ],
+              ),
+              Text(
+                user.bio,
+                style: const TextStyle(fontSize: 17),
+              ),
+            ],
+          ),
         ),
       ],
     );

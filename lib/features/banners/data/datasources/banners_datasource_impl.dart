@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../domain/entities/banners_entity.dart';
+import '../../domain/entities/banner_entity.dart';
 import 'banners_datasource.dart';
 
 class BannersDataSourceImpl implements BannersDataSource {

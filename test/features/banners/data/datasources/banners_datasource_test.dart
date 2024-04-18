@@ -5,7 +5,7 @@ import 'package:pedalpulse/core/errors/banner_failure.dart';
 import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/features/banners/data/datasources/banners_datasource.dart';
 import 'package:pedalpulse/features/banners/data/datasources/banners_datasource_impl.dart';
-import 'package:pedalpulse/features/banners/domain/entities/banners_entity.dart';
+import 'package:pedalpulse/features/banners/domain/entities/banner_entity.dart';
 
 import '../../../../mocks/database/mock_collection_reference.mocks.dart';
 import '../../../../mocks/database/mock_document_refernce.mocks.dart';

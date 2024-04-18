@@ -133,7 +133,7 @@ class SignInPage extends HookWidget {
         SignInButton(
           Buttons.Google,
           onPressed: () {
-            authProvider.signInWithGoogleUseCase();
+            authProvider.signInWithGoogle(context: context);
           },
         ),
       ],

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:pedalpulse/core/errors/banner_failure.dart';
 import 'package:pedalpulse/core/errors/failure.dart';
-import 'package:pedalpulse/features/banners/domain/entities/banners_entity.dart';
+import 'package:pedalpulse/features/banners/domain/entities/banner_entity.dart';
 import 'package:pedalpulse/features/banners/domain/usecases/get_banners_usecase.dart';
 
 import '../../../../mocks/banners/mock_banners_repository.mocks.dart';

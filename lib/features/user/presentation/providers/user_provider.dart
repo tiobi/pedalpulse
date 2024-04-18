@@ -56,4 +56,8 @@ class UserProvider extends ChangeNotifier {
 
     setLoading(false);
   }
+
+  Future<void> getUserPosts() async {
+    // final getUserPostsResult = await getUserPostsUseCase();
+  }
 }

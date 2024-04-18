@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:pedalpulse/core/errors/banner_failure.dart';
 import 'package:pedalpulse/core/errors/failure.dart';
 import 'package:pedalpulse/features/banners/data/repositories/banners_repository_impl.dart';
-import 'package:pedalpulse/features/banners/domain/entities/banners_entity.dart';
+import 'package:pedalpulse/features/banners/domain/entities/banner_entity.dart';
 import 'package:pedalpulse/features/banners/domain/repositories/banners_repository.dart';
 
 import '../../../../mocks/banners/mock_banners_datasource.mocks.dart';

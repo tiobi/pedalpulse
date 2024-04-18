@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:pedalpulse/features/banners/domain/usecases/get_banners_usecase.dart';
 import 'package:pedalpulse/features/banners/domain/usecases/increase_banner_views_usecase.dart';
 
-import '../../domain/entities/banners_entity.dart';
+import '../../domain/entities/banner_entity.dart';
 
 class BannersProvider extends ChangeNotifier {
   List<BannerEntity?> bannerList = [];
