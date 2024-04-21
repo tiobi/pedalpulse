@@ -100,7 +100,7 @@ class AppStringManager {
   static const String minimumKeywordLength =
       'Keyword must be at least 3 characters';
   static const String searchPedals = 'Search For Pedals...';
-  static const String cantFindPedal = 'Can\'t find your pedal?';
+  static const String cantFindPedal = 'Can\'t find your pedal? ';
   static const String requestPedal = 'Let Us Know!';
 
   // Upload Post Screen

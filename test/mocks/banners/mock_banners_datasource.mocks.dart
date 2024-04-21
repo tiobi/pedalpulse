@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/features/banners/data/datasources/banners_datasource.dart'
     as _i3;
-import 'package:pedalpulse/features/banners/domain/entities/banner_entity.dart'
+import 'package:pedalpulse/features/banners/data/models/banner_model.dart'
     as _i5;
 
 // ignore_for_file: type=lint
@@ -38,16 +38,16 @@ class _FakeUnit_0 extends _i1.SmartFake implements _i2.Unit {
 /// See the documentation for Mockito's code generation for more information.
 class MockBannersDataSource extends _i1.Mock implements _i3.BannersDataSource {
   @override
-  _i4.Future<List<_i5.BannerEntity>> getBanners() => (super.noSuchMethod(
+  _i4.Future<List<_i5.BannerModel>> getBanners() => (super.noSuchMethod(
         Invocation.method(
           #getBanners,
           [],
         ),
         returnValue:
-            _i4.Future<List<_i5.BannerEntity>>.value(<_i5.BannerEntity>[]),
+            _i4.Future<List<_i5.BannerModel>>.value(<_i5.BannerModel>[]),
         returnValueForMissingStub:
-            _i4.Future<List<_i5.BannerEntity>>.value(<_i5.BannerEntity>[]),
-      ) as _i4.Future<List<_i5.BannerEntity>>);
+            _i4.Future<List<_i5.BannerModel>>.value(<_i5.BannerModel>[]),
+      ) as _i4.Future<List<_i5.BannerModel>>);
 
   @override
   _i4.Future<_i2.Unit> increaseBannerViews({required String? uid}) =>

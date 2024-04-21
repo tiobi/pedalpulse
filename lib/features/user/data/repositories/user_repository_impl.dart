@@ -6,6 +6,7 @@ import '../../../../core/errors/failure.dart';
 import '../../../../core/errors/user_failure.dart';
 import '../../domain/entities/user_entity.dart';
 import '../datasources/user_datasource.dart';
+import '../models/user_model.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource dataSource;
@@ -19,7 +20,9 @@ class UserRepositoryImpl implements UserRepository {
     required String uid,
   }) async {
     try {
-      final user = await dataSource.getUser(uid: uid);
+      final UserModel userModel = await dataSource.getUser(uid: uid);
+      final UserEntity user = userModel.toEntity();
+
       return Right(user);
     } catch (e) {
       return Left(UserFailure(message: e.toString()));
@@ -31,8 +34,10 @@ class UserRepositoryImpl implements UserRepository {
     required UserEntity userEntity,
   }) async {
     try {
-      final user = await dataSource.updateUser(userEntity: userEntity);
-      return Right(user);
+      final UserModel userModel =
+          await dataSource.updateUser(userModel: userEntity.toModel());
+
+      return Right(userModel.toEntity());
     } catch (e) {
       return Left(UserFailure(message: e.toString()));
     }

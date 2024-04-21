@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
+import 'package:pedalpulse/features/search/presentation/providers/request_provider.dart';
+import 'package:pedalpulse/features/search/presentation/providers/search_provider.dart';
 import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,8 @@ import 'package:provider/provider.dart';
 import '../core/routes/routes.dart';
 import '../features/auth/presentation/pages/sign_in_page.dart';
 import '../features/auth/presentation/providers/auth_provider.dart';
+
+import '../features/upload/presentation/providers/upload_provider.dart';
 
 /// Models and Providers
 ///
@@ -38,8 +42,6 @@ class PedalPulseApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      /// TODO: make common provider list
-      ///
       providers: [
         ChangeNotifierProvider<UserProvider>(
           create: (_) => getIt<UserProvider>(),
@@ -55,6 +57,18 @@ class PedalPulseApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AppSizeProvider>(
           create: (_) => getIt<AppSizeProvider>(),
+        ),
+        ChangeNotifierProvider<SearchProvider>(
+          create: (_) => getIt<SearchProvider>(),
+        ),
+        ChangeNotifierProvider<RequestProvider>(
+          create: (_) => getIt<RequestProvider>(),
+        ),
+        ChangeNotifierProvider<UploadProvider>(
+          create: (_) => getIt<UploadProvider>(),
+        ),
+        ChangeNotifierProvider<PedalProvider>(
+          create: (_) => getIt<PedalProvider>(),
         ),
       ],
       child: MaterialApp(

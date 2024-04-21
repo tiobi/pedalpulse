@@ -116,7 +116,7 @@ class AuthMethods {
     }
   }
 
-  Future<UserModel> getUserDetails() async {
+  Future<UserModelDepr> getUserDetails() async {
     User? user = _auth.currentUser;
     if (user == null) {
       // User user = FirebaseAuth.instance.currentUser!;
@@ -127,7 +127,7 @@ class AuthMethods {
         .doc(user!.uid)
         .get();
 
-    return UserModel.fromMap(doc.data() as Map<String, dynamic>);
+    return UserModelDepr.fromMap(doc.data() as Map<String, dynamic>);
   }
 
   Future<String> deleteAccount() async {

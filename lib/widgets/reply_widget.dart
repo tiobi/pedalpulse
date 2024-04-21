@@ -109,7 +109,7 @@ class _ReplyWidgetState extends State<ReplyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel? user = Provider.of<UserProvider>(context).user;
+    UserModelDepr? user = Provider.of<UserProvider>(context).user;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),

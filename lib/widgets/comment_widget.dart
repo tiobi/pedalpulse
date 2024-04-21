@@ -57,7 +57,8 @@ class _CommentWidgetState extends State<CommentWidget> {
   void handleLike() async {
     toggleLoading();
 
-    UserModel? user = Provider.of<UserProvider>(context, listen: false).user;
+    UserModelDepr? user =
+        Provider.of<UserProvider>(context, listen: false).user;
     if (_liked) {
       await CommentFirestoreMethods().unlikeComment(
         postUid: widget.post.uid,
@@ -174,7 +175,7 @@ class _CommentWidgetState extends State<CommentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel? user = Provider.of<UserProvider>(context).user;
+    UserModelDepr? user = Provider.of<UserProvider>(context).user;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

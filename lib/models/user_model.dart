@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class UserModel {
+class UserModelDepr {
   final String uid;
   final String username;
   final String email;
@@ -10,7 +10,7 @@ class UserModel {
   final String bio;
   final DateTime joinedAt;
 
-  UserModel({
+  UserModelDepr({
     required this.uid,
     required this.username,
     required this.email,
@@ -20,7 +20,7 @@ class UserModel {
     required this.joinedAt,
   });
 
-  UserModel copyWith({
+  UserModelDepr copyWith({
     String? uid,
     String? username,
     String? email,
@@ -29,7 +29,7 @@ class UserModel {
     String? bio,
     DateTime? joinedAt,
   }) {
-    return UserModel(
+    return UserModelDepr(
       uid: uid ?? this.uid,
       username: username ?? this.username,
       email: email ?? this.email,
@@ -52,8 +52,8 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
+  factory UserModelDepr.fromMap(Map<String, dynamic> map) {
+    return UserModelDepr(
       uid: map['uid'] as String,
       username: map['username'] as String,
       email: map['email'] as String,
@@ -66,8 +66,8 @@ class UserModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModelDepr.fromJson(String source) =>
+      UserModelDepr.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -75,7 +75,7 @@ class UserModel {
   }
 
   @override
-  bool operator ==(covariant UserModel other) {
+  bool operator ==(covariant UserModelDepr other) {
     if (identical(this, other)) return true;
 
     return other.uid == uid &&

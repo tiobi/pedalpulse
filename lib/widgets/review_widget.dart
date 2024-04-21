@@ -59,7 +59,8 @@ class _ReviewWidgetState extends State<ReviewWidget> {
 
   void handleLike() async {
     toggleLoading();
-    UserModel? user = Provider.of<UserProvider>(context, listen: false).user;
+    UserModelDepr? user =
+        Provider.of<UserProvider>(context, listen: false).user;
     if (liked) {
       await ReviewFirestoreMethods().unlikeReview(
         pedalUid: widget.pedal.uid,
@@ -174,7 +175,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel? user = Provider.of<UserProvider>(context).user;
+    UserModelDepr? user = Provider.of<UserProvider>(context).user;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

@@ -137,7 +137,7 @@ void main() {
 
         // Act
         final result =
-            await dataSource.updateUser(userEntity: tUpdatedUserEntity);
+            await dataSource.updateUser(userModel: tUpdatedUserEntity);
 
         // Assert
         expect(result, tUserEntity);
@@ -152,7 +152,7 @@ void main() {
         when(document.update(any)).thenThrow(serverFailure);
 
         // Act
-        final result = dataSource.updateUser(userEntity: tUserEntity);
+        final result = dataSource.updateUser(userModel: tUserEntity);
 
         // Assert
         expect(result, throwsA(serverFailure));
@@ -164,7 +164,7 @@ void main() {
         when(document.update(any)).thenThrow(userNotFoundFailure);
 
         // Act
-        final result = dataSource.updateUser(userEntity: tUserEntity);
+        final result = dataSource.updateUser(userModel: tUserEntity);
 
         // Assert
         expect(result, throwsA(userNotFoundFailure));

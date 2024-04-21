@@ -4,8 +4,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:pedalpulse/features/user/data/models/user_model.dart' as _i2;
 import 'package:pedalpulse/features/user/domain/entities/user_entity.dart'
-    as _i2;
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -28,10 +29,20 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
         );
 }
 
+class _FakeUserModel_1 extends _i1.SmartFake implements _i2.UserModel {
+  _FakeUserModel_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [UserEntity].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserEntity extends _i1.Mock implements _i2.UserEntity {
+class MockUserEntity extends _i1.Mock implements _i3.UserEntity {
   @override
   String get uid => (super.noSuchMethod(
         Invocation.getter(#uid),
@@ -86,4 +97,26 @@ class MockUserEntity extends _i1.Mock implements _i2.UserEntity {
           Invocation.getter(#joinedAt),
         ),
       ) as DateTime);
+
+  @override
+  _i2.UserModel toModel() => (super.noSuchMethod(
+        Invocation.method(
+          #toModel,
+          [],
+        ),
+        returnValue: _FakeUserModel_1(
+          this,
+          Invocation.method(
+            #toModel,
+            [],
+          ),
+        ),
+        returnValueForMissingStub: _FakeUserModel_1(
+          this,
+          Invocation.method(
+            #toModel,
+            [],
+          ),
+        ),
+      ) as _i2.UserModel);
 }

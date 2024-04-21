@@ -1,5 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
+import '../../data/models/user_model.dart';
+
 part 'user_entity.mapper.dart';
 
 @MappableClass()
@@ -24,4 +26,14 @@ class UserEntity with UserEntityMappable {
 
   static const fromMap = UserEntityMapper.fromMap;
   static const fromJson = UserEntityMapper.fromJson;
+
+  UserModel toModel() => UserModel(
+        uid: uid,
+        username: username,
+        email: email,
+        profileImageUrl: profileImageUrl,
+        backgroundImageUrl: backgroundImageUrl,
+        bio: bio,
+        joinedAt: joinedAt,
+      );
 }

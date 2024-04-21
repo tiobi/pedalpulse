@@ -78,7 +78,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required String email,
   }) async {
     try {
-      UserModel newUser = UserModel(
+      UserModelDepr newUser = UserModelDepr(
         uid: uid,
         email: email,
         username: email.split('@')[0],

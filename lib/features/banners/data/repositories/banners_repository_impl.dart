@@ -5,6 +5,7 @@ import '../../../../core/errors/banner_failure.dart';
 import '../../../../core/errors/failure.dart';
 import '../../domain/entities/banner_entity.dart';
 import '../datasources/banners_datasource.dart';
+import '../models/banner_model.dart';
 
 class BannersRepositoryImpl extends BannersRepository {
   final BannersDataSource dataSource;
@@ -13,7 +14,10 @@ class BannersRepositoryImpl extends BannersRepository {
   @override
   Future<Either<Failure, List<BannerEntity>>> getBanners() async {
     try {
-      final List<BannerEntity> banners = await dataSource.getBanners();
+      final List<BannerModel> bannerModels = await dataSource.getBanners();
+
+      final List<BannerEntity> banners =
+          bannerModels.map((model) => model.toEntity()).toList();
 
       return Right(banners);
     } catch (e) {

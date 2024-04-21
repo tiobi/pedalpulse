@@ -84,7 +84,8 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   void handleLike() async {
     toggleLoading();
 
-    UserModel? user = Provider.of<UserProvider>(context, listen: false).user;
+    UserModelDepr? user =
+        Provider.of<UserProvider>(context, listen: false).user;
     if (_isLiked) {
       await PostFirestoreMethods().unlikePost(postUid: _post.uid);
 
@@ -117,7 +118,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double width = size.width;
-    UserModel user = Provider.of<UserProvider>(context).user!;
+    UserModelDepr user = Provider.of<UserProvider>(context).user!;
 
     return Scaffold(
       bottomNavigationBar: HidableBottomNavigationBar(

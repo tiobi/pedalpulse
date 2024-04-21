@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:pedalpulse/features/banners/domain/entities/banner_entity.dart';
+
+import '../models/banner_model.dart';
 
 abstract class BannersDataSource {
-  Future<List<BannerEntity>> getBanners();
+  Future<List<BannerModel>> getBanners();
   Future<Unit> increaseBannerViews({required String uid});
 }

@@ -13,7 +13,6 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
   static UserModelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = UserModelMapper._());
-      UserEntityMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -113,8 +112,7 @@ extension UserModelValueCopy<$R, $Out> on ObjectCopyWith<$R, UserModel, $Out> {
 }
 
 abstract class UserModelCopyWith<$R, $In extends UserModel, $Out>
-    implements UserEntityCopyWith<$R, $In, $Out> {
-  @override
+    implements ClassCopyWith<$R, $In, $Out> {
   $R call(
       {String? uid,
       String? username,

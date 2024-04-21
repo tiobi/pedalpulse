@@ -13,7 +13,7 @@ class UserFirestoreMethods {
     required String email,
   }) async {
     try {
-      UserModel newUser = UserModel(
+      UserModelDepr newUser = UserModelDepr(
         uid: uid,
         email: email,
         username: email.split('@')[0],
@@ -31,11 +31,11 @@ class UserFirestoreMethods {
     }
   }
 
-  Future<UserModel> getUserByUid({required String uid}) async {
+  Future<UserModelDepr> getUserByUid({required String uid}) async {
     try {
       DocumentSnapshot doc =
           await _firestore.collection('users').doc(uid).get();
-      return UserModel.fromMap(doc.data()! as Map<String, dynamic>);
+      return UserModelDepr.fromMap(doc.data()! as Map<String, dynamic>);
     } catch (e) {
       rethrow;
     }

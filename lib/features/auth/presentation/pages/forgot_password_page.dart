@@ -8,7 +8,7 @@ import '../../../../core/routes/routes.dart';
 import '../../../../widgets/custom_button_widget.dart';
 import '../../core/constants/auth_string.dart';
 import '../widgets/custom_text_button_widget.dart';
-import '../widgets/custom_textfield_widget.dart';
+import '../../../../core/common/widgets/custom_textfield_widget.dart';
 
 class ForgotPasswordPage extends HookWidget {
   ForgotPasswordPage({Key? key}) : super(key: key);

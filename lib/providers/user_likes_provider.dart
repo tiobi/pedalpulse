@@ -31,7 +31,7 @@ class UserLikesProvider with ChangeNotifier {
   }
 
   void handleLike(String postUid) async {
-    UserModel user = await _authMethods.getUserDetails();
+    UserModelDepr user = await _authMethods.getUserDetails();
     if (isLiked(postUid)) {
       await removeLike(userUid: user.uid, postUid: postUid);
     } else {
@@ -40,7 +40,7 @@ class UserLikesProvider with ChangeNotifier {
   }
 
   Future<void> setUserLikes() async {
-    UserModel user = await _authMethods.getUserDetails();
+    UserModelDepr user = await _authMethods.getUserDetails();
     List<String> userLikes =
         await UserFirestoreMethods().getUserLikes(userUid: user.uid);
     _userLikes.addAll(userLikes);

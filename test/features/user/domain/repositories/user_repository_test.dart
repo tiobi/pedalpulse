@@ -90,7 +90,7 @@ void main() {
     group('UpdateUser Test', () {
       test('should update the user in the datasource', () async {
         /// Arrange
-        when(dataSource.updateUser(userEntity: tUserEntity))
+        when(dataSource.updateUser(userModel: tUserEntity))
             .thenAnswer((_) async => tUserEntity);
 
         /// Act
@@ -98,13 +98,13 @@ void main() {
 
         /// Assert
         expect(result, Right(tUserEntity));
-        verify(dataSource.updateUser(userEntity: tUserEntity)).called(1);
+        verify(dataSource.updateUser(userModel: tUserEntity)).called(1);
         verifyNoMoreInteractions(dataSource);
       });
 
       test('should return a Failure when user is not found', () async {
         /// Arrange
-        when(dataSource.updateUser(userEntity: tUserEntity))
+        when(dataSource.updateUser(userModel: tUserEntity))
             .thenThrow(noUserFailure);
 
         /// Act
@@ -114,13 +114,13 @@ void main() {
         expect(result.isLeft(), true);
         expect(result.fold((noUserFailure) => noUserFailure, (r) => r),
             isA<UserFailure>());
-        verify(dataSource.updateUser(userEntity: tUserEntity)).called(1);
+        verify(dataSource.updateUser(userModel: tUserEntity)).called(1);
         verifyNoMoreInteractions(dataSource);
       });
 
       test('should return a Failure when the server fails', () async {
         /// Arrange
-        when(dataSource.updateUser(userEntity: tUserEntity))
+        when(dataSource.updateUser(userModel: tUserEntity))
             .thenThrow(serverFailure);
 
         /// Act
@@ -130,7 +130,7 @@ void main() {
         expect(result.isLeft(), true);
         expect(result.fold((serverFailure) => serverFailure, (r) => r),
             isA<UserFailure>());
-        verify(dataSource.updateUser(userEntity: tUserEntity)).called(1);
+        verify(dataSource.updateUser(userModel: tUserEntity)).called(1);
         verifyNoMoreInteractions(dataSource);
       });
     });

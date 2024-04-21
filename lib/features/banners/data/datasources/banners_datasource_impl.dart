@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../domain/entities/banner_entity.dart';
+import '../models/banner_model.dart';
 import 'banners_datasource.dart';
 
 class BannersDataSourceImpl implements BannersDataSource {
@@ -10,14 +10,14 @@ class BannersDataSourceImpl implements BannersDataSource {
   BannersDataSourceImpl({required this.firestore});
 
   @override
-  Future<List<BannerEntity>> getBanners() async {
+  Future<List<BannerModel>> getBanners() async {
     try {
       final snapshot =
           await firestore.collection('featured').orderBy('order').get();
 
-      final List<BannerEntity> banners = [];
+      final List<BannerModel> banners = [];
       for (var doc in snapshot.docs) {
-        banners.add(BannerEntity.fromMap(doc.data()));
+        banners.add(BannerModel.fromMap(doc.data()));
       }
       return banners;
     } catch (e) {

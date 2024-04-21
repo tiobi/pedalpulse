@@ -18,7 +18,7 @@ import '../widgets/post_listview_widget.dart';
 import '../widgets/user_profile_title_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final UserModel? otherUser;
+  final UserModelDepr? otherUser;
   final bool isModalSheet;
   const ProfileScreen({
     Key? key,
@@ -32,7 +32,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final List<PostModel> _userPosts = [];
-  late UserModel _user;
+  late UserModelDepr _user;
   bool _showOptions = false;
   bool _isEditing = false;
   bool _isLoading = false;
@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void getUser() async {
-    UserModel? user;
+    UserModelDepr? user;
     if (widget.otherUser != null) {
       user = widget.otherUser!;
     } else {

@@ -1,15 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
-import 'package:provider/provider.dart';
 
-import '../models/pedal_model.dart';
-import '../providers/pedal_provider.dart';
-import '../utils/managers/color_manager.dart';
-import '../utils/managers/route_manager.dart';
+import '../../../../utils/managers/color_manager.dart';
+import '../../../../utils/managers/route_manager.dart';
+import '../../domain/entities/pedal_entity.dart';
 
 class PedalCardWidget extends StatefulWidget {
-  final PedalModel pedal;
+  final PedalEntity pedal;
   final bool isSelectable;
   final bool isSelected;
   const PedalCardWidget({
@@ -41,11 +39,11 @@ class _PedalCardWidgetState extends State<PedalCardWidget> {
       onTap: () {
         widget.isSelectable
             ? setState(() {
-                _selected
-                    ? Provider.of<PedalProvider>(context, listen: false)
-                        .removePedal(widget.pedal)
-                    : Provider.of<PedalProvider>(context, listen: false)
-                        .addPedal(widget.pedal);
+                // _selected
+                //     ? Provider.of<PedalProvider>(context, listen: false)
+                //         .removePedal(widget.pedal)
+                //     : Provider.of<PedalProvider>(context, listen: false)
+                //         .addPedal(widget.pedal);
                 _selected = !_selected;
               })
             : Navigator.of(context).pushNamed(

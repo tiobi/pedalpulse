@@ -1,5 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
+import '../../data/models/banner_model.dart';
+
 part 'banner_entity.mapper.dart';
 
 @MappableClass()
@@ -20,4 +22,12 @@ class BannerEntity with BannerEntityMappable {
 
   static const fromMap = BannerEntityMapper.fromMap;
   static const fromJson = BannerEntityMapper.fromJson;
+
+  BannerModel toModel() => BannerModel(
+        uid: uid,
+        postUrl: postUrl,
+        imageUrl: imageUrl,
+        order: order,
+        views: views,
+      );
 }

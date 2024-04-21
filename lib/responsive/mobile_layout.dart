@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 import 'package:pedalpulse/screens/feed_screen.dart';
 import 'package:pedalpulse/screens/home_screen.dart';
-import 'package:pedalpulse/screens/upload_post_screen.dart';
 import 'package:pedalpulse/utils/managers/color_manager.dart';
 
-import '../screens/search_screen.dart';
-import '../screens/upload_screen.dart';
+import '../features/search/presentation/pages/search_page.dart';
 
 class MobileLayout extends StatefulWidget {
   final int? initialIndex;
@@ -38,7 +37,7 @@ class _MobileLayoutState extends State<MobileLayout> {
     if (page == 2) {
       showCupertinoModalBottomSheet(
         context: context,
-        builder: (context) => const UploadPostScreen(),
+        builder: (context) => const UploadPage(),
       );
       return;
     }
@@ -80,8 +79,8 @@ class _MobileLayoutState extends State<MobileLayout> {
 List<Widget> tabItems = <Widget>[
   const HomeScreen(),
   const FeedScreen(),
-  const UploadScreen(),
-  const SearchScreen(),
+  const UploadPage(),
+  const SearchPage(),
   ProfilePage(),
 ];
 

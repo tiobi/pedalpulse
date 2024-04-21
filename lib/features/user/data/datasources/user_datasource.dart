@@ -1,15 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
-import '../../domain/entities/user_entity.dart';
+import '../models/user_model.dart';
 
 abstract class UserDataSource {
-  Future<UserEntity> getUser({
+  Future<UserModel> getUser({
     required String uid,
   });
 
-  Future<UserEntity> updateUser({
-    required UserEntity userEntity,
+  Future<UserModel> updateUser({
+    required UserModel userModel,
   });
 
   Future<List<String>> getUserLikes({

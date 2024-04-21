@@ -7,9 +7,9 @@ import '../providers/user_provider.dart';
 import '../services/firebase/pedal_firestore_methods.dart';
 import '../utils/managers/message_manager.dart';
 import '../utils/managers/string_manager.dart';
-import '../widgets/custom_dynamic_height_textfield_widget.dart';
+import '../core/common/widgets/custom_dynamic_height_textfield_widget.dart';
 import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
-import '../features/auth/presentation/widgets/custom_textfield_widget.dart';
+import '../core/common/widgets/custom_textfield_widget.dart';
 import '../widgets/loading_placeholder_widget.dart';
 
 import 'package:provider/provider.dart';
@@ -49,7 +49,7 @@ class _RequestPedalScreenState extends State<RequestPedalScreen> {
 
   void onSend() async {
     toggleLoading();
-    final UserModel? user =
+    final UserModelDepr? user =
         Provider.of<UserProvider>(context, listen: false).user;
 
     if (_brandController.text.isEmpty || _modelController.text.isEmpty) {

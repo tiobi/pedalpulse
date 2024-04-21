@@ -9,7 +9,7 @@ import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button
 import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/social_auth_divider_widget.dart';
 import 'package:pedalpulse/widgets/custom_button_widget.dart';
-import 'package:pedalpulse/features/auth/presentation/widgets/custom_textfield_widget.dart';
+import 'package:pedalpulse/core/common/widgets/custom_textfield_widget.dart';
 
 import '../../core/constants/auth_string.dart';
 import '../../domain/entities/auth_entity.dart';

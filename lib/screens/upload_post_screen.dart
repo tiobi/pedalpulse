@@ -4,16 +4,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
+import '../features/user/domain/entities/user_entity.dart';
+import '../features/user/presentation/providers/user_provider.dart';
 import '../models/pedal_model.dart';
 import '../models/post_model.dart';
-import '../models/user_model.dart';
 import '../providers/pedal_provider.dart';
-import '../providers/user_provider.dart';
 import '../screens/search_screen.dart';
 import '../services/firebase/firebase_storage_methods.dart';
 import '../services/firebase/post_firestore_methods.dart';
@@ -21,11 +22,10 @@ import '../utils/managers/color_manager.dart';
 import '../utils/managers/message_manager.dart';
 import '../utils/managers/route_manager.dart';
 import '../utils/utils.dart';
-import '../widgets/custom_dynamic_height_textfield_widget.dart';
+import '../core/common/widgets/custom_dynamic_height_textfield_widget.dart';
 import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
-import '../features/auth/presentation/widgets/custom_textfield_widget.dart';
+import '../core/common/widgets/custom_textfield_widget.dart';
 import '../widgets/loading_placeholder_widget.dart';
-import '../widgets/pedal_card_widget.dart';
 
 class UploadPostScreen extends StatefulWidget {
   final PostModel? post;
@@ -144,7 +144,8 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
     final double tileWidth = (size.width - 16) / 3;
     final double cardWidth = size.width / 2 - 16;
 
-    final UserModel? user = Provider.of<UserProvider>(context).user;
+    final UserEntity user = getIt<UserProvider>().user!;
+
     List<PedalModel>? pedalList = Provider.of<PedalProvider>(context).pedalList;
 
     return Scaffold(
@@ -186,9 +187,9 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
                       if (widget.post == null) {
                         message = await PostFirestoreMethods().uploadPost(
                           postUid: postUid,
-                          userUid: user?.uid,
-                          username: user?.username,
-                          userProfileImageUrl: user?.profileImageUrl,
+                          userUid: user.uid,
+                          username: user.username,
+                          userProfileImageUrl: user.profileImageUrl,
                           title: _titleController.text,
                           description: _descriptionController.text,
                           imageList: _imageList,
@@ -198,7 +199,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
                         // update post
                         List<String> imageUrls = await FirebaseStorageMethods()
                             .uploadPostImagesToStorage(
-                          userUid: user!.uid,
+                          userUid: user.uid,
                           postUid: widget.post!.uid,
                           images: _imageList,
                         );
@@ -419,7 +420,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
                       } else {
                         return Stack(
                           children: [
-                            PedalCardWidget(pedal: pedalList[index - 1]),
+                            // PedalCardWidget(pedal: pedalList[index - 1]),
                             Positioned(
                               top: 10,
                               right: 10,

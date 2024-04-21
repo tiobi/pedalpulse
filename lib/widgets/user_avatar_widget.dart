@@ -28,7 +28,7 @@ class UserAvatarWidget extends StatefulWidget {
 
 class _UserAvatarWidgetState extends State<UserAvatarWidget> {
   bool _isLoading = true;
-  late final UserModel? _user;
+  late final UserModelDepr? _user;
 
   @override
   void initState() {

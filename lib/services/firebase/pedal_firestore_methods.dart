@@ -120,7 +120,7 @@ class PedalFirestoreMethods {
     required String brand,
     required String name,
     required String description,
-    required UserModel user,
+    required UserModelDepr user,
   }) async {
     try {
       await _firestore.collection('requests').add({

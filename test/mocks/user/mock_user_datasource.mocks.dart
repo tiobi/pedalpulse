@@ -10,8 +10,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/features/user/data/datasources/user_datasource.dart'
     as _i4;
-import 'package:pedalpulse/features/user/domain/entities/user_entity.dart'
-    as _i2;
+import 'package:pedalpulse/features/user/data/models/user_model.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,8 +23,8 @@ import 'package:pedalpulse/features/user/domain/entities/user_entity.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeUserEntity_0 extends _i1.SmartFake implements _i2.UserEntity {
-  _FakeUserEntity_0(
+class _FakeUserModel_0 extends _i1.SmartFake implements _i2.UserModel {
+  _FakeUserModel_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -49,14 +48,14 @@ class _FakeUnit_1 extends _i1.SmartFake implements _i3.Unit {
 /// See the documentation for Mockito's code generation for more information.
 class MockUserDataSource extends _i1.Mock implements _i4.UserDataSource {
   @override
-  _i5.Future<_i2.UserEntity> getUser({required String? uid}) =>
+  _i5.Future<_i2.UserModel> getUser({required String? uid}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [],
           {#uid: uid},
         ),
-        returnValue: _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+        returnValue: _i5.Future<_i2.UserModel>.value(_FakeUserModel_0(
           this,
           Invocation.method(
             #getUser,
@@ -65,7 +64,7 @@ class MockUserDataSource extends _i1.Mock implements _i4.UserDataSource {
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+            _i5.Future<_i2.UserModel>.value(_FakeUserModel_0(
           this,
           Invocation.method(
             #getUser,
@@ -73,35 +72,34 @@ class MockUserDataSource extends _i1.Mock implements _i4.UserDataSource {
             {#uid: uid},
           ),
         )),
-      ) as _i5.Future<_i2.UserEntity>);
+      ) as _i5.Future<_i2.UserModel>);
 
   @override
-  _i5.Future<_i2.UserEntity> updateUser(
-          {required _i2.UserEntity? userEntity}) =>
+  _i5.Future<_i2.UserModel> updateUser({required _i2.UserModel? userModel}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateUser,
           [],
-          {#userEntity: userEntity},
+          {#userModel: userModel},
         ),
-        returnValue: _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+        returnValue: _i5.Future<_i2.UserModel>.value(_FakeUserModel_0(
           this,
           Invocation.method(
             #updateUser,
             [],
-            {#userEntity: userEntity},
+            {#userModel: userModel},
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.UserEntity>.value(_FakeUserEntity_0(
+            _i5.Future<_i2.UserModel>.value(_FakeUserModel_0(
           this,
           Invocation.method(
             #updateUser,
             [],
-            {#userEntity: userEntity},
+            {#userModel: userModel},
           ),
         )),
-      ) as _i5.Future<_i2.UserEntity>);
+      ) as _i5.Future<_i2.UserModel>);
 
   @override
   _i5.Future<List<String>> getUserLikes({required String? userUid}) =>

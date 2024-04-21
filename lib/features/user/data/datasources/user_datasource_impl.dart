@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
-import '../../domain/entities/user_entity.dart';
+import '../models/user_model.dart';
 import 'user_datasource.dart';
 
 class UserDataSourceImpl implements UserDataSource {
@@ -13,30 +13,30 @@ class UserDataSourceImpl implements UserDataSource {
   });
 
   @override
-  Future<UserEntity> getUser({
+  Future<UserModel> getUser({
     required String uid,
   }) async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> userDocument =
           await firestore.collection('users').doc(uid).get();
 
-      return UserEntity.fromMap(userDocument.data()!);
+      return UserModel.fromMap(userDocument.data()!);
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<UserEntity> updateUser({
-    required UserEntity userEntity,
+  Future<UserModel> updateUser({
+    required UserModel userModel,
   }) async {
     try {
       await firestore
           .collection('users')
-          .doc(userEntity.uid)
-          .update(userEntity.toMap());
+          .doc(userModel.uid)
+          .update(userModel.toMap());
 
-      return userEntity;
+      return userModel;
     } catch (e) {
       rethrow;
     }

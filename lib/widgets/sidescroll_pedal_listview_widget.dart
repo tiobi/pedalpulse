@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/widgets/custom_circle_icon_button_widget.dart';
-import 'package:pedalpulse/widgets/pedal_card_widget.dart';
 
 import '../models/pedal_model.dart';
 
@@ -83,10 +82,12 @@ class _SidescrollPedalListviewWidgetState
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.pedalList.length,
                     itemBuilder: (context, index) {
-                      return PedalCardWidget(
-                        pedal: widget.pedalList[index],
-                        isSelectable: false,
-                      );
+                      return null;
+
+                      // return PedalCardWidget(
+                      //   pedal: widget.pedalList[index],
+                      //   isSelectable: false,
+                      // );
                     },
                   ),
                 ),

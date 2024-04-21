@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pedalpulse/services/firebase/user_firestore_methods.dart';
 import 'package:pedalpulse/utils/managers/color_manager.dart';
 import 'package:pedalpulse/utils/managers/message_manager.dart';
-import 'package:pedalpulse/widgets/custom_dynamic_height_textfield_widget.dart';
+import 'package:pedalpulse/core/common/widgets/custom_dynamic_height_textfield_widget.dart';
 import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ import '../providers/user_provider.dart';
 import 'package:intl/intl.dart';
 
 class UserProfileTitleWidget extends StatefulWidget {
-  final UserModel user;
+  final UserModelDepr user;
   final bool isModalSheet;
 
   const UserProfileTitleWidget({
@@ -31,7 +31,7 @@ class UserProfileTitleWidget extends StatefulWidget {
 class _UserProfileTitleWidgetState extends State<UserProfileTitleWidget> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
-  late UserModel user;
+  late UserModelDepr user;
   bool _isEditing = false;
   bool _isLoading = false;
   XFile? _backgroundImageFile;
@@ -116,7 +116,7 @@ class _UserProfileTitleWidgetState extends State<UserProfileTitleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final UserModel? currentUser = Provider.of<UserProvider>(context).user;
+    final UserModelDepr? currentUser = Provider.of<UserProvider>(context).user;
 
     final Size size = MediaQuery.of(context).size;
     final double width = size.width;

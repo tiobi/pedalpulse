@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pedalpulse/core/common/widgets/snack_bar_widget.dart';
 import 'package:pedalpulse/features/banners/domain/usecases/get_banners_usecase.dart';
 import 'package:pedalpulse/features/banners/domain/usecases/increase_banner_views_usecase.dart';
 
@@ -19,5 +19,19 @@ class BannersProvider extends ChangeNotifier {
 
   void setLoading(bool value) {
     notifyListeners();
+  }
+
+  void getBanners({
+    required BuildContext context,
+  }) async {
+    setLoading(true);
+    final result = await getBannersUseCase.call();
+
+    result.fold(
+      (l) => CustomSnackBar.showErrorSnackBar(context, 'Unable to get banners'),
+      (r) => bannerList = r,
+    );
+
+    setLoading(false);
   }
 }

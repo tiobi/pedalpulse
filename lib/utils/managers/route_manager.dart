@@ -78,7 +78,7 @@ class RouteManager {
       case Routes.profile:
         return MaterialPageRoute(
             builder: (_) => ProfileScreen(
-                  otherUser: settings.arguments as UserModel,
+                  otherUser: settings.arguments as UserModelDepr,
                 ));
       case Routes.pedalDetails:
         return MaterialPageRoute(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 
-import '../utils/managers/color_manager.dart';
+import '../../../../utils/managers/color_manager.dart';
 
 class LoadingPedalCardWidget extends StatefulWidget {
   const LoadingPedalCardWidget({

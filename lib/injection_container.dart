@@ -9,7 +9,13 @@ import 'package:pedalpulse/features/auth/domain/repositories/social_auth_reposit
 import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_usecase.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
+import 'package:pedalpulse/features/pedals/data/datasources/pedal_firestore_datasource.dart';
+import 'package:pedalpulse/features/pedals/domain/repositories/pedal_repository.dart';
+import 'package:pedalpulse/features/posts/domain/repositories/post_repository.dart';
+import 'package:pedalpulse/features/posts/domain/usecases/get_popular_posts_usecase.dart';
+import 'package:pedalpulse/features/search/domain/usecases/search_pedals_usecase.dart';
 
+import 'features/ads/presentation/providers/ads_provider.dart';
 import 'features/auth/data/datasources/firebase_auth_datasource.dart';
 import 'features/auth/data/datasources/firebase_auth_datasource_impl.dart';
 import 'features/auth/data/datasources/social_auth_datasource_impl.dart';
@@ -22,6 +28,19 @@ import 'features/auth/domain/usecases/sign_in_with_email_and_password_usecase.da
 import 'features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'features/auth/domain/usecases/sign_out_usecase.dart';
 import 'features/auth/domain/usecases/sign_up_with_email_and_password_usecase.dart';
+import 'features/pedals/data/datasources/pedal_firestore_datasource_impl.dart';
+import 'features/pedals/data/repositories/pedal_repository_impl.dart';
+import 'features/pedals/domain/usecases/get_popular_pedals_usecase.dart';
+import 'features/pedals/domain/usecases/get_recent_pedals_usecase.dart';
+import 'features/pedals/presentation/providers/pedal_provider.dart';
+import 'features/posts/data/datasources/post_firestore_datasource.dart';
+import 'features/posts/data/datasources/post_firestore_datasource_impl.dart';
+import 'features/posts/data/repositories/post_repository_impl.dart';
+import 'features/posts/domain/usecases/get_recent_posts_usecase.dart';
+import 'features/posts/presentation/providers/post_provider.dart';
+import 'features/search/presentation/providers/request_provider.dart';
+import 'features/search/presentation/providers/search_provider.dart';
+import 'features/upload/presentation/providers/upload_provider.dart';
 import 'features/user/data/datasources/user_datasource.dart';
 import 'features/user/data/datasources/user_datasource_impl.dart';
 import 'features/user/data/repositories/user_repository_impl.dart';
@@ -74,42 +93,42 @@ Future<void> initializeDependencies() async {
 
   /// User Use Cases
   ///
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<GetUserUseCase>(
     () => GetUserUseCase(
       repository: getIt<UserRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<UpdateUserUseCase>(
     () => UpdateUserUseCase(
       repository: getIt<UserRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<GetUserLikesUseCase>(
     () => GetUserLikesUseCase(
       repository: getIt<UserRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<AddUserLikesUseCase>(
     () => AddUserLikesUseCase(
       repository: getIt<UserRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<RemoveUserLikeUseCase>(
     () => RemoveUserLikeUseCase(
       repository: getIt<UserRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<DeleteUserUseCase>(
     () => DeleteUserUseCase(
       repository: getIt<UserRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<UpdateUserProfileImageUseCase>(
     () => UpdateUserProfileImageUseCase(
       repository: getIt<UserRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<GetCurrentUserUidUseCase>(
     () => GetCurrentUserUidUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
@@ -117,7 +136,7 @@ Future<void> initializeDependencies() async {
 
   /// User Providers
   ///
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<UserProvider>(
     () => UserProvider(
       getUserUseCase: getIt<GetUserUseCase>(),
       updateUserUseCase: getIt<UpdateUserUseCase>(),
@@ -161,37 +180,37 @@ Future<void> initializeDependencies() async {
 
   /// Auth Use Cases
   ///
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<SignInWithEmailAndPasswordUseCase>(
     () => SignInWithEmailAndPasswordUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<SignOutUseCase>(
     () => SignOutUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<SendPasswordResetEmailUseCase>(
     () => SendPasswordResetEmailUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<IsEmailVerifiedUseCase>(
     () => IsEmailVerifiedUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<SignUpWithEmailAndPasswordUseCase>(
     () => SignUpWithEmailAndPasswordUseCase(
       repository: getIt<FirebaseAuthRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<SignInWithGoogleUseCase>(
     () => SignInWithGoogleUseCase(
       repository: getIt<SocialAuthRepository>(),
     ),
   );
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<SignInWithAppleUseCase>(
     () => SignInWithAppleUseCase(
       repository: getIt<SocialAuthRepository>(),
     ),
@@ -199,7 +218,7 @@ Future<void> initializeDependencies() async {
 
   /// Auth Provider
   ///
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<AuthProvider>(
     () => AuthProvider(
       isEmailVerifiedUseCase: getIt<IsEmailVerifiedUseCase>(),
       sendPasswordResetEmailUseCase: getIt<SendPasswordResetEmailUseCase>(),
@@ -210,6 +229,93 @@ Future<void> initializeDependencies() async {
           getIt<SignUpWithEmailAndPasswordUseCase>(),
       signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
       signInWithAppleUseCase: getIt<SignInWithAppleUseCase>(),
+    ),
+  );
+
+  /// Ads
+  ///
+  getIt.registerLazySingleton<AdsProvider>(
+    () => AdsProvider(),
+  );
+
+  /// Search
+  ///
+  getIt.registerLazySingleton<SearchPedalsUseCase>(
+    () => SearchPedalsUseCase(),
+  );
+  getIt.registerLazySingleton<SearchProvider>(
+    () => SearchProvider(
+      searchPedalsUseCase: getIt<SearchPedalsUseCase>(),
+    ),
+  );
+
+  /// Request
+  ///
+  getIt.registerLazySingleton<RequestProvider>(
+    () => RequestProvider(),
+  );
+
+  /// Upload
+  ///
+  getIt.registerLazySingleton<UploadProvider>(
+    () => UploadProvider(),
+  );
+
+  /// Pedals
+  ///
+  getIt.registerLazySingleton<PedalFirestoreDataSource>(
+    () => PedalFirestoreDataSourceImpl(
+      firestore: getIt<FirebaseFirestore>(),
+    ),
+  );
+  getIt.registerLazySingleton<PedalRepository>(
+    () => PedalRepositoryImpl(
+      pedalDataSource: getIt<PedalFirestoreDataSource>(),
+    ),
+  );
+  getIt.registerLazySingleton<GetRecentPedalsUseCase>(
+    () => GetRecentPedalsUseCase(
+      repository: getIt<PedalRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<GetPopularPedalsUseCase>(
+    () => GetPopularPedalsUseCase(
+      repository: getIt<PedalRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<PedalProvider>(
+    () => PedalProvider(
+      getRecentPedalsUseCase: getIt<GetRecentPedalsUseCase>(),
+      getPopularPedalsUseCase: getIt<GetPopularPedalsUseCase>(),
+    ),
+  );
+
+  /// Posts
+  ///
+  getIt.registerLazySingleton<PostFirestoreDataSource>(
+    () => PostFirestoreDataSourceImpl(
+      firestore: getIt<FirebaseFirestore>(),
+    ),
+  );
+  getIt.registerLazySingleton<PostRepository>(
+    () => PostRepositoryImpl(
+      dataSource: getIt<PostFirestoreDataSource>(),
+    ),
+  );
+  getIt.registerLazySingleton<GetRecentPostsUseCase>(
+    () => GetRecentPostsUseCase(
+      repository: getIt<PostRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<GetPopularPostsUseCase>(
+    () => GetPopularPostsUseCase(
+      repository: getIt<PostRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<PostProvider>(
+    () => PostProvider(
+      getRecentPostsUseCase: getIt<GetRecentPostsUseCase>(),
+      getPopularPostsUseCase: getIt<GetPopularPostsUseCase>(),
     ),
   );
 }

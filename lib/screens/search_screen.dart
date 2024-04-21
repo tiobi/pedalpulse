@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
+import '../features/pedals/domain/entities/pedal_entity.dart';
 import '../models/pedal_model.dart';
 import '../providers/pedal_provider.dart';
 import '../services/algolia/algolia.dart';
 import '../screens/request_pedal_screen.dart';
 import '../utils/managers/string_manager.dart';
 import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
-import '../features/auth/presentation/widgets/custom_textfield_widget.dart';
-import '../widgets/loading_pedal_card_widget.dart';
-import '../widgets/pedal_card_widget.dart';
+import '../core/common/widgets/custom_textfield_widget.dart';
+import '../features/search/presentation/widgets/loading_pedal_card_widget.dart';
+import '../features/pedals/presentation/widgets/pedal_card_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool isSelectable;
@@ -183,7 +184,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             isSelected: pedalList
                                 .any((element) => element.uid == pedal.uid),
                             isSelectable: widget.isSelectable,
-                            pedal: pedal,
+                            pedal: pedal as PedalEntity,
                           );
                         },
                       ),
