@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 import 'package:pedalpulse/widgets/user_avatar_widget.dart';
 
-import '../models/post_model.dart';
+import '../features/posts/domain/entities/post_entity.dart';
 import '../utils/managers/asset_manager.dart';
 import '../utils/managers/color_manager.dart';
 import '../utils/managers/route_manager.dart';
 
 class PostCardWidget extends StatefulWidget {
-  final PostModel post;
+  final PostEntity post;
   const PostCardWidget({
     super.key,
     required this.post,

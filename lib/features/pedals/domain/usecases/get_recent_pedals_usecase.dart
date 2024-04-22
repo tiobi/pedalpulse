@@ -9,7 +9,7 @@ class GetRecentPedalsUseCase {
 
   GetRecentPedalsUseCase({required this.repository});
 
-  Future<Either<Failure, List<PedalEntity>>> call() async {
-    return repository.getRecentPedals();
+  Future<Either<Failure, List<PedalEntity>>> call({int limit = 10}) async {
+    return repository.getRecentPedals(limit: limit);
   }
 }

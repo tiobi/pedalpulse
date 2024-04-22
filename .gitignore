@@ -52,3 +52,7 @@ key.properties
 
 # Global Variable
 global_variable.dart
+
+# Firebase
+google-services.json
+firebase_options.dart

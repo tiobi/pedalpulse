@@ -9,7 +9,7 @@ class GetPopularPostsUseCase {
 
   GetPopularPostsUseCase({required this.repository});
 
-  Future<Either<Failure, List<PostEntity>>> call() async {
-    return repository.getPopularPosts();
+  Future<Either<Failure, List<PostEntity>>> call({int limit = 3}) async {
+    return repository.getPopularPosts(limit: limit);
   }
 }

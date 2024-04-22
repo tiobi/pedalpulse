@@ -122,9 +122,10 @@ class _FeedScreenState extends State<FeedScreen> {
               itemCount: _posts.length,
               itemBuilder: (context, index) {
                 final post = _posts[index];
-                return PostCardWidget(
-                  post: post,
-                );
+                return null;
+                // return PostCardWidget(
+                //   post: post,
+                // );
               },
             ),
             _isLoading

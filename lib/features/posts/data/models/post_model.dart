@@ -43,8 +43,33 @@ class PostModel with PostModelMappable {
     required this.views,
   });
 
-  static const fromMap = PostModelMapper.fromMap;
+  // static const fromMap = PostModelMapper.fromMap;
   static const fromJson = PostModelMapper.fromJson;
+
+  factory PostModel.fromMap(Map<String, dynamic> map) {
+    return PostModel(
+      uid: map['uid'],
+      userUid: map['userUid'],
+      username: map['username'],
+      userProfileImageUrl: map['userProfileImageUrl'],
+      imageUrls: List<String>.from(map['imageUrls']),
+      title: map['title'],
+      description: map['description'],
+      createdAt: map['createdAt'].toDate(),
+      updatedAt: map['updatedAt'].toDate(),
+      likes: List<String>.from(map['likes']),
+      reports: List<String>.from(map['reports']),
+      likesCount: map['likesCount'],
+      commentsCount: map['commentsCount'],
+      pedalList: List<PedalModel>.from(
+        map['pedalList'].map(
+          (pedal) => PedalModel.fromMap(pedal),
+        ),
+      ),
+      pedalUids: List<String>.from(map['pedalUids']),
+      views: map['views'],
+    );
+  }
 
   PostEntity toEntity() {
     return PostEntity(

@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 import 'package:pedalpulse/models/comment_model.dart';
 
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 import '../utils/managers/message_manager.dart';
 import '../core/common/widgets/custom_dynamic_height_textfield_widget.dart';
 import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
@@ -58,7 +58,7 @@ class _ReplyDialogWidgetState extends State<ReplyDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final UserModelDepr? user = Provider.of<UserProvider>(context).user;
+    final UserModelDepr? user = Provider.of<UserProviderDepr>(context).user;
     return Scaffold(
       body: GestureDetector(
         onTap: FocusScope.of(context).unfocus,

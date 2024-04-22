@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pedalpulse/providers/user_provider.dart';
+import 'package:pedalpulse/providers/user_provider_depr.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/managers/message_manager.dart';
@@ -64,7 +64,7 @@ class AuthMethods {
         password: password,
       );
 
-      await UserProvider().setUser();
+      await UserProviderDepr().setUser();
 
       // check if email is verified
       if (!await isEmailVerified(email: email)) {

@@ -35,16 +35,15 @@ class SearchProvider extends ChangeNotifier {
 
   Future<void> search() async {
     clearPedals();
-    setLoading(true);
-    // perform search
+    // setLoading(true);
 
-    final searchResult =
-        await searchPedalsUseCase(query: _searchController.text);
+    // final searchResultOrFailure =
+    //     await searchPedalsUseCase(query: _searchController.text);
 
-    searchResult.fold((failure) {}, (pedals) {
-      addPedals(pedals);
-    });
+    // searchResultOrFailure.fold((failure) {}, (pedals) {
+    //   addPedals(pedals);
+    // });
 
-    setLoading(false);
+    setLoading(!_isLoading);
   }
 }

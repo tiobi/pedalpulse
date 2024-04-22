@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/common/widgets/custom_textfield_widget.dart';
 import '../../../../injection_container.dart';
@@ -74,7 +75,8 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildResults(BuildContext context) {
-    final SearchProvider searchProvider = getIt<SearchProvider>();
+    // final SearchProvider searchProvider = getIt<SearchProvider>();
+    final SearchProvider searchProvider = Provider.of<SearchProvider>(context);
 
     return searchProvider.isLoading
         ? Expanded(

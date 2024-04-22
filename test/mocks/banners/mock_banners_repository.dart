@@ -1,5 +1,5 @@
 import 'package:mockito/annotations.dart';
-import 'package:pedalpulse/features/banners/domain/repositories/banners_repository.dart';
+import 'package:pedalpulse/features/banner/domain/repositories/banner_repository.dart';
 
-@GenerateNiceMocks([MockSpec<BannersRepository>(as: #MockBannersRepository)])
+@GenerateNiceMocks([MockSpec<BannerRepository>(as: #MockBannersRepository)])
 void main() {}

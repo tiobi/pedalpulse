@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/post_model.dart';
 import '../models/search_option_model.dart';
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 import '../services/auth/auth_methods.dart';
 import '../services/firebase/post_firestore_methods.dart';
 import '../utils/managers/color_manager.dart';
@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (widget.otherUser != null) {
       user = widget.otherUser!;
     } else {
-      user = Provider.of<UserProvider>(context, listen: false).user;
+      user = Provider.of<UserProviderDepr>(context, listen: false).user;
     }
 
     setState(() {

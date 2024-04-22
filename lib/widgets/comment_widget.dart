@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:pedalpulse/providers/user_likes_provider.dart';
+import 'package:pedalpulse/providers/user_likes_provider_depr.dart';
 import 'package:pedalpulse/services/firebase/comment_firestore_methods.dart';
 import 'package:pedalpulse/utils/managers/color_manager.dart';
 import 'package:pedalpulse/widgets/comment_dialog_widget.dart';
@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import '../models/comment_model.dart';
 import '../models/post_model.dart';
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 import '../utils/utils.dart';
 
 class CommentWidget extends StatefulWidget {
@@ -58,14 +58,14 @@ class _CommentWidgetState extends State<CommentWidget> {
     toggleLoading();
 
     UserModelDepr? user =
-        Provider.of<UserProvider>(context, listen: false).user;
+        Provider.of<UserProviderDepr>(context, listen: false).user;
     if (_liked) {
       await CommentFirestoreMethods().unlikeComment(
         postUid: widget.post.uid,
         commentUid: _comment.uid,
       );
 
-      Provider.of<UserLikesProvider>(context, listen: false)
+      Provider.of<UserLikesProviderDepr>(context, listen: false)
           .removeLike(postUid: _comment.uid, userUid: user!.uid);
     } else {
       await CommentFirestoreMethods().likeComment(
@@ -73,7 +73,7 @@ class _CommentWidgetState extends State<CommentWidget> {
         commentUid: _comment.uid,
       );
 
-      Provider.of<UserLikesProvider>(context, listen: false)
+      Provider.of<UserLikesProviderDepr>(context, listen: false)
           .addLike(postUid: _comment.uid, userUid: user!.uid);
     }
     getUpdatedComment(_comment.uid);
@@ -86,7 +86,7 @@ class _CommentWidgetState extends State<CommentWidget> {
 
   void isLiked() {
     List<String> likes =
-        Provider.of<UserLikesProvider>(context, listen: false).userLikes;
+        Provider.of<UserLikesProviderDepr>(context, listen: false).userLikes;
     if (likes.contains(_comment.uid)) {
       setState(() {
         _liked = true;
@@ -175,7 +175,7 @@ class _CommentWidgetState extends State<CommentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    UserModelDepr? user = Provider.of<UserProvider>(context).user;
+    UserModelDepr? user = Provider.of<UserProviderDepr>(context).user;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

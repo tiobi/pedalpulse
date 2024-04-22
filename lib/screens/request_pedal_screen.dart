@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../models/pedal_model.dart';
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 import '../services/firebase/pedal_firestore_methods.dart';
 import '../utils/managers/message_manager.dart';
 import '../utils/managers/string_manager.dart';
@@ -50,7 +50,7 @@ class _RequestPedalScreenState extends State<RequestPedalScreen> {
   void onSend() async {
     toggleLoading();
     final UserModelDepr? user =
-        Provider.of<UserProvider>(context, listen: false).user;
+        Provider.of<UserProviderDepr>(context, listen: false).user;
 
     if (_brandController.text.isEmpty || _modelController.text.isEmpty) {
       // show snackbar

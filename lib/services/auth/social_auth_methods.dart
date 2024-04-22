@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pedalpulse/services/firebase/user_firestore_methods.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-import '../../providers/user_provider.dart';
+import '../../providers/user_provider_depr.dart';
 import '../../utils/managers/message_manager.dart';
 
 class SocialAuthMethods {
@@ -41,7 +41,7 @@ class SocialAuthMethods {
 
         await _auth.signInWithCredential(credential);
 
-        await UserProvider().setUser(); // Update user information if needed
+        await UserProviderDepr().setUser(); // Update user information if needed
 
         return NetworkMessageManager.success;
       } else {
@@ -89,7 +89,7 @@ class SocialAuthMethods {
         );
       }
 
-      await UserProvider().setUser(); // Update user information if needed
+      await UserProviderDepr().setUser(); // Update user information if needed
 
       return NetworkMessageManager.success;
     } catch (e) {

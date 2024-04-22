@@ -4,8 +4,8 @@ import '../layouts/hidable_bottom_navigation_bar.dart';
 import '../models/comment_model.dart';
 import '../models/post_model.dart';
 import '../models/user_model.dart';
-import '../providers/user_likes_provider.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_likes_provider_depr.dart';
+import '../providers/user_provider_depr.dart';
 import '../responsive/mobile_layout.dart';
 import '../screens/upload_post_screen.dart';
 import '../services/firebase/comment_firestore_methods.dart';
@@ -85,18 +85,18 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
     toggleLoading();
 
     UserModelDepr? user =
-        Provider.of<UserProvider>(context, listen: false).user;
+        Provider.of<UserProviderDepr>(context, listen: false).user;
     if (_isLiked) {
       await PostFirestoreMethods().unlikePost(postUid: _post.uid);
 
-      Provider.of<UserLikesProvider>(context, listen: false)
+      Provider.of<UserLikesProviderDepr>(context, listen: false)
           .removeLike(postUid: _post.uid, userUid: user!.uid);
     }
 
     if (!_isLiked) {
       await PostFirestoreMethods().likePost(postUid: _post.uid);
 
-      Provider.of<UserLikesProvider>(context, listen: false)
+      Provider.of<UserLikesProviderDepr>(context, listen: false)
           .addLike(postUid: _post.uid, userUid: user!.uid);
     }
     toggleLoading();
@@ -106,7 +106,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
 
   void isLiked() {
     List<String> userLikes =
-        Provider.of<UserLikesProvider>(context, listen: false).userLikes;
+        Provider.of<UserLikesProviderDepr>(context, listen: false).userLikes;
     if (userLikes.contains(_post.uid)) {
       setState(() {
         _isLiked = true;
@@ -118,7 +118,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double width = size.width;
-    UserModelDepr user = Provider.of<UserProvider>(context).user!;
+    UserModelDepr user = Provider.of<UserProviderDepr>(context).user!;
 
     return Scaffold(
       bottomNavigationBar: HidableBottomNavigationBar(

@@ -24,15 +24,20 @@ class PostProvider extends ChangeNotifier {
     final recentPostsOrFailure = await getRecentPostsUseCase();
 
     popularPostsOrFailure.fold(
-      (l) {},
+      (l) {
+        print('Error: $l');
+      },
       (posts) {
         _popularPosts.clear();
         _popularPosts.addAll(posts);
+        print(_popularPosts.length);
       },
     );
 
     recentPostsOrFailure.fold(
-      (l) {},
+      (l) {
+        print('Error: $l');
+      },
       (posts) {
         _recentPosts.clear();
         _recentPosts.addAll(posts);

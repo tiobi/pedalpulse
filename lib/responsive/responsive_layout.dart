@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/providers/user_likes_provider.dart';
+import 'package:pedalpulse/providers/user_likes_provider_depr.dart';
 import 'package:provider/provider.dart';
 
 class ResponsiveLayout extends StatefulWidget {
@@ -24,8 +24,8 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   }
 
   void getUserLikes() {
-    UserLikesProvider userLikesProvider =
-        Provider.of<UserLikesProvider>(context, listen: false);
+    UserLikesProviderDepr userLikesProvider =
+        Provider.of<UserLikesProviderDepr>(context, listen: false);
 
     userLikesProvider.setUserLikes();
   }

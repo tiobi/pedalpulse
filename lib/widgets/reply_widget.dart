@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../models/comment_model.dart';
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 import '../services/firebase/reply_firestore_methods.dart';
 import '../utils/managers/color_manager.dart';
 import '../utils/utils.dart';
@@ -109,7 +109,7 @@ class _ReplyWidgetState extends State<ReplyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    UserModelDepr? user = Provider.of<UserProvider>(context).user;
+    UserModelDepr? user = Provider.of<UserProviderDepr>(context).user;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),

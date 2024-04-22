@@ -6,8 +6,8 @@ import '../../../pedals/domain/entities/pedal_entity.dart';
 class SearchPedalsUseCase {
   Future<Either<Failure, List<PedalEntity>>> call(
       {required String query}) async {
+    // throw UnimplementedError();
     print(query);
-
     return const Right([]);
   }
 }

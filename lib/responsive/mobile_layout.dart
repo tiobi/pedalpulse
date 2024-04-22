@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pedalpulse/features/featured/presentation/pages/featured_page.dart';
 import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 import 'package:pedalpulse/screens/feed_screen.dart';
-import 'package:pedalpulse/screens/home_screen.dart';
 import 'package:pedalpulse/utils/managers/color_manager.dart';
 
 import '../features/search/presentation/pages/search_page.dart';
@@ -77,7 +77,8 @@ class _MobileLayoutState extends State<MobileLayout> {
 }
 
 List<Widget> tabItems = <Widget>[
-  const HomeScreen(),
+  // const HomeScreen(),
+  const FeaturedPage(),
   const FeedScreen(),
   const UploadPage(),
   const SearchPage(),

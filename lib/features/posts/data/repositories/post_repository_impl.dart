@@ -13,7 +13,7 @@ class PostRepositoryImpl implements PostRepository {
 
   @override
   Future<Either<Failure, List<PostEntity>>> getPopularPosts(
-      {int limit = 10}) async {
+      {int limit = 3}) async {
     try {
       final List<PostModel> postModels =
           await dataSource.getPopularPosts(limit: limit);
@@ -29,7 +29,7 @@ class PostRepositoryImpl implements PostRepository {
 
   @override
   Future<Either<Failure, List<PostEntity>>> getRecentPosts(
-      {int limit = 10}) async {
+      {int limit = 3}) async {
     try {
       final List<PostModel> postModels =
           await dataSource.getRecentPosts(limit: limit);

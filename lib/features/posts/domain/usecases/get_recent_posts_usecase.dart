@@ -9,7 +9,7 @@ class GetRecentPostsUseCase {
 
   GetRecentPostsUseCase({required this.repository});
 
-  Future<Either<Failure, List<PostEntity>>> call() async {
-    return repository.getRecentPosts();
+  Future<Either<Failure, List<PostEntity>>> call({int limit = 3}) async {
+    return repository.getRecentPosts(limit: limit);
   }
 }

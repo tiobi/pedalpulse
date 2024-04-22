@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:pedalpulse/providers/user_likes_provider.dart';
+import 'package:pedalpulse/providers/user_likes_provider_depr.dart';
 import 'package:pedalpulse/widgets/dragger_widget.dart';
 import 'package:pedalpulse/widgets/rating_widget.dart';
 import 'package:pedalpulse/widgets/reply_dialog_widget.dart';
@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import '../models/comment_model.dart';
 import '../models/pedal_model.dart';
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 import '../services/firebase/review_firestore_methods.dart';
 import '../utils/managers/color_manager.dart';
 import '../utils/utils.dart';
@@ -60,14 +60,14 @@ class _ReviewWidgetState extends State<ReviewWidget> {
   void handleLike() async {
     toggleLoading();
     UserModelDepr? user =
-        Provider.of<UserProvider>(context, listen: false).user;
+        Provider.of<UserProviderDepr>(context, listen: false).user;
     if (liked) {
       await ReviewFirestoreMethods().unlikeReview(
         pedalUid: widget.pedal.uid,
         commentUid: _review.uid,
       );
 
-      Provider.of<UserLikesProvider>(context, listen: false)
+      Provider.of<UserLikesProviderDepr>(context, listen: false)
           .removeLike(postUid: _review.uid, userUid: user!.uid);
     } else {
       await ReviewFirestoreMethods().likeReview(
@@ -75,7 +75,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
         commentUid: _review.uid,
       );
 
-      Provider.of<UserLikesProvider>(context, listen: false)
+      Provider.of<UserLikesProviderDepr>(context, listen: false)
           .addLike(postUid: _review.uid, userUid: user!.uid);
     }
     getUpdatedReview(_review.uid);
@@ -87,7 +87,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
 
   void isLiked() {
     List<String> likes =
-        Provider.of<UserLikesProvider>(context, listen: false).userLikes;
+        Provider.of<UserLikesProviderDepr>(context, listen: false).userLikes;
     if (likes.contains(_review.uid)) {
       setState(() {
         liked = true;
@@ -175,7 +175,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    UserModelDepr? user = Provider.of<UserProvider>(context).user;
+    UserModelDepr? user = Provider.of<UserProviderDepr>(context).user;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

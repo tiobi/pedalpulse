@@ -11,7 +11,7 @@ import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 import 'package:intl/intl.dart';
 
 class UserProfileTitleWidget extends StatefulWidget {
@@ -116,7 +116,8 @@ class _UserProfileTitleWidgetState extends State<UserProfileTitleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final UserModelDepr? currentUser = Provider.of<UserProvider>(context).user;
+    final UserModelDepr? currentUser =
+        Provider.of<UserProviderDepr>(context).user;
 
     final Size size = MediaQuery.of(context).size;
     final double width = size.width;

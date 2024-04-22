@@ -7,7 +7,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:provider/provider.dart';
 
 // Models and Providers
-import '../providers/user_provider.dart';
+import '../providers/user_provider_depr.dart';
 
 import '../services/auth/auth_methods.dart';
 import '../services/auth/social_auth_methods.dart';
@@ -69,7 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
 
     if (message == NetworkMessageManager.success) {
-      Provider.of<UserProvider>(context, listen: false).setUser();
+      Provider.of<UserProviderDepr>(context, listen: false).setUser();
       Navigator.pushReplacementNamed(context, Routes.mobileLayout);
     }
     toggleLoading();
@@ -81,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (message == NetworkMessageManager.success) {
       if (mounted) {
-        await Provider.of<UserProvider>(context, listen: false).setUser();
+        await Provider.of<UserProviderDepr>(context, listen: false).setUser();
         Navigator.pushReplacementNamed(
           context,
           Routes.mobileLayout,
@@ -114,7 +114,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (!mounted) return;
     if (message == NetworkMessageManager.success) {
-      await Provider.of<UserProvider>(context, listen: false).setUser();
+      await Provider.of<UserProviderDepr>(context, listen: false).setUser();
       if (mounted) {
         Navigator.pushReplacementNamed(
           context,

@@ -9,6 +9,7 @@ import 'package:pedalpulse/features/auth/domain/repositories/social_auth_reposit
 import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_usecase.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
+import 'package:pedalpulse/features/banner/presentation/providers/banner_provider.dart';
 import 'package:pedalpulse/features/pedals/data/datasources/pedal_firestore_datasource.dart';
 import 'package:pedalpulse/features/pedals/domain/repositories/pedal_repository.dart';
 import 'package:pedalpulse/features/posts/domain/repositories/post_repository.dart';
@@ -28,6 +29,12 @@ import 'features/auth/domain/usecases/sign_in_with_email_and_password_usecase.da
 import 'features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'features/auth/domain/usecases/sign_out_usecase.dart';
 import 'features/auth/domain/usecases/sign_up_with_email_and_password_usecase.dart';
+import 'features/banner/data/datasources/banner_firestore_datasource.dart';
+import 'features/banner/data/datasources/banner_firestore_datasource_impl.dart';
+import 'features/banner/data/repositories/banner_repository_impl.dart';
+import 'features/banner/domain/repositories/banner_repository.dart';
+import 'features/banner/domain/usecases/get_banners_usecase.dart';
+import 'features/banner/domain/usecases/increase_banner_views_usecase.dart';
 import 'features/pedals/data/datasources/pedal_firestore_datasource_impl.dart';
 import 'features/pedals/data/repositories/pedal_repository_impl.dart';
 import 'features/pedals/domain/usecases/get_popular_pedals_usecase.dart';
@@ -236,6 +243,35 @@ Future<void> initializeDependencies() async {
   ///
   getIt.registerLazySingleton<AdsProvider>(
     () => AdsProvider(),
+  );
+
+  /// Banner
+  ///
+  getIt.registerLazySingleton<BannerFirestoreDataSource>(
+    () => BannerFirestoreDataSourceImpl(
+      firestore: getIt<FirebaseFirestore>(),
+    ),
+  );
+  getIt.registerLazySingleton<BannerRepository>(
+    () => BannerRepositoryImpl(
+      dataSource: getIt<BannerFirestoreDataSource>(),
+    ),
+  );
+  getIt.registerLazySingleton<GetBannersUseCase>(
+    () => GetBannersUseCase(
+      repository: getIt<BannerRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<IncreaseBannerViewsUseCase>(
+    () => IncreaseBannerViewsUseCase(
+      repository: getIt<BannerRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<BannerProvider>(
+    () => BannerProvider(
+      getBannersUseCase: getIt<GetBannersUseCase>(),
+      increaseBannerViewsUseCase: getIt<IncreaseBannerViewsUseCase>(),
+    ),
   );
 
   /// Search

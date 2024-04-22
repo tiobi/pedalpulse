@@ -13,6 +13,7 @@ class ProfilePage extends HookWidget {
   ProfilePage({super.key});
 
   final UserProvider userProvider = getIt<UserProvider>();
+  // final UserProvider userProvider = Provider.of<UserProvider>(context);
 
   @override
   Widget build(BuildContext context) {

@@ -8,9 +8,9 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pedalpulse/core/errors/failure.dart' as _i5;
-import 'package:pedalpulse/features/banners/domain/entities/banner_entity.dart'
+import 'package:pedalpulse/features/banner/domain/entities/banner_entity.dart'
     as _i6;
-import 'package:pedalpulse/features/banners/domain/repositories/banners_repository.dart'
+import 'package:pedalpulse/features/banner/domain/repositories/banner_repository.dart'
     as _i3;
 
 // ignore_for_file: type=lint
@@ -34,10 +34,10 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-/// A class which mocks [BannersRepository].
+/// A class which mocks [BannerRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBannersRepository extends _i1.Mock implements _i3.BannersRepository {
+class MockBannersRepository extends _i1.Mock implements _i3.BannerRepository {
   @override
   _i4.Future<_i2.Either<_i5.Failure, List<_i6.BannerEntity>>> getBanners() =>
       (super.noSuchMethod(

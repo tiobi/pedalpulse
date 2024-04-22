@@ -14,7 +14,7 @@ import '../features/user/domain/entities/user_entity.dart';
 import '../features/user/presentation/providers/user_provider.dart';
 import '../models/pedal_model.dart';
 import '../models/post_model.dart';
-import '../providers/pedal_provider.dart';
+import '../providers/pedal_provider_depr.dart';
 import '../screens/search_screen.dart';
 import '../services/firebase/firebase_storage_methods.dart';
 import '../services/firebase/post_firestore_methods.dart';
@@ -51,12 +51,12 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
     _titleController.text = AppStringManager.blank;
     _descriptionController.text = AppStringManager.blank;
 
-    Provider.of<PedalProvider>(context, listen: false).resetPedalList();
+    Provider.of<PedalProviderDepr>(context, listen: false).resetPedalList();
 
     if (widget.post != null) {
       _titleController.text = widget.post!.title;
       _descriptionController.text = widget.post!.description;
-      Provider.of<PedalProvider>(context, listen: false)
+      Provider.of<PedalProviderDepr>(context, listen: false)
           .updatePedalList(widget.post!.pedalList);
     }
     getImageList();
@@ -108,7 +108,7 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
   }
 
   void _removePedal(PedalModel pedal) {
-    Provider.of<PedalProvider>(context, listen: false).removePedal(pedal);
+    Provider.of<PedalProviderDepr>(context, listen: false).removePedal(pedal);
   }
 
   void showError(String message) {
@@ -146,7 +146,8 @@ class _UploadPostScreenState extends State<UploadPostScreen> {
 
     final UserEntity user = getIt<UserProvider>().user!;
 
-    List<PedalModel>? pedalList = Provider.of<PedalProvider>(context).pedalList;
+    List<PedalModel>? pedalList =
+        Provider.of<PedalProviderDepr>(context).pedalList;
 
     return Scaffold(
       appBar: AppBar(

@@ -80,7 +80,9 @@ class _PostListviewWidgetState extends State<PostListviewWidget> {
                   shrinkWrap: true,
                   itemCount: widget.postList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return PostCardWidget(post: widget.postList[index]);
+                    return null;
+
+                    // return PostCardWidget(post: widget.postList[index]);
                   },
                 ),
         ],

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../features/pedals/domain/entities/pedal_entity.dart';
 import '../models/pedal_model.dart';
-import '../providers/pedal_provider.dart';
+import '../providers/pedal_provider_depr.dart';
 import '../services/algolia/algolia.dart';
 import '../screens/request_pedal_screen.dart';
 import '../utils/managers/string_manager.dart';
@@ -85,7 +85,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<PedalModel> pedalList = Provider.of<PedalProvider>(context).pedalList;
+    List<PedalModel> pedalList =
+        Provider.of<PedalProviderDepr>(context).pedalList;
 
     return Scaffold(
       body: GestureDetector(

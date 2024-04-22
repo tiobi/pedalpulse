@@ -8,7 +8,7 @@ class PostFirestoreDataSourceImpl implements PostFirestoreDataSource {
   PostFirestoreDataSourceImpl({required this.firestore});
 
   @override
-  Future<List<PostModel>> getPopularPosts({int limit = 10}) async {
+  Future<List<PostModel>> getPopularPosts({int limit = 3}) async {
     try {
       final posts = await firestore
           .collection('posts')
@@ -23,13 +23,14 @@ class PostFirestoreDataSourceImpl implements PostFirestoreDataSource {
   }
 
   @override
-  Future<List<PostModel>> getRecentPosts({int limit = 10}) async {
+  Future<List<PostModel>> getRecentPosts({int limit = 3}) async {
     try {
       final posts = await firestore
           .collection('posts')
           .orderBy('createdAt', descending: true)
           .limit(limit)
           .get();
+
       return posts.docs.map((doc) => PostModel.fromMap(doc.data())).toList();
     } catch (e) {
       throw Exception(e);
