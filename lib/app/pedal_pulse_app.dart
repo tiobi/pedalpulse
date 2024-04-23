@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 /// 3rd party packages
 ///
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:pedalpulse/app/init_providers.dart';
 import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
 import 'package:pedalpulse/features/posts/presentation/providers/post_provider.dart';
 import 'package:pedalpulse/features/search/presentation/providers/request_provider.dart';
@@ -17,7 +18,6 @@ import '../core/routes/routes.dart';
 import '../features/auth/presentation/pages/sign_in_page.dart';
 import '../features/auth/presentation/providers/auth_provider.dart';
 
-import '../features/banner/presentation/providers/banner_provider.dart';
 import '../features/pedals/presentation/providers/pedal_provider.dart';
 import '../features/upload/presentation/providers/upload_provider.dart';
 
@@ -95,32 +95,8 @@ class PedalPulseApp extends StatelessWidget {
             } else {
               /// Initialize all the providers here.
               ///
-              UserProvider userProvider = getIt<UserProvider>();
-              if (userProvider.user == null) {
-                userProvider.getUser();
-              }
 
-              AppSizeProvider appSizeProvider = getIt<AppSizeProvider>();
-              if (appSizeProvider.size == Size.zero) {
-                appSizeProvider.setAppSize(context: context);
-              }
-
-              BannerProvider bannerProvider = getIt<BannerProvider>();
-              if (bannerProvider.banners.isEmpty) {
-                bannerProvider.getBanners(context: context);
-              }
-
-              PedalProvider pedalProvider = getIt<PedalProvider>();
-              if (pedalProvider.popularPedals.isEmpty ||
-                  pedalProvider.recentPedals.isEmpty) {
-                pedalProvider.getFeaturedPedals();
-              }
-
-              PostProvider postProvider = getIt<PostProvider>();
-              if (postProvider.popularPosts.isEmpty ||
-                  postProvider.recentPosts.isEmpty) {
-                postProvider.getFeaturedPosts();
-              }
+              initProviders(context);
 
               return const ResponsiveLayout(
                 mobileLayout: MobileLayout(initialIndex: 0),

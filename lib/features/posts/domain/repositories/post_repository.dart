@@ -7,4 +7,6 @@ abstract class PostRepository {
   Future<Either<Failure, List<PostEntity>>> getPopularPosts({int limit = 3});
 
   Future<Either<Failure, List<PostEntity>>> getRecentPosts({int limit = 3});
+
+  Future<Either<Failure, List<PostEntity>>> getFeedPosts();
 }

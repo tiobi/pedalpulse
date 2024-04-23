@@ -24,8 +24,6 @@ class FeaturedPostFirestoreMethods {
       await _firestore.collection('featured').doc(postUid).update({
         'views': FieldValue.increment(1),
       });
-    } catch (e) {
-      print(e.toString());
-    }
+    } catch (e) {}
   }
 }

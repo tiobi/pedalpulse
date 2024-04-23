@@ -6,7 +6,6 @@ import '../models/post_model.dart';
 import '../models/search_option_model.dart';
 import '../utils/managers/string_manager.dart';
 import '../widgets/loading_placeholder_widget.dart';
-import '../widgets/post_card_widget.dart';
 import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 
 class FeedScreen extends StatefulWidget {

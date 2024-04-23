@@ -9,8 +9,5 @@ class UploadProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> upload() async {
-    setLoading(_isLoading ? false : true);
-    print(_isLoading);
-  }
+  Future<void> upload() async {}
 }

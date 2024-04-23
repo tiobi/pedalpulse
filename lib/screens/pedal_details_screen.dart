@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../layouts/hidable_bottom_navigation_bar.dart';
+import '../responsive/hidable_bottom_navigation_bar.dart';
 import '../models/comment_model.dart';
 import '../models/pedal_model.dart';
 import '../models/post_model.dart';

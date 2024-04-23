@@ -93,7 +93,6 @@ class SocialAuthMethods {
 
       return NetworkMessageManager.success;
     } catch (e) {
-      print(e.toString());
       return NetworkMessageManager.error;
     }
   }

@@ -42,4 +42,20 @@ class PostRepositoryImpl implements PostRepository {
       return Left(FirestoreFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<PostEntity>>> getFeedPosts(
+      {int limit = 10}) async {
+    try {
+      final List<PostModel> postModels =
+          await dataSource.getRecentPosts(limit: limit);
+
+      final List<PostEntity> postEntities =
+          postModels.map((e) => e.toEntity()).toList();
+
+      return Right(postEntities);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
 }

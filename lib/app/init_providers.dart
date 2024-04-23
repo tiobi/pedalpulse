@@ -30,7 +30,9 @@ void initProviders(BuildContext context) {
   }
 
   PostProvider postProvider = getIt<PostProvider>();
-  if (postProvider.popularPosts.isEmpty || postProvider.recentPosts.isEmpty) {
-    postProvider.getFeaturedPosts();
+  if (postProvider.popularPosts.isEmpty ||
+      postProvider.recentPosts.isEmpty ||
+      postProvider.feedPosts.isEmpty) {
+    postProvider.initProvider();
   }
 }

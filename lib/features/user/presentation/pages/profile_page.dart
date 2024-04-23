@@ -96,7 +96,6 @@ class ProfilePage extends HookWidget {
 
                   /// Uncomment Joined At if necessary.
                   ///
-
                   // Text(
                   //   'Joined At: ${DateFormat('dd/MM/yyyy').format(user.joinedAt)}',
                   //   style: const TextStyle(

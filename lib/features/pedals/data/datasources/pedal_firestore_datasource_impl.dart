@@ -33,7 +33,7 @@ class PedalFirestoreDataSourceImpl extends PedalFirestoreDataSource {
     try {
       final QuerySnapshot<Map<String, dynamic>> querySnapshot = await firestore
           .collection('pedals')
-          .orderBy('createdAt', descending: true)
+          .orderBy('rating.overall', descending: true)
           .limit(limit)
           .get();
 

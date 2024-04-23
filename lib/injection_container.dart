@@ -13,6 +13,7 @@ import 'package:pedalpulse/features/banner/presentation/providers/banner_provide
 import 'package:pedalpulse/features/pedals/data/datasources/pedal_firestore_datasource.dart';
 import 'package:pedalpulse/features/pedals/domain/repositories/pedal_repository.dart';
 import 'package:pedalpulse/features/posts/domain/repositories/post_repository.dart';
+import 'package:pedalpulse/features/posts/domain/usecases/get_feed_posts_usecase.dart';
 import 'package:pedalpulse/features/posts/domain/usecases/get_popular_posts_usecase.dart';
 import 'package:pedalpulse/features/search/domain/usecases/search_pedals_usecase.dart';
 
@@ -348,10 +349,16 @@ Future<void> initializeDependencies() async {
       repository: getIt<PostRepository>(),
     ),
   );
+  getIt.registerLazySingleton<GetFeedPostsUseCase>(
+    () => GetFeedPostsUseCase(
+      postsRepository: getIt<PostRepository>(),
+    ),
+  );
   getIt.registerLazySingleton<PostProvider>(
     () => PostProvider(
       getRecentPostsUseCase: getIt<GetRecentPostsUseCase>(),
       getPopularPostsUseCase: getIt<GetPopularPostsUseCase>(),
+      getFeedPostsUseCase: getIt<GetFeedPostsUseCase>(),
     ),
   );
 }
