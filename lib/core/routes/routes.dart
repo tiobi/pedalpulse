@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pedalpulse/features/posts/presentation/pages/post_details_page.dart';
 
 import '../../features/auth/presentation/pages/forgot_password_page.dart';
 import '../../features/auth/presentation/pages/sign_in_page.dart';
 import '../../features/auth/presentation/pages/sign_up_page.dart';
+import '../../features/pedals/domain/entities/pedal_entity.dart';
+import '../../features/pedals/presentation/pages/pedal_details_page.dart';
 
 class Routes {
   static const String splash = '/';
@@ -43,6 +46,15 @@ class RouteManager {
       case Routes.home:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(body: Center(child: Text('Home'))));
+
+      case Routes.pedalDetails:
+        return MaterialPageRoute(
+          builder: (_) => PedalDetailsPage(
+            pedal: settings.arguments as PedalEntity,
+          ),
+        );
+      case Routes.postDetails:
+        return MaterialPageRoute(builder: (_) => const PostDetailsPage());
 
       default:
         return MaterialPageRoute(builder: (_) => const Scaffold());

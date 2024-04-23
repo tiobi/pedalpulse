@@ -1,26 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:pedalpulse/models/user_model.dart';
+import 'package:pedalpulse/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:pedalpulse/features/featured/presentation/pages/featured_page.dart';
+import 'package:pedalpulse/features/featured/presentation/pages/feed_page.dart';
+import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 import 'package:pedalpulse/responsive/desktop_layout.dart';
 import 'package:pedalpulse/responsive/mobile_layout.dart';
 import 'package:pedalpulse/responsive/responsive_layout.dart';
 import 'package:pedalpulse/screens/comments_screen.dart';
-import 'package:pedalpulse/screens/forgot_password_screen.dart';
-import 'package:pedalpulse/screens/home_screen.dart';
 import 'package:pedalpulse/screens/reviews_screen.dart';
-import 'package:pedalpulse/screens/sign_up_screen.dart';
 import 'package:pedalpulse/screens/upload_post_screen.dart';
 
+import '../../features/auth/presentation/pages/forgot_password_page.dart';
 import '../../models/pedal_model.dart';
 import '../../models/post_model.dart';
 import '../../screens/add_post_screen.dart';
-import '../../screens/feed_screen.dart';
 import '../../screens/image_details_screen.dart';
 import '../../screens/mobile_web_screen.dart';
-import '../../screens/pedal_details_screen.dart';
 import '../../screens/post_details_screen.dart';
-import '../../screens/profile_screen.dart';
 import '../../screens/search_screen.dart';
 import '../../screens/upload_screen.dart';
 
@@ -60,14 +58,14 @@ class RouteManager {
       case Routes.signIn:
         return MaterialPageRoute(builder: (_) => SignInPage());
       case Routes.signUp:
-        return MaterialPageRoute(builder: (_) => const SignUpScreen());
+        return MaterialPageRoute(builder: (_) => SignUpPage());
       case Routes.forgotPassword:
-        return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
+        return MaterialPageRoute(builder: (_) => ForgotPasswordPage());
       case Routes.home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (_) => const FeaturedPage());
       case Routes.feed:
         return MaterialPageRoute(
-            builder: (_) => const FeedScreen(),
+            builder: (_) => const FeedPage(),
             settings: RouteSettings(arguments: settings.arguments));
       case Routes.uploadPost:
         return MaterialPageRoute(builder: (_) => const UploadPostScreen());
@@ -76,14 +74,8 @@ class RouteManager {
             builder: (_) =>
                 SearchScreen(isSelectable: settings.arguments as bool));
       case Routes.profile:
-        return MaterialPageRoute(
-            builder: (_) => ProfileScreen(
-                  otherUser: settings.arguments as UserModelDepr,
-                ));
-      case Routes.pedalDetails:
-        return MaterialPageRoute(
-            builder: (_) =>
-                PedalDetailsScreen(pedal: settings.arguments as PedalModel));
+        return MaterialPageRoute(builder: (_) => ProfilePage());
+
       case Routes.postDetails:
         return MaterialPageRoute(
             builder: (_) =>

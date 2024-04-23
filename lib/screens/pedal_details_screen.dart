@@ -158,6 +158,8 @@ class _PedalDetailsScreenState extends State<PedalDetailsScreen> {
             const SizedBox(
               height: 50,
             ),
+
+            // Posts section
             PostListviewWidget(
               postList: _postList,
               title: AppStringManager.pedalboards,
