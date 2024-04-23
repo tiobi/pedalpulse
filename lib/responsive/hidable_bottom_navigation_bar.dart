@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pedalpulse/features/featured/presentation/pages/featured_page.dart';
+import 'package:pedalpulse/features/featured/presentation/pages/feed_page.dart';
+import 'package:pedalpulse/features/search/presentation/pages/search_page.dart';
+import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
+import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 import 'package:pedalpulse/utils/managers/color_manager.dart';
 
 import '../screens/feed_screen.dart';
@@ -104,11 +109,11 @@ class _HidableBottomNavigationBarState
 }
 
 List<Widget> tabItems = <Widget>[
-  const HomeScreen(),
-  const FeedScreen(),
-  const UploadScreen(),
-  const SearchScreen(),
-  const ProfileScreen(),
+  const FeaturedPage(),
+  const FeedPage(),
+  const UploadPage(),
+  const SearchPage(),
+  ProfilePage(),
 ];
 
 const List<String> tabRoutes = [
