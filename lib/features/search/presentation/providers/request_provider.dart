@@ -1,13 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:pedalpulse/features/search/domain/entities/request_entity.dart';
+
+import '../../domain/usecases/send_request_usecase.dart';
 
 class RequestProvider extends ChangeNotifier {
-  final TextEditingController _manufacturerController = TextEditingController();
-  final TextEditingController _modelController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
-  TextEditingController get manufacturerController => _manufacturerController;
-  TextEditingController get modelController => _modelController;
-  TextEditingController get descriptionController => _descriptionController;
+  final SendRequestUseCase sendRequestUseCase;
 
-  Future<void> sendRequest() async {}
+  RequestProvider({
+    required this.sendRequestUseCase,
+  });
+
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
+  Future<void> sendRequest({
+    required String manufacturer,
+    required String model,
+    required String description,
+  }) async {
+    setLoading(true);
+
+    RequestEntity requestEntity = RequestEntity(
+      manufacturer: manufacturer,
+      model: model,
+      description: description,
+    );
+
+    final unitOrFailure = await sendRequestUseCase(
+      requestEntity: requestEntity,
+    );
+
+    unitOrFailure.fold(
+      (failure) {},
+      (unit) {},
+    );
+    setLoading(false);
+  }
 }
