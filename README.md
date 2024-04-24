@@ -146,6 +146,25 @@ class FirebaseAuthDataSource {
 }
 ```
 
+- Algolia 🔍
+
+  - Firebase Cloud Firestore is an amazingly incredible NoSQL DB service, with incredible speed. However, it lacks a good if any usable quality for querying strings.
+  - Therefore, it is recommended to use 3rd party query services for searching etc, even by Firebase team themselves.
+  - Algolia is one of the simplest and cost-efficient querying service for Firebase, also recommended by Flutter teams.
+
+```dart
+void main() {
+  Algolia algolia = Algolia.init(
+    applicationId: algoliaAppId,
+    apiKey: algoliaApiKey,
+  );
+
+  AlgoliaQuery query = algolia.instance.index('collection').query('query');
+  AlgoliaQuerySnapshot snapshot = await query.getObjects();
+}
+
+```
+
 - Provider 👏
   - Provider is a state management package, recommended by Dart team.
   - It is simpler and more efficient way for the state management than other popular libraries (eg. Riverpod, getX, BloC) TOTALLY IMO.

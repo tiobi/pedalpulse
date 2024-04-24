@@ -44,7 +44,6 @@ class SearchPage extends StatelessWidget {
         icon: const Icon(Icons.search),
         onPressed: searchProvider.search,
       ),
-      onSubmitted: searchProvider.search,
     );
   }
 
@@ -75,7 +74,6 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildResults(BuildContext context) {
-    // final SearchProvider searchProvider = getIt<SearchProvider>();
     final SearchProvider searchProvider = Provider.of<SearchProvider>(context);
 
     return searchProvider.isLoading

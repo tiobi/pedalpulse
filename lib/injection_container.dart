@@ -1,3 +1,4 @@
+import 'package:algolia/algolia.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -16,6 +17,7 @@ import 'package:pedalpulse/features/posts/domain/repositories/post_repository.da
 import 'package:pedalpulse/features/posts/domain/usecases/get_feed_posts_usecase.dart';
 import 'package:pedalpulse/features/posts/domain/usecases/get_popular_posts_usecase.dart';
 import 'package:pedalpulse/features/posts/domain/usecases/get_posts_with_pedal_usecase.dart';
+import 'package:pedalpulse/core/constants/algolia.keys.dart';
 import 'package:pedalpulse/features/search/data/datasources/request_datasource.dart';
 import 'package:pedalpulse/features/search/domain/repositories/request_repository.dart';
 import 'package:pedalpulse/features/search/domain/usecases/search_pedals_usecase.dart';
@@ -51,7 +53,11 @@ import 'features/posts/domain/usecases/get_post_by_uid_usecase.dart';
 import 'features/posts/domain/usecases/get_recent_posts_usecase.dart';
 import 'features/posts/presentation/providers/post_provider.dart';
 import 'features/search/data/datasources/request_datasource_impl.dart';
+import 'features/search/data/datasources/search_datasource.dart';
+import 'features/search/data/datasources/search_datasource_impl.dart';
 import 'features/search/data/repositories/request_repository_impl.dart';
+import 'features/search/data/repositories/search_repository_impl.dart';
+import 'features/search/domain/repositories/search_repository.dart';
 import 'features/search/domain/usecases/send_request_usecase.dart';
 import 'features/search/presentation/providers/request_provider.dart';
 import 'features/search/presentation/providers/search_provider.dart';
@@ -76,6 +82,10 @@ Future<void> initializeDependencies() async {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   GoogleSignIn googleSignIn = GoogleSignIn();
+  Algolia algolia = const Algolia.init(
+    applicationId: algoliaAppId,
+    apiKey: algoliaApiKey,
+  );
 
   /// External
   ///
@@ -284,8 +294,20 @@ Future<void> initializeDependencies() async {
 
   /// Search
   ///
+  getIt.registerLazySingleton<SearchDataSource>(
+    () => SearchDataSourceImpl(
+      algolia: algolia,
+    ),
+  );
+  getIt.registerLazySingleton<SearchRepository>(
+    () => SearchRepositoryImpl(
+      dataSource: getIt<SearchDataSource>(),
+    ),
+  );
   getIt.registerLazySingleton<SearchPedalsUseCase>(
-    () => SearchPedalsUseCase(),
+    () => SearchPedalsUseCase(
+      repository: getIt<SearchRepository>(),
+    ),
   );
   getIt.registerLazySingleton<SearchProvider>(
     () => SearchProvider(
