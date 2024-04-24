@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pedalpulse/features/posts/domain/usecases/get_post_by_uid_usecase.dart';
 
 import '../../domain/entities/post_entity.dart';
 import '../../domain/usecases/get_feed_posts_usecase.dart';
 import '../../domain/usecases/get_popular_posts_usecase.dart';
+import '../../domain/usecases/get_posts_with_pedal_usecase.dart';
 import '../../domain/usecases/get_recent_posts_usecase.dart';
 
 class PostProvider extends ChangeNotifier {
@@ -15,14 +17,24 @@ class PostProvider extends ChangeNotifier {
   final List<PostEntity> _feedPosts = [];
   List<PostEntity> get feedPosts => _feedPosts;
 
+  final List<PostEntity> _postWithPedal = [];
+  List<PostEntity> get postWithPedal => _postWithPedal;
+
+  PostEntity? _post;
+  PostEntity? get post => _post;
+
   final GetRecentPostsUseCase getRecentPostsUseCase;
   final GetPopularPostsUseCase getPopularPostsUseCase;
   final GetFeedPostsUseCase getFeedPostsUseCase;
+  final GetPostsWithPedalUseCase getPostsWithPedalUseCase;
+  final GetPostByUidUseCase getPostByUidUseCase;
 
   PostProvider({
     required this.getRecentPostsUseCase,
     required this.getPopularPostsUseCase,
     required this.getFeedPostsUseCase,
+    required this.getPostsWithPedalUseCase,
+    required this.getPostByUidUseCase,
   });
 
   Future<void> initProvider() async {
@@ -71,5 +83,34 @@ class PostProvider extends ChangeNotifier {
     );
 
     notifyListeners();
+  }
+
+  Future<void> getPostsWithPedal({required String pedalUid}) async {
+    final postWithPedalOrFailure = await getPostsWithPedalUseCase(
+      pedalUid: pedalUid,
+    );
+
+    postWithPedalOrFailure.fold(
+      (l) {
+        print(l);
+      },
+      (posts) {
+        _postWithPedal.clear();
+        _postWithPedal.addAll(posts);
+      },
+    );
+
+    notifyListeners();
+  }
+
+  Future<void> getPostByUid({required String postUid}) async {
+    final postOrFailure = await getPostByUidUseCase(postUid: postUid);
+
+    postOrFailure.fold(
+      (l) {},
+      (post) {
+        _post = post;
+      },
+    );
   }
 }

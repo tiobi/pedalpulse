@@ -6,6 +6,7 @@ import '../../features/auth/presentation/pages/sign_in_page.dart';
 import '../../features/auth/presentation/pages/sign_up_page.dart';
 import '../../features/pedals/domain/entities/pedal_entity.dart';
 import '../../features/pedals/presentation/pages/pedal_details_page.dart';
+import '../../features/posts/domain/entities/post_entity.dart';
 
 class Routes {
   static const String splash = '/';
@@ -54,7 +55,11 @@ class RouteManager {
           ),
         );
       case Routes.postDetails:
-        return MaterialPageRoute(builder: (_) => const PostDetailsPage());
+        return MaterialPageRoute(
+          builder: (_) => PostDetailsPage(
+            post: settings.arguments as PostEntity,
+          ),
+        );
 
       default:
         return MaterialPageRoute(builder: (_) => const Scaffold());

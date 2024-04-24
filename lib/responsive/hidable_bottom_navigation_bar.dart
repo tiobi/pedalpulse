@@ -8,12 +8,7 @@ import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 import 'package:pedalpulse/utils/managers/color_manager.dart';
 
-import '../screens/feed_screen.dart';
-import '../screens/home_screen.dart';
-import '../screens/profile_screen.dart';
-import '../screens/search_screen.dart';
 import '../screens/upload_post_screen.dart';
-import '../screens/upload_screen.dart';
 import '../utils/managers/route_manager.dart';
 
 class HidableBottomNavigationBar extends StatefulWidget {

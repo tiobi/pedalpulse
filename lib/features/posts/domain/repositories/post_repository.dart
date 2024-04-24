@@ -9,4 +9,13 @@ abstract class PostRepository {
   Future<Either<Failure, List<PostEntity>>> getRecentPosts({int limit = 3});
 
   Future<Either<Failure, List<PostEntity>>> getFeedPosts();
+
+  Future<Either<Failure, List<PostEntity>>> getPostsWithPedal({
+    required String pedalUid,
+    int limit = 10,
+  });
+
+  Future<Either<Failure, PostEntity>> getPostByUid({
+    required String postUid,
+  });
 }

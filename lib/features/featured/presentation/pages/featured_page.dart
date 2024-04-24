@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/features/featured/presentation/widgets/Side_scroll_pedal_list_view_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../injection_container.dart';
@@ -7,8 +6,9 @@ import '../../../../utils/managers/asset_manager.dart';
 import '../../../../utils/managers/color_manager.dart';
 import '../../../banner/presentation/providers/banner_provider.dart';
 import '../../../pedals/presentation/providers/pedal_provider.dart';
+import '../../../pedals/presentation/widgets/side_scroll_pedal_list_view_widget.dart';
 import '../../../posts/presentation/providers/post_provider.dart';
-import '../widgets/post_list_view_widget.dart';
+import '../../../posts/presentation/widgets/post_list_view_widget.dart';
 
 class FeaturedPage extends StatelessWidget {
   const FeaturedPage({Key? key}) : super(key: key);
@@ -34,8 +34,6 @@ class FeaturedPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //TODO: BannerWidget
-
             SideScrollPedalListViewWidget(
               title: "Popular Pedals",
               pedals: pedalProvider.popularPedals,

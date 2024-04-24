@@ -15,6 +15,7 @@ import 'package:pedalpulse/features/pedals/domain/repositories/pedal_repository.
 import 'package:pedalpulse/features/posts/domain/repositories/post_repository.dart';
 import 'package:pedalpulse/features/posts/domain/usecases/get_feed_posts_usecase.dart';
 import 'package:pedalpulse/features/posts/domain/usecases/get_popular_posts_usecase.dart';
+import 'package:pedalpulse/features/posts/domain/usecases/get_posts_with_pedal_usecase.dart';
 import 'package:pedalpulse/features/search/domain/usecases/search_pedals_usecase.dart';
 
 import 'features/ads/presentation/providers/ads_provider.dart';
@@ -44,6 +45,7 @@ import 'features/pedals/presentation/providers/pedal_provider.dart';
 import 'features/posts/data/datasources/post_firestore_datasource.dart';
 import 'features/posts/data/datasources/post_firestore_datasource_impl.dart';
 import 'features/posts/data/repositories/post_repository_impl.dart';
+import 'features/posts/domain/usecases/get_post_by_uid_usecase.dart';
 import 'features/posts/domain/usecases/get_recent_posts_usecase.dart';
 import 'features/posts/presentation/providers/post_provider.dart';
 import 'features/search/presentation/providers/request_provider.dart';
@@ -354,11 +356,23 @@ Future<void> initializeDependencies() async {
       postsRepository: getIt<PostRepository>(),
     ),
   );
+  getIt.registerLazySingleton<GetPostsWithPedalUseCase>(
+    () => GetPostsWithPedalUseCase(
+      repository: getIt<PostRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<GetPostByUidUseCase>(
+    () => GetPostByUidUseCase(
+      repository: getIt<PostRepository>(),
+    ),
+  );
   getIt.registerLazySingleton<PostProvider>(
     () => PostProvider(
       getRecentPostsUseCase: getIt<GetRecentPostsUseCase>(),
       getPopularPostsUseCase: getIt<GetPopularPostsUseCase>(),
       getFeedPostsUseCase: getIt<GetFeedPostsUseCase>(),
+      getPostsWithPedalUseCase: getIt<GetPostsWithPedalUseCase>(),
+      getPostByUidUseCase: getIt<GetPostByUidUseCase>(),
     ),
   );
 }

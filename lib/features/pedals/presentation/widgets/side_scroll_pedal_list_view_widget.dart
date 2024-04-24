@@ -3,8 +3,8 @@ import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
 import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 
 import '../../../../injection_container.dart';
-import '../../../pedals/domain/entities/pedal_entity.dart';
-import '../../../pedals/presentation/widgets/pedal_card_widget.dart';
+import '../../domain/entities/pedal_entity.dart';
+import 'pedal_card_widget.dart';
 
 class SideScrollPedalListViewWidget extends StatelessWidget {
   final String title;
@@ -23,7 +23,7 @@ class SideScrollPedalListViewWidget extends StatelessWidget {
     final double cardWidth = size.width / 2 - 16;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: isLoading
           ? const LoadingPlaceholderWidget()
           : Column(

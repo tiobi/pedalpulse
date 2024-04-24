@@ -58,4 +58,39 @@ class PostRepositoryImpl implements PostRepository {
       return Left(FirestoreFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<PostEntity>>> getPostsWithPedal({
+    required String pedalUid,
+    int limit = 10,
+  }) async {
+    try {
+      final List<PostModel> postModels = await dataSource.getPostsWithPedal(
+        pedalUid: pedalUid,
+        limit: limit,
+      );
+
+      final List<PostEntity> postEntities =
+          postModels.map((e) => e.toEntity()).toList();
+
+      return Right(postEntities);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PostEntity>> getPostByUid(
+      {required String postUid}) async {
+    try {
+      final PostModel postModel =
+          await dataSource.getPostByUid(postUid: postUid);
+
+      final PostEntity postEntity = postModel.toEntity();
+
+      return Right(postEntity);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
 }

@@ -3,7 +3,7 @@ import 'package:pedalpulse/widgets/post_card_widget.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../auth/presentation/widgets/custom_text_button_widget.dart';
-import '../../../posts/domain/entities/post_entity.dart';
+import '../../domain/entities/post_entity.dart';
 
 class PostListViewWidget extends StatelessWidget {
   final String title;

@@ -36,4 +36,31 @@ class PostFirestoreDataSourceImpl implements PostFirestoreDataSource {
       throw Exception(e);
     }
   }
+
+  @override
+  Future<List<PostModel>> getPostsWithPedal(
+      {required String pedalUid, int limit = 10}) async {
+    try {
+      final posts = await firestore
+          .collection('posts')
+          .where('pedalUids', arrayContains: pedalUid)
+          .limit(limit)
+          .get();
+
+      return posts.docs.map((doc) => PostModel.fromMap(doc.data())).toList();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<PostModel> getPostByUid({required String postUid}) async {
+    try {
+      final post = await firestore.collection('posts').doc(postUid).get();
+
+      return PostModel.fromMap(post.data()!);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
