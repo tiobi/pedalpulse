@@ -295,4 +295,4 @@ void main(){
 
 ## !Disclaimer
 
-This project does NOT include some of the core files that contains keys, routes and/or paths to prohibit from unwanted accesses, and therefore is only a personal portfolio to demonstrate the dev's habits of writing codes. Also, most of the code examples might not work in real projects. Consider reading the document pages for the accurate examples and use cases.
+This project does NOT include some of the core files that contains keys, routes and paths to prohibit any unwanted accesses, and therefore is only a personal portfolio to demonstrate the dev's habits of writing codes. Also, most of the code examples might not work in real projects. Consider reading the document pages for the accurate examples and use cases.
