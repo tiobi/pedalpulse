@@ -11,11 +11,11 @@ Below are external links to download the app:
 # Table of Content
 
 - [Table of Content](#table-of-content)
-  - [Design Patterns](#design-patterns)
+  - [Design Patterns and Principles](#design-patterns-and-principles)
   - [Packages](#packages)
   - [!Disclaimer](#disclaimer)
 
-## Design Patterns
+## Design Patterns and Principles
 
 - Clean Architecture 🧹
   - Clean Architecture is a way of organizing software that keeps it tidy, easy to understand, and adaptable. It divides the code into layers: the inner layers deal with the core logic of the application, while the outer layers handle external concerns like user interfaces and databases.
@@ -95,6 +95,7 @@ class UserProfile extends StatelessWidget{
   - This iterative process ensures the code meets requirements and remains reliable and maintainable.
 
 ```dart
+// test/user/domain/get_user_usecase.dart
 void main(){
     late GetUserUseCase usecase;
     late MockUserRepository repository;

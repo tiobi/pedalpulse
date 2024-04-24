@@ -91,9 +91,7 @@ class PostProvider extends ChangeNotifier {
     );
 
     postWithPedalOrFailure.fold(
-      (l) {
-        print(l);
-      },
+      (l) {},
       (posts) {
         _postWithPedal.clear();
         _postWithPedal.addAll(posts);

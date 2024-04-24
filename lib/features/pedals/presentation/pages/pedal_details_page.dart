@@ -8,7 +8,6 @@ import 'package:pedalpulse/widgets/image_pageview_indicator_widget.dart';
 import 'package:pedalpulse/widgets/safe_area_padding_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/common/providers/app_size_provider.dart';
 import '../../../../utils/managers/string_manager.dart';
 import '../../../posts/domain/entities/post_entity.dart';
 import '../../../posts/presentation/providers/post_provider.dart';
@@ -20,7 +19,6 @@ class PedalDetailsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = useScrollController();
-    final Size size = Provider.of<AppSizeProvider>(context).size;
 
     useEffect(() {
       Provider.of<PostProvider>(context, listen: false)
