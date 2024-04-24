@@ -297,14 +297,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
-  desktop_drop:
-    dependency: "direct main"
-    description:
-      name: desktop_drop
-      sha256: "222176827aa4799266800be4ef4e59a607b0fdb1f3a1b0cc6d1fa0a14469f9e3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.2"
   desktop_webview_auth:
     dependency: transitive
     description:

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:pedalpulse/features/pedals/presentation/widgets/side_scroll_pedal_list_view_widget.dart';
 import 'package:pedalpulse/responsive/hidable_bottom_navigation_bar.dart';
 import 'package:pedalpulse/responsive/mobile_layout.dart';
+import 'package:pedalpulse/utils/managers/string_manager.dart';
 import 'package:pedalpulse/widgets/safe_area_padding_widget.dart';
+import 'package:pedalpulse/widgets/user_avatar_widget.dart';
 
+import '../../../../utils/managers/asset_manager.dart';
+import '../../../../utils/managers/color_manager.dart';
+import '../../../../widgets/image_pageview_indicator_widget.dart';
 import '../../domain/entities/post_entity.dart';
 
 class PostDetailsPage extends HookWidget {
@@ -32,7 +38,6 @@ class PostDetailsPage extends HookWidget {
             _buildImageSection(),
             _buildDescriptionSection(),
             _buildPedalListSection(context),
-            _buildCommentSection(),
           ],
         ),
       ),
@@ -40,20 +45,58 @@ class PostDetailsPage extends HookWidget {
   }
 
   Widget _buildImageSection() {
-    return const Column(
-      children: [],
+    return Column(
+      children: [
+        post.imageUrls.isEmpty
+            ? Container(
+                padding: const EdgeInsets.all(20),
+                color: ColorManager.primaryColorLight,
+                child: Center(
+                  child: Image.asset(
+                    ImageAssetManager.appLogoWhite,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              )
+            : ImagePageviewIndicatorWidget(
+                imageUrls: post.imageUrls,
+              ),
+      ],
     );
   }
 
   Widget _buildDescriptionSection() {
-    return Container();
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            post.title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            post.description,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          const SizedBox(height: 10),
+          UserAvatarWidget(userUid: post.userUid),
+        ],
+      ),
+    );
   }
 
   Widget _buildPedalListSection(BuildContext context) {
-    return Container();
-  }
-
-  Widget _buildCommentSection() {
-    return Container();
+    return SideScrollPedalListViewWidget(
+      title: AppStringManager.pedalsUsed,
+      pedals: post.pedalList,
+      isLoading: false,
+    );
   }
 }
