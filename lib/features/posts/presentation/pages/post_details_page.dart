@@ -4,13 +4,13 @@ import 'package:pedalpulse/features/pedals/presentation/widgets/side_scroll_peda
 import 'package:pedalpulse/responsive/hidable_bottom_navigation_bar.dart';
 import 'package:pedalpulse/responsive/mobile_layout.dart';
 import 'package:pedalpulse/core/common/managers/string_manager.dart';
-import 'package:pedalpulse/widgets/safe_area_padding_widget.dart';
-import 'package:pedalpulse/widgets/user_avatar_widget.dart';
 
 import '../../../../core/common/managers/asset_manager.dart';
 import '../../../../core/common/managers/color_manager.dart';
-import '../../../../widgets/image_pageview_indicator_widget.dart';
+import '../../../../core/common/widgets/safe_area_padding_widget.dart';
+import '../../../user/presentation/widgets/user_avatar_widget.dart';
 import '../../domain/entities/post_entity.dart';
+import '../widgets/image_pageview_indicator_widget.dart';
 
 class PostDetailsPage extends HookWidget {
   final PostEntity post;
