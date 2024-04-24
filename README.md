@@ -121,13 +121,28 @@ void main(){
 
 ## Packages
 
-- Firebase (Auth, Firestore, Storage) 🔥
+- Firebase (Auth, Firestore, Storage, Analytics, ...) 🔥
   - Implementing some services provided by Firebase is one of the fastest way to develop a software, in that the developers do not have to set up the backend and/or DB.
   - It's especially crucial for some of the new-born startups when they are trying to validate their MVP from the market.
   - Both Firebase and Flutter are built and maintained by teams from Google, so it is recommended to use FireFlow (as they say) for the mobile development.
 
-```
+```dart
+// project/features/auth/data/datasource/firebase_auth.dart
+class FirebaseAuthDataSource {
+  final FirebaseAuth auth;
 
+  FirebaseAuthDataSource(this.auth);
+
+  Future<UserCredential> signIn({
+    required String email,
+    required String password,
+  }) async {
+    return auth.signInWithEmailAndPassword(
+      email: email,
+      password: password
+    );
+  }
+}
 ```
 
 - Provider 👏
