@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button_widget.dart';
 
+import '../../../../core/common/widgets/loading_placeholder_widget.dart';
 import '../../../../injection_container.dart';
-import '../../../../utils/managers/string_manager.dart';
-import '../../../../widgets/loading_placeholder_widget.dart';
+import '../../../../core/common/managers/string_manager.dart';
 import '../providers/upload_provider.dart';
 
 class UploadPage extends StatelessWidget {

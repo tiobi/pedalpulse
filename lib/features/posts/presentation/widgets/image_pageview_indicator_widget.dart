@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 
-import '../utils/managers/color_manager.dart';
-import 'custom_circle_icon_button_widget.dart';
+import '../../../../core/common/managers/color_manager.dart';
+import '../../../../core/common/widgets/custom_circle_icon_button_widget.dart';
+import '../../../../core/common/widgets/loading_placeholder_widget.dart';
 
 class ImagePageviewIndicatorWidget extends StatefulWidget {
   final List<String> imageUrls;

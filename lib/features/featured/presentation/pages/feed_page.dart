@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pedalpulse/features/posts/presentation/providers/post_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/managers/string_manager.dart';
-import '../../../../widgets/post_card_widget.dart';
+import '../../../../core/common/managers/string_manager.dart';
 import '../../../posts/domain/entities/post_entity.dart';
+import '../../../posts/presentation/widgets/post_card_widget.dart';
 
 class FeedPage extends StatelessWidget {
   const FeedPage({Key? key}) : super(key: key);

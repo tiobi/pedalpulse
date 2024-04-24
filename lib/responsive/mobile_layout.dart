@@ -3,8 +3,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pedalpulse/features/featured/presentation/pages/featured_page.dart';
 import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
-import 'package:pedalpulse/utils/managers/color_manager.dart';
 
+import '../core/common/managers/color_manager.dart';
 import '../features/featured/presentation/pages/feed_page.dart';
 import '../features/search/presentation/pages/search_page.dart';
 

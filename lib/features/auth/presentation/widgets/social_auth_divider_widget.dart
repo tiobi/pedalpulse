@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/managers/color_manager.dart';
-import '../../../../utils/managers/string_manager.dart';
+import '../../../../core/common/managers/color_manager.dart';
+import '../../../../core/common/managers/string_manager.dart';
 
 class SocialAuthDividerWidget extends StatelessWidget {
   const SocialAuthDividerWidget({Key? key}) : super(key: key);

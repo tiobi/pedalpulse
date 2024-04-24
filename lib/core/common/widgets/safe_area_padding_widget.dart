@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/utils/managers/color_manager.dart';
+
+import '../managers/color_manager.dart';
 
 class SafeAreaPaddingWidget extends StatelessWidget {
   const SafeAreaPaddingWidget({Key? key}) : super(key: key);

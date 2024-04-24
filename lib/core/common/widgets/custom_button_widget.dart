@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/managers/color_manager.dart';
+import '../managers/color_manager.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   final VoidCallback? onTap;

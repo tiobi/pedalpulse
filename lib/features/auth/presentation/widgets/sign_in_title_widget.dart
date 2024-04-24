@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../../../utils/managers/asset_manager.dart';
+import '../../../../core/common/managers/asset_manager.dart';
 
 class SignInTitleWidget extends StatelessWidget {
   const SignInTitleWidget({Key? key}) : super(key: key);

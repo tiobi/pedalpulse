@@ -6,7 +6,7 @@ import '../models/user_model.dart';
 import '../providers/user_provider_depr.dart';
 import '../services/firebase/pedal_firestore_methods.dart';
 import '../utils/managers/message_manager.dart';
-import '../utils/managers/string_manager.dart';
+import '../core/common/managers/string_manager.dart';
 import '../core/common/widgets/custom_dynamic_height_textfield_widget.dart';
 import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 import '../core/common/widgets/custom_textfield_widget.dart';

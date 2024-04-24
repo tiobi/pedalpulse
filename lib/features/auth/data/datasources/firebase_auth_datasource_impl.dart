@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../../models/user_model.dart';
+import '../../../user/data/models/user_model.dart';
 import '../../domain/entities/auth_entity.dart';
 import 'firebase_auth_datasource.dart';
 
@@ -78,7 +78,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required String email,
   }) async {
     try {
-      UserModelDepr newUser = UserModelDepr(
+      UserModel newUser = UserModel(
         uid: uid,
         email: email,
         username: email.split('@')[0],

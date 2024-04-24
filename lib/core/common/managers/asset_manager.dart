@@ -1,4 +1,4 @@
-import 'package:pedalpulse/utils/global_variable.dart';
+import 'package:pedalpulse/core/constants/global_variable.keys.dart';
 
 class FontManager {}
 

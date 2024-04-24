@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/common/widgets/custom_textfield_widget.dart';
-import '../../../../utils/managers/string_manager.dart';
+import '../../../../core/common/managers/string_manager.dart';
 import '../../../../core/common/widgets/custom_dynamic_height_textfield_widget.dart';
-import '../../../../widgets/loading_placeholder_widget.dart';
+import '../../../../core/common/widgets/loading_placeholder_widget.dart';
 import '../../../auth/presentation/widgets/custom_text_button_widget.dart';
 
 class RequestPage extends StatelessWidget {

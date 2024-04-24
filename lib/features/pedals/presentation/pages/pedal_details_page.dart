@@ -4,13 +4,13 @@ import 'package:pedalpulse/features/pedals/domain/entities/pedal_entity.dart';
 import 'package:pedalpulse/features/posts/presentation/widgets/post_list_view_widget.dart';
 import 'package:pedalpulse/responsive/hidable_bottom_navigation_bar.dart';
 import 'package:pedalpulse/responsive/mobile_layout.dart';
-import 'package:pedalpulse/widgets/image_pageview_indicator_widget.dart';
-import 'package:pedalpulse/widgets/safe_area_padding_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/managers/string_manager.dart';
+import '../../../../core/common/managers/string_manager.dart';
+import '../../../../core/common/widgets/safe_area_padding_widget.dart';
 import '../../../posts/domain/entities/post_entity.dart';
 import '../../../posts/presentation/providers/post_provider.dart';
+import '../../../posts/presentation/widgets/image_pageview_indicator_widget.dart';
 
 class PedalDetailsPage extends HookWidget {
   final PedalEntity pedal;

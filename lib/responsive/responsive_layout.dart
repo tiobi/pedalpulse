@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/providers/user_likes_provider_depr.dart';
-import 'package:provider/provider.dart';
 
 class ResponsiveLayout extends StatefulWidget {
   final Widget mobileLayout;
@@ -20,14 +18,6 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   void initState() {
     super.initState();
-    getUserLikes();
-  }
-
-  void getUserLikes() {
-    UserLikesProviderDepr userLikesProvider =
-        Provider.of<UserLikesProviderDepr>(context, listen: false);
-
-    userLikesProvider.setUserLikes();
   }
 
   @override

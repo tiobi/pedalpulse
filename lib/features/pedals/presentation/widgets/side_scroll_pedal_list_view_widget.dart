@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
-import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 
+import '../../../../core/common/widgets/loading_placeholder_widget.dart';
 import '../../../../injection_container.dart';
 import '../../domain/entities/pedal_entity.dart';
 import 'pedal_card_widget.dart';

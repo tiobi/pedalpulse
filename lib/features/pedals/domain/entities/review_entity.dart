@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-import '../../../../models/rating_model.dart';
+import '../../data/models/rating_model.dart';
 
 part 'review_entity.mapper.dart';
 

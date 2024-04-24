@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/widgets/post_card_widget.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../auth/presentation/widgets/custom_text_button_widget.dart';
 import '../../domain/entities/post_entity.dart';
+import 'post_card_widget.dart';
 
 class PostListViewWidget extends StatelessWidget {
   final String title;

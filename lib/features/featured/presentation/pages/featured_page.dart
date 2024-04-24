@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/common/managers/asset_manager.dart';
+import '../../../../core/common/managers/color_manager.dart';
 import '../../../../injection_container.dart';
-import '../../../../utils/managers/asset_manager.dart';
-import '../../../../utils/managers/color_manager.dart';
 import '../../../banner/presentation/providers/banner_provider.dart';
 import '../../../pedals/presentation/providers/pedal_provider.dart';
 import '../../../pedals/presentation/widgets/side_scroll_pedal_list_view_widget.dart';

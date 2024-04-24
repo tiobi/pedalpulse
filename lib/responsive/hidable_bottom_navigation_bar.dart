@@ -6,10 +6,10 @@ import 'package:pedalpulse/features/featured/presentation/pages/feed_page.dart';
 import 'package:pedalpulse/features/search/presentation/pages/search_page.dart';
 import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
-import 'package:pedalpulse/utils/managers/color_manager.dart';
 
+import '../core/common/managers/color_manager.dart';
+import '../core/routes/routes.dart';
 import '../screens/upload_post_screen.dart';
-import '../utils/managers/route_manager.dart';
 
 class HidableBottomNavigationBar extends StatefulWidget {
   final ScrollController scrollController;

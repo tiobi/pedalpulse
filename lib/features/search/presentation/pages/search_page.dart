@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/common/widgets/custom_textfield_widget.dart';
 import '../../../../injection_container.dart';
-import '../../../../utils/managers/string_manager.dart';
+import '../../../../core/common/managers/string_manager.dart';
 import '../../../pedals/domain/entities/pedal_entity.dart';
 import '../../../pedals/presentation/widgets/pedal_card_widget.dart';
 import '../widgets/loading_pedal_card_widget.dart';

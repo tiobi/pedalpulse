@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
 
-import '../../../../utils/managers/color_manager.dart';
-import '../../../../utils/managers/route_manager.dart';
+import '../../../../core/common/managers/color_manager.dart';
+import '../../../../core/common/widgets/loading_placeholder_widget.dart';
+import '../../../../core/routes/routes.dart';
 import '../../domain/entities/pedal_entity.dart';
 
 class PedalCardWidget extends StatefulWidget {

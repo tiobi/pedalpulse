@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pedalpulse/widgets/loading_placeholder_widget.dart';
-import 'package:pedalpulse/widgets/user_avatar_widget.dart';
 
-import '../features/posts/domain/entities/post_entity.dart';
-import '../utils/managers/asset_manager.dart';
-import '../utils/managers/color_manager.dart';
-import '../utils/managers/route_manager.dart';
+import '../../../../core/common/managers/asset_manager.dart';
+import '../../../../core/common/managers/color_manager.dart';
+import '../../../../core/common/widgets/loading_placeholder_widget.dart';
+import '../../../../core/routes/routes.dart';
+import '../../domain/entities/post_entity.dart';
 
 class PostCardWidget extends StatefulWidget {
   final PostEntity post;

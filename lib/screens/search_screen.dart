@@ -8,7 +8,7 @@ import '../models/pedal_model.dart';
 import '../providers/pedal_provider_depr.dart';
 import '../services/algolia/algolia.dart';
 import '../screens/request_pedal_screen.dart';
-import '../utils/managers/string_manager.dart';
+import '../core/common/managers/string_manager.dart';
 import '../features/auth/presentation/widgets/custom_text_button_widget.dart';
 import '../core/common/widgets/custom_textfield_widget.dart';
 import '../features/search/presentation/widgets/loading_pedal_card_widget.dart';
