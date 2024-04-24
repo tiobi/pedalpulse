@@ -16,7 +16,7 @@ import '../features/auth/presentation/pages/sign_in_page.dart';
 import '../features/auth/presentation/providers/auth_provider.dart';
 
 import '../features/pedals/presentation/providers/pedal_provider.dart';
-import '../features/upload/presentation/providers/upload_provider.dart';
+import '../features/posts/presentation/providers/upload_provider.dart';
 
 import '../features/user/presentation/providers/user_provider.dart';
 import '../responsive/desktop_layout.dart';

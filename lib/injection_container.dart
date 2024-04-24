@@ -55,7 +55,7 @@ import 'features/search/data/repositories/request_repository_impl.dart';
 import 'features/search/domain/usecases/send_request_usecase.dart';
 import 'features/search/presentation/providers/request_provider.dart';
 import 'features/search/presentation/providers/search_provider.dart';
-import 'features/upload/presentation/providers/upload_provider.dart';
+import 'features/posts/presentation/providers/upload_provider.dart';
 import 'features/user/data/datasources/user_datasource.dart';
 import 'features/user/data/datasources/user_datasource_impl.dart';
 import 'features/user/data/repositories/user_repository_impl.dart';

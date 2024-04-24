@@ -4,7 +4,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pedalpulse/features/featured/presentation/pages/featured_page.dart';
 import 'package:pedalpulse/features/featured/presentation/pages/feed_page.dart';
 import 'package:pedalpulse/features/search/presentation/pages/search_page.dart';
-import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
+import 'package:pedalpulse/features/posts/presentation/pages/upload_post_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 
 import '../config/routes/routes.dart';
@@ -65,7 +65,7 @@ class _HidableBottomNavigationBarState
     if (page == 2) {
       showCupertinoModalBottomSheet(
         context: context,
-        builder: (context) => const UploadPage(),
+        builder: (context) => const UploadPostPage(),
       );
       return;
     }
@@ -105,7 +105,7 @@ class _HidableBottomNavigationBarState
 List<Widget> tabItems = <Widget>[
   const FeaturedPage(),
   const FeedPage(),
-  const UploadPage(),
+  const UploadPostPage(),
   const SearchPage(),
   ProfilePage(),
 ];

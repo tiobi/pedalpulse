@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pedalpulse/features/featured/presentation/pages/featured_page.dart';
-import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
+import 'package:pedalpulse/features/posts/presentation/pages/upload_post_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 
 import '../core/common/managers/color_manager.dart';
@@ -37,7 +37,7 @@ class _MobileLayoutState extends State<MobileLayout> {
     if (page == 2) {
       showCupertinoModalBottomSheet(
         context: context,
-        builder: (context) => const UploadPage(),
+        builder: (context) => const UploadPostPage(),
       );
       return;
     }
@@ -79,7 +79,7 @@ class _MobileLayoutState extends State<MobileLayout> {
 List<Widget> tabItems = <Widget>[
   const FeaturedPage(),
   const FeedPage(),
-  const UploadPage(),
+  const UploadPostPage(),
   const SearchPage(),
   ProfilePage(),
 ];

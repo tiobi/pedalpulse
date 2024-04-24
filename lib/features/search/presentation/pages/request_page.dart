@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:pedalpulse/core/common/widgets/snack_bar_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/common/widgets/custom_textfield_widget.dart';
 import '../../../../core/common/managers/string_manager.dart';
 import '../../../../core/common/widgets/custom_dynamic_height_textfield_widget.dart';
 import '../../../../core/common/widgets/loading_placeholder_widget.dart';
+import '../../../../core/common/widgets/snack_bar_widget.dart';
 import '../../../auth/presentation/widgets/custom_text_button_widget.dart';
 import '../providers/request_provider.dart';
 
@@ -24,7 +24,7 @@ class RequestPage extends HookWidget {
     final TextEditingController descriptionController =
         useTextEditingController();
 
-    void onSendRequest() {
+    void onSendRequest() async {
       if (manufacturerController.text.isEmpty ||
           modelController.text.isEmpty ||
           descriptionController.text.isEmpty) {
@@ -35,7 +35,7 @@ class RequestPage extends HookWidget {
         return;
       }
 
-      requestProvider.sendRequest(
+      await requestProvider.sendRequest(
         manufacturer: manufacturerController.text,
         model: modelController.text,
         description: descriptionController.text,
@@ -68,12 +68,14 @@ class RequestPage extends HookWidget {
           children: [
             CustomTextfieldWidget(
               placeholder: AppStringManager.manufacturer,
+              controller: manufacturerController,
             ),
             CustomTextfieldWidget(
               placeholder: AppStringManager.model,
+              controller: modelController,
             ),
             CustomDynamicHeightTextfieldWidget(
-              textController: TextEditingController(),
+              textController: descriptionController,
               maxLength: 500,
               placeholder: AppStringManager.description,
             ),
