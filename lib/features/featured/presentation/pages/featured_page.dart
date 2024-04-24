@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/common/managers/asset_manager.dart';
 import '../../../../core/common/managers/color_manager.dart';
-import '../../../../injection_container.dart';
-import '../../../banner/presentation/providers/banner_provider.dart';
 import '../../../pedals/presentation/providers/pedal_provider.dart';
 import '../../../pedals/presentation/widgets/side_scroll_pedal_list_view_widget.dart';
 import '../../../posts/presentation/providers/post_provider.dart';
@@ -15,9 +13,8 @@ class FeaturedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BannerProvider bannersProvider = getIt<BannerProvider>();
-    final PostProvider postProvider = getIt<PostProvider>();
-    // final PedalProvider pedalProvider = getIt<PedalProvider>();
+    // final BannerProvider bannerProvider = Provider.of<BannerProvider>(context);
+    final PostProvider postProvider = Provider.of<PostProvider>(context);
     final PedalProvider pedalProvider = Provider.of<PedalProvider>(context);
 
     return Scaffold(
