@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../config/routes/routes.dart';
 import '../../../../core/common/managers/asset_manager.dart';
 import '../../../../core/common/managers/color_manager.dart';
 import '../../../../core/common/widgets/loading_placeholder_widget.dart';
-import '../../../../core/routes/routes.dart';
 import '../../../user/presentation/widgets/user_avatar_widget.dart';
 import '../../domain/entities/post_entity.dart';
 

@@ -14,6 +14,7 @@ class ReviewEntityMapper extends ClassMapperBase<ReviewEntity> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ReviewEntityMapper._());
       ReviewEntityMapper.ensureInitialized();
+      RatingModelMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -136,6 +137,7 @@ abstract class ReviewEntityCopyWith<$R, $In extends ReviewEntity, $Out>
   ListCopyWith<$R, ReviewEntity,
       ReviewEntityCopyWith<$R, ReviewEntity, ReviewEntity>> get replies;
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get reportedBy;
+  RatingModelCopyWith<$R, RatingModel, RatingModel>? get rating;
   $R call(
       {String? uid,
       String? userUid,
@@ -167,6 +169,9 @@ class _ReviewEntityCopyWithImpl<$R, $Out>
   ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get reportedBy =>
       ListCopyWith($value.reportedBy, (v, t) => ObjectCopyWith(v, $identity, t),
           (v) => call(reportedBy: v));
+  @override
+  RatingModelCopyWith<$R, RatingModel, RatingModel>? get rating =>
+      $value.rating?.copyWith.$chain((v) => call(rating: v));
   @override
   $R call(
           {String? uid,

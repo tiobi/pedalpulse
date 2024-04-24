@@ -7,9 +7,8 @@ import 'package:pedalpulse/features/search/presentation/pages/search_page.dart';
 import 'package:pedalpulse/features/upload/presentation/pages/upload_page.dart';
 import 'package:pedalpulse/features/user/presentation/pages/profile_page.dart';
 
+import '../config/routes/routes.dart';
 import '../core/common/managers/color_manager.dart';
-import '../core/routes/routes.dart';
-import '../screens/upload_post_screen.dart';
 
 class HidableBottomNavigationBar extends StatefulWidget {
   final ScrollController scrollController;
@@ -66,7 +65,7 @@ class _HidableBottomNavigationBarState
     if (page == 2) {
       showCupertinoModalBottomSheet(
         context: context,
-        builder: (context) => const UploadPostScreen(),
+        builder: (context) => const UploadPage(),
       );
       return;
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/routes/routes.dart';
+import '../../../../config/routes/routes.dart';
 import '../../../auth/presentation/widgets/custom_text_button_widget.dart';
 import '../../domain/entities/post_entity.dart';
 import 'post_card_widget.dart';

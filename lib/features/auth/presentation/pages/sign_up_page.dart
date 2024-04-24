@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pedalpulse/core/common/widgets/snack_bar_widget.dart';
-import 'package:pedalpulse/core/routes/routes.dart';
 import 'package:pedalpulse/features/auth/core/constants/auth_string.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button_widget.dart';
 import 'package:pedalpulse/core/common/widgets/custom_textfield_widget.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
 
+import '../../../../config/routes/routes.dart';
 import '../../../../core/common/widgets/custom_button_widget.dart';
 import '../../domain/entities/auth_entity.dart';
 import '../providers/auth_provider.dart';

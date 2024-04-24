@@ -4,8 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/sign_in_title_widget.dart';
 
+import '../../../../config/routes/routes.dart';
 import '../../../../core/common/widgets/custom_button_widget.dart';
-import '../../../../core/routes/routes.dart';
 import '../../core/constants/auth_string.dart';
 import '../widgets/custom_text_button_widget.dart';
 import '../../../../core/common/widgets/custom_textfield_widget.dart';

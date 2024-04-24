@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pedalpulse/core/errors/firebase_auth_failure.dart';
-import 'package:pedalpulse/core/routes/routes.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
+import '../../../../config/routes/routes.dart';
 import '../../../../core/common/widgets/snack_bar_widget.dart';
 import '../../domain/usecases/is_email_verified_usecase.dart';
 import '../../domain/usecases/send_password_reset_email_usecase.dart';

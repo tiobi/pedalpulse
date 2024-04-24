@@ -11,7 +11,7 @@ import 'package:pedalpulse/injection_container.dart';
 import 'package:pedalpulse/core/common/managers/string_manager.dart';
 import 'package:provider/provider.dart';
 
-import '../core/routes/routes.dart';
+import '../config/routes/routes.dart';
 import '../features/auth/presentation/pages/sign_in_page.dart';
 import '../features/auth/presentation/providers/auth_provider.dart';
 
