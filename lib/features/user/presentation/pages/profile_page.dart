@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
 import 'package:pedalpulse/features/auth/presentation/widgets/custom_text_button_widget.dart';
 import 'package:pedalpulse/features/user/constants/user_string.dart';
-import 'package:pedalpulse/injection_container.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/common/providers/app_size_provider.dart';
 import '../../domain/entities/user_entity.dart';
 import '../providers/user_provider.dart';
 
 class ProfilePage extends HookWidget {
-  ProfilePage({super.key});
+  const ProfilePage({super.key});
 
-  final UserProvider userProvider = getIt<UserProvider>();
-  // final UserProvider userProvider = Provider.of<UserProvider>(context);
+  // final UserProvider userProvider = getIt<UserProvider>();
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
+    final AuthProvider authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
+      appBar: AppBar(actions: [
+        IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            authProvider.signOut(context: context);
+          },
+        )
+      ]),
       body: userProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : _buildProfile(userProvider.user),
@@ -26,16 +36,10 @@ class ProfilePage extends HookWidget {
 
   Widget _buildProfile(UserEntity? user) {
     return user == null
-        ? Center(
+        ? const Center(
             child: Row(
               children: [
-                const Text(UserString.unableToLoadUser),
-                CustomTextButtonWidget(
-                  placeholder: UserString.reload,
-                  onTap: () {
-                    userProvider.getUser();
-                  },
-                )
+                Text(UserString.unableToLoadUser),
               ],
             ),
           )

@@ -73,6 +73,8 @@ class AuthProvider extends ChangeNotifier {
     final result =
         await signInWithEmailAndPasswordUseCase(authEntity: authEntity);
 
+    print(result);
+
     result.fold((l) {
       if (l.message == FirebaseAuthFailure.userNotFoundCode) {
         CustomSnackBar.showErrorSnackBar(context, 'User not found');

@@ -78,6 +78,13 @@ class PedalPulseApp extends StatelessWidget {
             if (!snapshot.hasData) {
               return SignInPage();
             } else {
+              User? user = snapshot.data;
+              if (user != null) {
+                if (!user.emailVerified) {
+                  return SignInPage();
+                }
+              }
+
               /// Initialize all the providers here.
               ///
               initProviders(context);

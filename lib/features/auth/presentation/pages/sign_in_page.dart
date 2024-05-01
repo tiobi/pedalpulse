@@ -33,6 +33,14 @@ class SignInPage extends HookWidget {
           child: SafeArea(
             child: Column(
               children: [
+                // IconButton(
+                //     onPressed: () async {
+                //       FirebaseAuthDataSourceImpl(
+                //         firestore: FirebaseFirestore.instance,
+                //         auth: FirebaseAuth.instance,
+                //       ).sendEmailVerification(email: 'estarcraft@naver.com');
+                //     },
+                //     icon: const Icon(Icons.email)),
                 _buildSignInForm(context),
                 const Spacer(),
                 _buildSignUpButton(context),

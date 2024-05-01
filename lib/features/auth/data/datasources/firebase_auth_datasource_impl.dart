@@ -26,6 +26,8 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         password: authEntity.password,
       );
 
+      print('User created: ${userCredential.user!.uid}');
+
       // User null check
       if (auth.currentUser == null) {
         throw FirebaseAuthException(
@@ -34,6 +36,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         );
       }
 
+      // Send email verification
       await auth.currentUser!.sendEmailVerification();
 
       await initializeUserData(
@@ -47,23 +50,61 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     }
   }
 
+  // @override
+  // Future<UserCredential> signInWithEmailAndPassword({
+  //   required AuthEntity authEntity,
+  // }) async {
+  //   try {
+  //     print('datasource sign in');
+  //     final UserCredential userCredential =
+  //         await auth.signInWithEmailAndPassword(
+  //       email: authEntity.email,
+  //       password: authEntity.password,
+  //     );
+
+  //     if (userCredential.user != null && !userCredential.user!.emailVerified) {
+  //       print('Email is not verified');
+  //       sendEmailVerification(email: authEntity.email);
+  //       throw FirebaseAuthException(
+  //         code: 'email-not-verified',
+  //         message: 'Email is not verified',
+  //       );
+  //     }
+
+  //     return userCredential;
+  //   } on FirebaseAuthException {
+  //     rethrow;
+  //   }
+  // }
+
   @override
   Future<UserCredential> signInWithEmailAndPassword({
     required AuthEntity authEntity,
   }) async {
     try {
+      print('datasource sign in');
       final UserCredential userCredential =
           await auth.signInWithEmailAndPassword(
         email: authEntity.email,
         password: authEntity.password,
       );
 
-      // check if user is verified
-      if (isEmailVerified(email: authEntity.email) == false) {
-        throw FirebaseAuthException(
-          code: 'email-not-verified',
-          message: 'Email is not verified',
-        );
+      if (userCredential.user != null) {
+        if (!userCredential.user!.emailVerified) {
+          sendEmailVerification(email: authEntity.email);
+          throw FirebaseAuthException(
+            code: 'email-not-verified',
+            message: 'Email is not verified',
+          );
+        }
+
+        if (!userCredential.user!.isAnonymous &&
+            userCredential.user!.uid != auth.currentUser!.uid) {
+          throw FirebaseAuthException(
+            code: 'user-not-authenticated',
+            message: 'User is not properly authenticated',
+          );
+        }
       }
 
       return userCredential;
@@ -105,6 +146,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
           message: 'User not found',
         );
       }
+
       return user.emailVerified;
     } on FirebaseAuthException {
       rethrow;
