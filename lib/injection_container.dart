@@ -10,6 +10,13 @@ import 'package:pedalpulse/features/auth/domain/repositories/social_auth_reposit
 import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_usecase.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
+import 'package:pedalpulse/features/auth/presentation/providers/auth_provider_new.dart';
+import 'package:pedalpulse/features/auth/presentation/view_models/auth_view_model.dart';
+import 'package:pedalpulse/features/auth/data/services/firebase_auth_service.dart';
+import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasource_new.dart';
+import 'package:pedalpulse/features/auth/data/repositories/firebase_auth_repository_new.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_email_and_password_usecase_enhanced.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/sign_up_with_email_and_password_usecase_enhanced.dart';
 import 'package:pedalpulse/features/banner/presentation/providers/banner_provider.dart';
 import 'package:pedalpulse/features/pedals/data/datasources/pedal_firestore_datasource.dart';
 import 'package:pedalpulse/features/pedals/domain/repositories/pedal_repository.dart';
@@ -74,6 +81,14 @@ import 'features/user/domain/usecases/remove_user_like_usecase.dart';
 import 'features/user/domain/usecases/update_user_profile_image_usecase.dart';
 import 'features/user/domain/usecases/update_user_usecase.dart';
 import 'features/user/presentation/providers/user_provider.dart';
+import 'features/user/presentation/providers/user_provider_new.dart';
+import 'features/user/presentation/view_models/user_view_model.dart';
+import 'features/user/data/services/firebase_firestore_service.dart';
+import 'features/user/data/services/firebase_storage_service.dart';
+import 'features/user/data/datasources/user_datasource_new.dart';
+import 'features/user/data/repositories/user_repository_new.dart';
+import 'features/user/domain/usecases/update_user_usecase_enhanced.dart';
+import 'features/user/domain/usecases/validate_user_profile_usecase.dart';
 
 final getIt = GetIt.instance;
 
@@ -94,6 +109,27 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => firebaseStorage);
   getIt.registerLazySingleton(() => googleSignIn);
 
+  /// Services
+  ///
+  getIt.registerLazySingleton<FirebaseAuthService>(
+    () => FirebaseAuthService(
+      auth: getIt<FirebaseAuth>(),
+      firestore: getIt<FirebaseFirestore>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FirebaseFirestoreService>(
+    () => FirebaseFirestoreService(
+      firestore: getIt<FirebaseFirestore>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FirebaseStorageService>(
+    () => FirebaseStorageService(
+      storage: getIt<FirebaseStorage>(),
+    ),
+  );
+
   /// Core
   ///
   getIt.registerLazySingleton<AppSizeProvider>(
@@ -108,11 +144,24 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  getIt.registerLazySingleton<UserDataSourceNew>(
+    () => UserDataSourceNewImpl(
+      firestoreService: getIt<FirebaseFirestoreService>(),
+      storageService: getIt<FirebaseStorageService>(),
+    ),
+  );
+
   /// User Repositories
   ///
   getIt.registerLazySingleton<UserRepository>(
     () => UserRepositoryImpl(
       dataSource: getIt<UserDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<UserRepositoryNew>(
+    () => UserRepositoryNew(
+      dataSource: getIt<UserDataSourceNew>(),
     ),
   );
 
@@ -159,6 +208,32 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  /// Enhanced User Use Cases
+  ///
+  getIt.registerLazySingleton<UpdateUserUseCaseEnhanced>(
+    () => UpdateUserUseCaseEnhanced(
+      repository: getIt<UserRepositoryNew>(),
+    ),
+  );
+  getIt.registerLazySingleton<ValidateUserProfileUseCase>(
+    () => ValidateUserProfileUseCase(),
+  );
+
+  /// User View Models
+  ///
+  getIt.registerLazySingleton<UserViewModel>(
+    () => UserViewModel(
+      getUserUseCase: getIt<GetUserUseCase>(),
+      updateUserUseCase: getIt<UpdateUserUseCase>(),
+      getUserLikesUseCase: getIt<GetUserLikesUseCase>(),
+      addUserLikesUseCase: getIt<AddUserLikesUseCase>(),
+      removeUserLikeUseCase: getIt<RemoveUserLikeUseCase>(),
+      deleteUserUseCase: getIt<DeleteUserUseCase>(),
+      updateUserProfileImageUseCase: getIt<UpdateUserProfileImageUseCase>(),
+      getCurrentUserUidUseCase: getIt<GetCurrentUserUidUseCase>(),
+    ),
+  );
+
   /// User Providers
   ///
   getIt.registerLazySingleton<UserProvider>(
@@ -174,12 +249,24 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  getIt.registerLazySingleton<UserProviderNew>(
+    () => UserProviderNew(
+      userViewModel: getIt<UserViewModel>(),
+    ),
+  );
+
   /// Auth Data Sources
   ///
   getIt.registerLazySingleton<FirebaseAuthDataSource>(
     () => FirebaseAuthDataSourceImpl(
       firestore: getIt<FirebaseFirestore>(),
       auth: getIt<FirebaseAuth>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FirebaseAuthDataSourceNew>(
+    () => FirebaseAuthDataSourceNewImpl(
+      authService: getIt<FirebaseAuthService>(),
     ),
   );
   getIt.registerLazySingleton<SocialAuthDataSource>(
@@ -195,6 +282,12 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton<FirebaseAuthRepository>(
     () => FirebaseAuthRepositoryImpl(
       dataSource: getIt<FirebaseAuthDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FirebaseAuthRepositoryNew>(
+    () => FirebaseAuthRepositoryNew(
+      dataSource: getIt<FirebaseAuthDataSourceNew>(),
     ),
   );
   getIt.registerLazySingleton<SocialAuthRepository>(
@@ -241,7 +334,36 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-  /// Auth Provider
+  /// Enhanced Auth Use Cases
+  ///
+  getIt.registerLazySingleton<SignInWithEmailAndPasswordUseCaseEnhanced>(
+    () => SignInWithEmailAndPasswordUseCaseEnhanced(
+      repository: getIt<FirebaseAuthRepositoryNew>(),
+    ),
+  );
+  getIt.registerLazySingleton<SignUpWithEmailAndPasswordUseCaseEnhanced>(
+    () => SignUpWithEmailAndPasswordUseCaseEnhanced(
+      repository: getIt<FirebaseAuthRepositoryNew>(),
+    ),
+  );
+
+  /// Auth View Models
+  ///
+  getIt.registerLazySingleton<AuthViewModel>(
+    () => AuthViewModel(
+      isEmailVerifiedUseCase: getIt<IsEmailVerifiedUseCase>(),
+      sendPasswordResetEmailUseCase: getIt<SendPasswordResetEmailUseCase>(),
+      signInWithEmailAndPasswordUseCase:
+          getIt<SignInWithEmailAndPasswordUseCase>(),
+      signOutUseCase: getIt<SignOutUseCase>(),
+      signUpWithEmailAndPasswordUseCase:
+          getIt<SignUpWithEmailAndPasswordUseCase>(),
+      signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
+      signInWithAppleUseCase: getIt<SignInWithAppleUseCase>(),
+    ),
+  );
+
+  /// Auth Providers
   ///
   getIt.registerLazySingleton<AuthProvider>(
     () => AuthProvider(
@@ -254,6 +376,12 @@ Future<void> initializeDependencies() async {
           getIt<SignUpWithEmailAndPasswordUseCase>(),
       signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
       signInWithAppleUseCase: getIt<SignInWithAppleUseCase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<AuthProviderNew>(
+    () => AuthProviderNew(
+      authViewModel: getIt<AuthViewModel>(),
     ),
   );
 
