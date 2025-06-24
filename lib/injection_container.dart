@@ -15,6 +15,8 @@ import 'package:pedalpulse/features/auth/presentation/view_models/auth_view_mode
 import 'package:pedalpulse/features/auth/data/services/firebase_auth_service.dart';
 import 'package:pedalpulse/features/auth/data/datasources/firebase_auth_datasource_new.dart';
 import 'package:pedalpulse/features/auth/data/repositories/firebase_auth_repository_new.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_email_and_password_usecase_enhanced.dart';
+import 'package:pedalpulse/features/auth/domain/usecases/sign_up_with_email_and_password_usecase_enhanced.dart';
 import 'package:pedalpulse/features/banner/presentation/providers/banner_provider.dart';
 import 'package:pedalpulse/features/pedals/data/datasources/pedal_firestore_datasource.dart';
 import 'package:pedalpulse/features/pedals/domain/repositories/pedal_repository.dart';
@@ -85,6 +87,8 @@ import 'features/user/data/services/firebase_firestore_service.dart';
 import 'features/user/data/services/firebase_storage_service.dart';
 import 'features/user/data/datasources/user_datasource_new.dart';
 import 'features/user/data/repositories/user_repository_new.dart';
+import 'features/user/domain/usecases/update_user_usecase_enhanced.dart';
+import 'features/user/domain/usecases/validate_user_profile_usecase.dart';
 
 final getIt = GetIt.instance;
 
@@ -204,6 +208,17 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  /// Enhanced User Use Cases
+  ///
+  getIt.registerLazySingleton<UpdateUserUseCaseEnhanced>(
+    () => UpdateUserUseCaseEnhanced(
+      repository: getIt<UserRepositoryNew>(),
+    ),
+  );
+  getIt.registerLazySingleton<ValidateUserProfileUseCase>(
+    () => ValidateUserProfileUseCase(),
+  );
+
   /// User View Models
   ///
   getIt.registerLazySingleton<UserViewModel>(
@@ -316,6 +331,19 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton<SignInWithAppleUseCase>(
     () => SignInWithAppleUseCase(
       repository: getIt<SocialAuthRepository>(),
+    ),
+  );
+
+  /// Enhanced Auth Use Cases
+  ///
+  getIt.registerLazySingleton<SignInWithEmailAndPasswordUseCaseEnhanced>(
+    () => SignInWithEmailAndPasswordUseCaseEnhanced(
+      repository: getIt<FirebaseAuthRepositoryNew>(),
+    ),
+  );
+  getIt.registerLazySingleton<SignUpWithEmailAndPasswordUseCaseEnhanced>(
+    () => SignUpWithEmailAndPasswordUseCaseEnhanced(
+      repository: getIt<FirebaseAuthRepositoryNew>(),
     ),
   );
 
