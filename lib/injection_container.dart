@@ -10,6 +10,8 @@ import 'package:pedalpulse/features/auth/domain/repositories/social_auth_reposit
 import 'package:pedalpulse/features/auth/domain/usecases/is_email_verified_usecase.dart';
 import 'package:pedalpulse/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
 import 'package:pedalpulse/features/auth/presentation/providers/auth_provider.dart';
+import 'package:pedalpulse/features/auth/presentation/providers/auth_provider_new.dart';
+import 'package:pedalpulse/features/auth/presentation/view_models/auth_view_model.dart';
 import 'package:pedalpulse/features/banner/presentation/providers/banner_provider.dart';
 import 'package:pedalpulse/features/pedals/data/datasources/pedal_firestore_datasource.dart';
 import 'package:pedalpulse/features/pedals/domain/repositories/pedal_repository.dart';
@@ -74,6 +76,8 @@ import 'features/user/domain/usecases/remove_user_like_usecase.dart';
 import 'features/user/domain/usecases/update_user_profile_image_usecase.dart';
 import 'features/user/domain/usecases/update_user_usecase.dart';
 import 'features/user/presentation/providers/user_provider.dart';
+import 'features/user/presentation/providers/user_provider_new.dart';
+import 'features/user/presentation/view_models/user_view_model.dart';
 
 final getIt = GetIt.instance;
 
@@ -159,6 +163,21 @@ Future<void> initializeDependencies() async {
     ),
   );
 
+  /// User View Models
+  ///
+  getIt.registerLazySingleton<UserViewModel>(
+    () => UserViewModel(
+      getUserUseCase: getIt<GetUserUseCase>(),
+      updateUserUseCase: getIt<UpdateUserUseCase>(),
+      getUserLikesUseCase: getIt<GetUserLikesUseCase>(),
+      addUserLikesUseCase: getIt<AddUserLikesUseCase>(),
+      removeUserLikeUseCase: getIt<RemoveUserLikeUseCase>(),
+      deleteUserUseCase: getIt<DeleteUserUseCase>(),
+      updateUserProfileImageUseCase: getIt<UpdateUserProfileImageUseCase>(),
+      getCurrentUserUidUseCase: getIt<GetCurrentUserUidUseCase>(),
+    ),
+  );
+
   /// User Providers
   ///
   getIt.registerLazySingleton<UserProvider>(
@@ -171,6 +190,12 @@ Future<void> initializeDependencies() async {
       deleteUserUseCase: getIt<DeleteUserUseCase>(),
       updateUserProfileImageUseCase: getIt<UpdateUserProfileImageUseCase>(),
       getCurrentUserUidUseCase: getIt<GetCurrentUserUidUseCase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<UserProviderNew>(
+    () => UserProviderNew(
+      userViewModel: getIt<UserViewModel>(),
     ),
   );
 
@@ -241,7 +266,23 @@ Future<void> initializeDependencies() async {
     ),
   );
 
-  /// Auth Provider
+  /// Auth View Models
+  ///
+  getIt.registerLazySingleton<AuthViewModel>(
+    () => AuthViewModel(
+      isEmailVerifiedUseCase: getIt<IsEmailVerifiedUseCase>(),
+      sendPasswordResetEmailUseCase: getIt<SendPasswordResetEmailUseCase>(),
+      signInWithEmailAndPasswordUseCase:
+          getIt<SignInWithEmailAndPasswordUseCase>(),
+      signOutUseCase: getIt<SignOutUseCase>(),
+      signUpWithEmailAndPasswordUseCase:
+          getIt<SignUpWithEmailAndPasswordUseCase>(),
+      signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
+      signInWithAppleUseCase: getIt<SignInWithAppleUseCase>(),
+    ),
+  );
+
+  /// Auth Providers
   ///
   getIt.registerLazySingleton<AuthProvider>(
     () => AuthProvider(
@@ -254,6 +295,12 @@ Future<void> initializeDependencies() async {
           getIt<SignUpWithEmailAndPasswordUseCase>(),
       signInWithGoogleUseCase: getIt<SignInWithGoogleUseCase>(),
       signInWithAppleUseCase: getIt<SignInWithAppleUseCase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<AuthProviderNew>(
+    () => AuthProviderNew(
+      authViewModel: getIt<AuthViewModel>(),
     ),
   );
 
