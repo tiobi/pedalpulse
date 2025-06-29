@@ -1,23 +1,84 @@
-import 'package:dart_mappable/dart_mappable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../domain/entities/auth_entity.dart';
 
-part 'auth_state.mapper.dart';
+part '.g/auth_state.dart';
 
-@MappableClass()
-class AuthState with AuthStateMappable {
-  final bool isLoading;
-  final bool isAuthenticated;
-  final String? userUid;
-  final String? errorMessage;
-  final bool emailVerificationSent;
+@freezed
+class AuthState with _$AuthState {
+  const factory AuthState({
+    required bool isAuthenticated,
+    required bool isEmailVerified,
+    required bool isLoading,
+    required bool isInitializing,
+    String? userUid,
+    String? email,
+    AuthType? authType,
+    String? errorMessage,
+    String? successMessage,
+  }) = _AuthState;
 
-  const AuthState({
-    this.isLoading = false,
-    this.isAuthenticated = false,
-    this.userUid,
-    this.errorMessage,
-    this.emailVerificationSent = false,
-  });
+  factory AuthState.initial() => const AuthState(
+        isAuthenticated: false,
+        isEmailVerified: false,
+        isLoading: false,
+        isInitializing: true,
+      );
 
-  static const fromMap = AuthStateMapper.fromMap;
-  static const fromJson = AuthStateMapper.fromJson;
+  factory AuthState.loading() => const AuthState(
+        isAuthenticated: false,
+        isEmailVerified: false,
+        isLoading: true,
+        isInitializing: false,
+      );
+
+  factory AuthState.authenticated({
+    required String userUid,
+    required String email,
+    required bool isEmailVerified,
+    required AuthType authType,
+    String? successMessage,
+  }) =>
+      AuthState(
+        isAuthenticated: true,
+        isEmailVerified: isEmailVerified,
+        isLoading: false,
+        isInitializing: false,
+        userUid: userUid,
+        email: email,
+        authType: authType,
+        successMessage: successMessage,
+      );
+
+  factory AuthState.unauthenticated({
+    String? errorMessage,
+  }) =>
+      AuthState(
+        isAuthenticated: false,
+        isEmailVerified: false,
+        isLoading: false,
+        isInitializing: false,
+        errorMessage: errorMessage,
+      );
+
+  factory AuthState.error({
+    required String errorMessage,
+    bool? wasAuthenticated,
+  }) =>
+      AuthState(
+        isAuthenticated: wasAuthenticated ?? false,
+        isEmailVerified: false,
+        isLoading: false,
+        isInitializing: false,
+        errorMessage: errorMessage,
+      );
+
+  factory AuthState.fromJson(Map<String, dynamic> json) =>
+      _$AuthStateFromJson(json);
+}
+
+extension AuthStateExtensions on AuthState {
+  bool get hasError => errorMessage != null;
+  bool get hasSuccess => successMessage != null;
+  bool get isReady => !isInitializing && !isLoading;
+  bool get canPerformAuth => !isLoading && !isInitializing;
 }

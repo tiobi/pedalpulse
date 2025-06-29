@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:pedalpulse/features/auth/domain/repositories/firebase_auth_repository.dart';
 
 import '../../../../core/errors/failure.dart';
+import '../repositories/firebase_auth_repository.dart';
 
 class SignOutUseCase {
   final FirebaseAuthRepository repository;
@@ -10,5 +10,7 @@ class SignOutUseCase {
     required this.repository,
   });
 
-  Future<Either<Failure, Unit>> call() async => await repository.signOut();
+  Future<Either<Failure, Unit>> call() async {
+    return await repository.signOut();
+  }
 }

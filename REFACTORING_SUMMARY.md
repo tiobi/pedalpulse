@@ -66,29 +66,57 @@ This document summarizes the comprehensive refactoring work done to transform Pe
   - Helper methods for creating social auth entities
   - Consistent error reporting
 
-### 4. Comprehensive TDD Test Suite
+### 4. State and ViewModel Separation (MVVM)
 
-#### AuthEntity Tests
-- **File**: `test/features/auth/domain/entities/auth_entity_test.dart`
+#### AuthState and AuthViewModel
+- **State File**: `lib/features/auth/presentation/state/auth_state.dart`
+- **ViewModel File**: `lib/features/auth/presentation/viewmodels/auth_viewmodel.dart`
+- **Features**:
+  - Separated pure state data from business logic
+  - Comprehensive state management with factory methods
+  - AuthViewModel manages all authentication operations
+  - State transitions for loading, authenticated, error states
+  - Built-in validation and error handling
+  - Support for multiple auth methods (email/password, Google, Apple)
+
+#### UserState and UserViewModel  
+- **State File**: `lib/features/user/presentation/state/user_state.dart`
+- **ViewModel File**: `lib/features/user/presentation/viewmodels/user_viewmodel.dart`
+- **Features**:
+  - Pure user state with loading, updating, and error states
+  - UserViewModel handles all user operations (CRUD, likes, profile updates)
+  - Optimistic updates for better UX
+  - Granular update states (profile vs image updates)
+  - Comprehensive user interaction management
+
+### 5. Comprehensive TDD Test Suite
+
+#### Entity Tests
+- **Files**: 
+  - `test/features/auth/domain/entities/auth_entity_test.dart`
+  - `test/features/user/domain/entities/user_entity_test.dart`
 - **Coverage**:
   - Email validation with various formats
   - Password validation for different auth types
   - Overall entity validation
   - Immutability and copyWith functionality
   - JSON serialization/deserialization
-  - AuthState factory methods and transitions
-  - AuthType pattern matching
-
-#### UserEntity Tests
-- **File**: `test/features/user/domain/entities/user_entity_test.dart`
-- **Coverage**:
   - Factory constructors and user creation
-  - Validation getters (profile images, bio, etc.)
-  - Immutability and copyWith functionality
-  - JSON serialization for all nested entities
-  - UserSettings and UserStats comprehensive testing
+  - Validation getters and extensions
 
-#### Updated Use Case Tests
+#### State Tests
+- **Files**:
+  - `test/features/auth/presentation/state/auth_state_test.dart`
+  - `test/features/user/presentation/state/user_state_test.dart`
+- **Coverage**:
+  - State factory methods and transitions
+  - Extension method functionality
+  - Immutability and copyWith behavior
+  - JSON serialization of states
+  - State transition scenarios
+  - Error and success state handling
+
+#### Use Case Tests
 - **File**: `test/features/auth/domain/usecases/sign_up_with_email_and_password_usecase_test.dart`
 - **Coverage**:
   - Input validation testing
@@ -103,6 +131,8 @@ This document summarizes the comprehensive refactoring work done to transform Pe
 - ✅ Clear separation between entities, models, and data transfer
 - ✅ Domain entities are framework-independent
 - ✅ Proper dependency inversion with repositories and use cases
+- ✅ **MVVM Pattern**: Separated state from business logic with ViewModels
+- ✅ **State Management**: Pure state classes with factory methods and extensions
 
 ### 2. SOLID Principles Implementation
 - ✅ **Single Responsibility**: Each class has one clear purpose
@@ -182,13 +212,25 @@ This will create the organized structure:
 4. **Better Error Handling**: Comprehensive validation and error reporting
 5. **Scalability**: Clean architecture supports easy feature additions
 6. **Developer Experience**: Better IDE support and code generation
+7. **Clear State Management**: Separated state from business logic following MVVM
+8. **Predictable State Transitions**: Well-defined state factory methods and transitions
+9. **Optimistic Updates**: Better UX with immediate UI feedback and error recovery
+10. **Granular Loading States**: Specific loading indicators for different operations
 
 ## 📁 Files Modified/Created
 
 ### Created Files
 - `test/features/auth/domain/entities/auth_entity_test.dart`
 - `test/features/user/domain/entities/user_entity_test.dart`
+- `test/features/auth/presentation/state/auth_state_test.dart`
+- `test/features/user/presentation/state/user_state_test.dart`
+- `lib/features/auth/presentation/state/auth_state.dart`
+- `lib/features/auth/presentation/viewmodels/auth_viewmodel.dart`
+- `lib/features/user/presentation/state/user_state.dart`
+- `lib/features/user/presentation/viewmodels/user_viewmodel.dart`
+- `lib/features/auth/domain/usecases/sign_out_usecase.dart`
 - `REFACTORING_SUMMARY.md`
+- `MVVM_USAGE_EXAMPLE.md`
 - `scripts/organize_generated_files.sh`
 - `tool/organize_generated_files.dart`
 - `build.yaml`
