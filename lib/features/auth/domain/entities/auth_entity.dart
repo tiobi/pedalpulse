@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'auth_entity.freezed.dart';
-part 'auth_entity.g.dart';
+part '.g/auth_entity.dart';
 
 @freezed
 class AuthEntity with _$AuthEntity {

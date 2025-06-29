@@ -1,0 +1,45 @@
+targets:
+  $default:
+    builders:
+      freezed|freezed:
+        enabled: true
+        generate_for:
+          - lib/**/*.dart
+        options:
+          # This doesn't directly control output path, but we can configure other options
+          map_factory: true
+          union_factory: true
+          
+      json_serializable|json_serializable:
+        enabled: true
+        generate_for:
+          - lib/**/*.dart
+        options:
+          explicit_to_json: true
+          include_if_null: false
+
+# Custom file organization configuration
+# Generated files will be reorganized using the organize_generated_files.sh script
+#
+# Usage:
+# 1. Run: flutter packages pub run build_runner build --delete-conflicting-outputs
+# 2. Run: bash scripts/organize_generated_files.sh
+#
+# This will create the desired structure:
+# - lib/features/auth/domain/entities/.g/auth_entity.dart
+# - lib/features/user/domain/entities/.g/user_entity.dart
+# - lib/features/user/data/models/.g/user_model.dart
+#
+# Each .g/entity_name.dart file contains both freezed and json_serializable code
+
+# Note: Freezed generates .freezed.dart and .g.dart files by default
+# The part declarations in the source files determine the actual file names
+# We've updated the part declarations to point to .g/entity_name.dart
+
+global_options:
+  freezed:
+    runs_before: ["json_serializable"]
+    
+  json_serializable:
+    explicit_to_json: true
+    include_if_null: false

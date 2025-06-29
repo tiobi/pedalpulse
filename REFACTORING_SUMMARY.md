@@ -8,6 +8,8 @@ This document summarizes the comprehensive refactoring work done to transform Pe
 - **Migrated from dart_mappable to Freezed** for better immutability and code generation
 - Updated `pubspec.yaml` to include `freezed` and `freezed_annotation` dependencies
 - Removed `dart_mappable` and `dart_mappable_builder` dependencies
+- **Custom File Organization**: Created scripts to organize generated files into `.g/entity_name.dart` structure
+- Added `build.yaml` configuration for optimized build process
 
 ### 2. Enhanced Domain Entities with Freezed
 
@@ -123,11 +125,23 @@ This document summarizes the comprehensive refactoring work done to transform Pe
 
 ## ⏳ Next Steps Required
 
-### 1. Code Generation
+### 1. Code Generation and File Organization
 ```bash
-# Run this to generate Freezed files
+# Step 1: Generate Freezed files
 flutter packages pub run build_runner build --delete-conflicting-outputs
+
+# Step 2: Organize files into .g/entity_name.dart structure
+# Option A: Using Dart script (cross-platform)
+dart tool/organize_generated_files.dart
+
+# Option B: Using bash script (Unix/Linux/macOS)
+bash scripts/organize_generated_files.sh
 ```
+
+This will create the organized structure:
+- `lib/features/auth/domain/entities/.g/auth_entity.dart`
+- `lib/features/user/domain/entities/.g/user_entity.dart`
+- `lib/features/user/data/models/.g/user_model.dart`
 
 ### 2. Repository Updates
 - Update Firebase auth datasources to work with new AuthEntity structure
@@ -175,6 +189,9 @@ flutter packages pub run build_runner build --delete-conflicting-outputs
 - `test/features/auth/domain/entities/auth_entity_test.dart`
 - `test/features/user/domain/entities/user_entity_test.dart`
 - `REFACTORING_SUMMARY.md`
+- `scripts/organize_generated_files.sh`
+- `tool/organize_generated_files.dart`
+- `build.yaml`
 
 ### Modified Files
 - `lib/features/auth/domain/entities/auth_entity.dart`
