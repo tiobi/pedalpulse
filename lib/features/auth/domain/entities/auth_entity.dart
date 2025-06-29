@@ -1,21 +1,22 @@
-import 'package:dart_mappable/dart_mappable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'auth_entity.mapper.dart';
+part 'auth_entity.freezed.dart';
+part 'auth_entity.g.dart';
 
-@MappableClass()
-class AuthEntity with AuthEntityMappable {
-  final String email;
-  final String? password;
-  final AuthType authType;
-  final Map<String, dynamic>? socialData;
+@freezed
+class AuthEntity with _$AuthEntity {
+  const factory AuthEntity({
+    required String email,
+    String? password,
+    required AuthType authType,
+    Map<String, dynamic>? socialData,
+  }) = _AuthEntity;
 
-  const AuthEntity({
-    required this.email,
-    this.password,
-    required this.authType,
-    this.socialData,
-  });
+  factory AuthEntity.fromJson(Map<String, dynamic> json) =>
+      _$AuthEntityFromJson(json);
+}
 
+extension AuthEntityValidation on AuthEntity {
   bool get isEmailValid {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(email);
@@ -31,38 +32,30 @@ class AuthEntity with AuthEntityMappable {
   bool get isValid {
     return isEmailValid && isPasswordValid;
   }
-
-  static const fromMap = AuthEntityMapper.fromMap;
-  static const fromJson = AuthEntityMapper.fromJson;
 }
 
-@MappableEnum()
-enum AuthType {
-  emailPassword,
-  google,
-  apple,
-  anonymous
+@freezed
+class AuthType with _$AuthType {
+  const factory AuthType.emailPassword() = EmailPassword;
+  const factory AuthType.google() = Google;
+  const factory AuthType.apple() = Apple;
+  const factory AuthType.anonymous() = Anonymous;
+
+  factory AuthType.fromJson(Map<String, dynamic> json) =>
+      _$AuthTypeFromJson(json);
 }
 
-@MappableClass()
-class AuthState with AuthStateMappable {
-  final bool isAuthenticated;
-  final bool isEmailVerified;
-  final bool isLoading;
-  final String? userUid;
-  final String? email;
-  final AuthType? authType;
-  final String? errorMessage;
-
-  const AuthState({
-    required this.isAuthenticated,
-    required this.isEmailVerified,
-    required this.isLoading,
-    this.userUid,
-    this.email,
-    this.authType,
-    this.errorMessage,
-  });
+@freezed
+class AuthState with _$AuthState {
+  const factory AuthState({
+    required bool isAuthenticated,
+    required bool isEmailVerified,
+    required bool isLoading,
+    String? userUid,
+    String? email,
+    AuthType? authType,
+    String? errorMessage,
+  }) = _AuthState;
 
   factory AuthState.initial() => const AuthState(
         isAuthenticated: false,
@@ -98,6 +91,6 @@ class AuthState with AuthStateMappable {
         errorMessage: errorMessage,
       );
 
-  static const fromMap = AuthStateMapper.fromMap;
-  static const fromJson = AuthStateMapper.fromJson;
+  factory AuthState.fromJson(Map<String, dynamic> json) =>
+      _$AuthStateFromJson(json);
 }
