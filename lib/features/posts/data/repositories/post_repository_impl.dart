@@ -48,7 +48,7 @@ class PostRepositoryImpl implements PostRepository {
       {int limit = 10}) async {
     try {
       final List<PostModel> postModels =
-          await dataSource.getRecentPosts(limit: limit);
+          await dataSource.getFeedPosts(limit: limit);
 
       final List<PostEntity> postEntities =
           postModels.map((e) => e.toEntity()).toList();
@@ -89,6 +89,113 @@ class PostRepositoryImpl implements PostRepository {
       final PostEntity postEntity = postModel.toEntity();
 
       return Right(postEntity);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> createPost({required PostEntity post}) async {
+    try {
+      final PostModel postModel = PostModel(
+        uid: post.uid,
+        userUid: post.userUid,
+        username: post.username,
+        userProfileImageUrl: post.userProfileImageUrl,
+        imageUrls: post.imageUrls,
+        title: post.title,
+        description: post.description,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
+        likes: post.likes,
+        reports: post.reports,
+        likesCount: post.likesCount,
+        commentsCount: post.commentsCount,
+        pedalList: [],
+        pedalUids: post.pedalUids,
+        views: post.views,
+      );
+
+      final String postId = await dataSource.createPost(post: postModel);
+      return Right(postId);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updatePost({required PostEntity post}) async {
+    try {
+      final PostModel postModel = PostModel(
+        uid: post.uid,
+        userUid: post.userUid,
+        username: post.username,
+        userProfileImageUrl: post.userProfileImageUrl,
+        imageUrls: post.imageUrls,
+        title: post.title,
+        description: post.description,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
+        likes: post.likes,
+        reports: post.reports,
+        likesCount: post.likesCount,
+        commentsCount: post.commentsCount,
+        pedalList: [],
+        pedalUids: post.pedalUids,
+        views: post.views,
+      );
+
+      await dataSource.updatePost(post: postModel);
+      return const Right(unit);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deletePost({required String postUid}) async {
+    try {
+      await dataSource.deletePost(postUid: postUid);
+      return const Right(unit);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> likePost({
+    required String postUid,
+    required String userUid,
+  }) async {
+    try {
+      await dataSource.likePost(postUid: postUid, userUid: userUid);
+      return const Right(unit);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> unlikePost({
+    required String postUid,
+    required String userUid,
+  }) async {
+    try {
+      await dataSource.unlikePost(postUid: postUid, userUid: userUid);
+      return const Right(unit);
+    } catch (e) {
+      return Left(FirestoreFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> uploadImages({
+    required List<String> imagePaths,
+  }) async {
+    try {
+      final List<String> downloadUrls =
+          await dataSource.uploadImages(imagePaths: imagePaths);
+      return Right(downloadUrls);
     } catch (e) {
       return Left(FirestoreFailure(message: e.toString()));
     }

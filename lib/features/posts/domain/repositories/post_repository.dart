@@ -8,7 +8,7 @@ abstract class PostRepository {
 
   Future<Either<Failure, List<PostEntity>>> getRecentPosts({int limit = 3});
 
-  Future<Either<Failure, List<PostEntity>>> getFeedPosts();
+  Future<Either<Failure, List<PostEntity>>> getFeedPosts({int limit = 10});
 
   Future<Either<Failure, List<PostEntity>>> getPostsWithPedal({
     required String pedalUid,
@@ -17,5 +17,31 @@ abstract class PostRepository {
 
   Future<Either<Failure, PostEntity>> getPostByUid({
     required String postUid,
+  });
+
+  Future<Either<Failure, String>> createPost({
+    required PostEntity post,
+  });
+
+  Future<Either<Failure, Unit>> updatePost({
+    required PostEntity post,
+  });
+
+  Future<Either<Failure, Unit>> deletePost({
+    required String postUid,
+  });
+
+  Future<Either<Failure, Unit>> likePost({
+    required String postUid,
+    required String userUid,
+  });
+
+  Future<Either<Failure, Unit>> unlikePost({
+    required String postUid,
+    required String userUid,
+  });
+
+  Future<Either<Failure, List<String>>> uploadImages({
+    required List<String> imagePaths,
   });
 }
