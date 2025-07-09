@@ -1,6 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pedalpulse/core/common/providers/app_size_provider.dart';
 import 'package:pedalpulse/core/common/widgets/custom_textfield_widget.dart';
 import 'package:pedalpulse/core/common/widgets/snack_bar_widget.dart';
@@ -20,28 +21,40 @@ class UploadPostPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = getIt<AppSizeProvider>().size;
-    final double tileWidth = (size.width - 16) / 3;
-    final double cardWidth = size.width / 2 - 16;
-
     final UploadProvider uploadProvider = Provider.of<UploadProvider>(context);
 
     final TextEditingController titleController = useTextEditingController();
-    final TextEditingController descriptionController =
-        useTextEditingController();
-    final List<XFile?> images = [];
+    final TextEditingController descriptionController = useTextEditingController();
+
+    useEffect(() {
+      if (uploadProvider.uploadState is UploadSuccess) {
+        CustomSnackBar.showSuccessSnackBar(context, 'Post uploaded successfully!');
+        Navigator.pop(context);
+      } else if (uploadProvider.uploadState is UploadError) {
+        final error = uploadProvider.uploadState as UploadError;
+        CustomSnackBar.showErrorSnackBar(context, error.message);
+      }
+      return null;
+    }, [uploadProvider.uploadState]);
 
     void onUpload() async {
-      uploadProvider.upload();
+      final validationError = uploadProvider.validateForm(
+        titleController.text,
+        descriptionController.text,
+      );
 
-      if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
-        CustomSnackBar.showErrorSnackBar(
-          context,
-          AppStringManager.fillInTheFields,
-        );
+      if (validationError != null) {
+        CustomSnackBar.showErrorSnackBar(context, validationError);
         return;
       }
 
-      await uploadProvider.upload();
+      await uploadProvider.uploadPost(
+        userUid: 'current_user_uid', // TODO: Get from auth provider
+        username: 'current_username', // TODO: Get from auth provider
+        userProfileImageUrl: '', // TODO: Get from auth provider
+        title: titleController.text,
+        description: descriptionController.text,
+      );
     }
 
     return Scaffold(
@@ -66,17 +79,19 @@ class UploadPostPage extends HookWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomTextfieldWidget(
+                textController: titleController,
                 placeholder: AppStringManager.title,
                 maxLength: 100,
               ),
               CustomDynamicHeightTextfieldWidget(
-                textController: TextEditingController(),
+                textController: descriptionController,
                 maxLength: 5000,
                 placeholder: AppStringManager.description,
               ),
-              _buildImagesSection(),
-              _buildPedalSection(),
+              _buildImagesSection(uploadProvider, size),
+              _buildPedalSection(uploadProvider, size),
               _buildTermsSection(),
+              if (uploadProvider.isLoading) _buildLoadingSection(uploadProvider),
             ],
           ),
         ),
@@ -84,28 +99,29 @@ class UploadPostPage extends HookWidget {
     );
   }
 
-  Widget _buildImagesSection() {
+  Widget _buildImagesSection(UploadProvider provider, Size size) {
+    final double tileWidth = (size.width - 32) / 3;
+    
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              Text(
+              const Text(
                 AppStringManager.addImages,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                // "${_imageList.length} / 5",
-                "12",
-                style: TextStyle(
+                "${provider.selectedImages.length} / 5",
+                style: const TextStyle(
                   fontSize: 12,
                   color: ColorManager.primaryColorDark,
                 ),
@@ -114,70 +130,87 @@ class UploadPostPage extends HookWidget {
             ],
           ),
         ),
+        const SizedBox(height: 16),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15),
-          // height: tileWidth * (_imageList.length ~/ 3 + 1) + 8,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
           child: GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               childAspectRatio: 1,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 4,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
             ),
-            // itemCount: _imageList.length + 1,
-            itemCount: 5,
+            itemCount: provider.selectedImages.length + 1,
             itemBuilder: (context, index) {
-              return index == 0
-                  ? GestureDetector(
-                      onTap:
-                          // _imageList.length < 5 ? _pickImage : null,
-                          null,
+              if (index == 0) {
+                return GestureDetector(
+                  onTap: provider.selectedImages.length < 5 
+                      ? () => provider.pickImages()
+                      : null,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: provider.selectedImages.length < 5
+                          ? ColorManager.primaryColorLight
+                          : Colors.grey[300],
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: ColorManager.primaryColorDark.withOpacity(0.2),
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.add_a_photo,
+                      size: 32,
+                      color: provider.selectedImages.length < 5
+                          ? ColorManager.primaryColorDark
+                          : Colors.grey[600],
+                    ),
+                  ),
+                );
+              } else {
+                final imageIndex = index - 1;
+                final image = provider.selectedImages[imageIndex];
+                
+                return Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
                       child: Container(
-                        // width: tileWidth,
-                        // height: tileWidth,
+                        width: tileWidth,
+                        height: tileWidth,
                         decoration: BoxDecoration(
-                          color: ColorManager.primaryColorLight,
-                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(
-                          Icons.add,
-                          // color: _imageList.length < 5
-                          // ? Colors.black
-                          // : Colors.black.withOpacity(0.1),
+                        child: Image.file(
+                          File(image.path),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    )
-                  : Stack(
-                      children: [
-                        Container(
-                          // width: tileWidth,
-                          // height: tileWidth,
-                          color: Colors.grey[200],
-                          // child: Image.file(
-                          //   File(_imageList[index - 1].path),
-                          //   fit: BoxFit.contain,
-                          // ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            iconSize: 30,
-                            onPressed: () {
-                              // _removeImage(index - 1);
-                            },
-                            icon: const Icon(
-                              Icons.close_rounded,
-                              color: Colors.red,
-                            ),
+                    ),
+                    Positioned(
+                      top: 4,
+                      right: 4,
+                      child: GestureDetector(
+                        onTap: () => provider.removeImage(imageIndex),
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 16,
                           ),
                         ),
-                      ],
-                    );
+                      ),
+                    ),
+                  ],
+                );
+              }
             },
           ),
         ),
@@ -185,28 +218,27 @@ class UploadPostPage extends HookWidget {
     );
   }
 
-  Widget _buildPedalSection() {
+  Widget _buildPedalSection(UploadProvider provider, Size size) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              Text(
+              const Text(
                 AppStringManager.addPedals,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                // "${pedalList.length} / 20",
-                "5",
-                style: TextStyle(
+                "${provider.selectedPedalUids.length} / 20",
+                style: const TextStyle(
                   fontSize: 12,
                   color: ColorManager.primaryColorDark,
                 ),
@@ -215,78 +247,113 @@ class UploadPostPage extends HookWidget {
             ],
           ),
         ),
-        GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 2 / 3,
-            crossAxisCount: 2,
-          ),
-          // itemCount: pedalList.length + 1,
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return SizedBox(
-                child: GestureDetector(
-                  onTap: () {
-                    // showCupertinoModalBottomSheet(
-                    //   enableDrag: true,
-                    //   isDismissible: true,
-                    //   elevation: 150,
-                    //   context: context,
-                    //   builder: (context) => const SearchScreen(
-                    //     isSelectable: true,
-                    //     isModelSheet: true,
-                    //   ),
-                    // );
-                  },
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    // height: cardWidth - 10,
-                    // width: cardWidth - 10,
-                    margin: const EdgeInsets.all(8),
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: ColorManager.primaryColorLight,
-                      borderRadius: BorderRadius.circular(10),
+        const SizedBox(height: 16),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              if (provider.selectedPedalUids.isEmpty)
+                Container(
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: ColorManager.primaryColorLight,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: ColorManager.primaryColorDark.withOpacity(0.2),
                     ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        // color: pedalList.length < 20
-                        // ? Colors.black
-                        // : Colors.black.withOpacity(0.1),
-                      ),
+                  ),
+                  child: const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.music_note,
+                          size: 32,
+                          color: ColorManager.primaryColorDark,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'No pedals selected',
+                          style: TextStyle(
+                            color: ColorManager.primaryColorDark,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          'Tap to add pedals',
+                          style: TextStyle(
+                            color: ColorManager.primaryColorDark,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              );
-            } else {
-              return Stack(
-                children: [
-                  // PedalCardWidget(pedal: pedalList[index - 1]),
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      iconSize: 30,
-                      onPressed: () {
-                        // _removePedal(pedalList[index - 1]);
-                      },
-                      icon: const Icon(
-                        Icons.close_rounded,
-                        color: Colors.red,
-                      ),
-                    ),
+              if (provider.selectedPedalUids.isNotEmpty)
+                ...provider.selectedPedalUids.map((pedalUid) => Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey[300]!),
                   ),
-                ],
-              );
-            }
-          },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.music_note, color: ColorManager.primaryColorDark),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Pedal: $pedalUid', // TODO: Replace with actual pedal name
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle, color: Colors.red),
+                        onPressed: () => provider.removePedal(pedalUid),
+                      ),
+                    ],
+                  ),
+                )),
+            ],
+          ),
         ),
       ],
+    );
+  }
+
+  Widget _buildLoadingSection(UploadProvider provider) {
+    String loadingText = 'Uploading...';
+    
+    if (provider.uploadState is UploadImageCompressing) {
+      loadingText = 'Compressing images...';
+    } else if (provider.uploadState is UploadImageUploading) {
+      loadingText = 'Uploading images...';
+    } else if (provider.uploadState is UploadCreatingPost) {
+      loadingText = 'Creating post...';
+    }
+
+    return Container(
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: ColorManager.primaryColorLight.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          const CircularProgressIndicator(),
+          const SizedBox(height: 16),
+          Text(
+            loadingText,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
